@@ -21,7 +21,7 @@ class ShopifyConnector {
     public function call($method, $options = [])
     {
         $shopify = $this->connect();
-        
+
         $result = $shopify($method, $options);
 
         return $result;

@@ -9,16 +9,32 @@ use phpish\shopify;
 class ShopifyProductRepository implements ProductRepositoryInterface{
 
 
-    function __construct(ShopifyConnector $shopifyConnector)
+    /**
+     * @var ProductAdapter
+     */
+    private $adapter;
+
+    function __construct(ShopifyConnector $shopifyConnector, ProductAdapter $adapter)
     {
         $this->shopifyConnector = $shopifyConnector;
+        $this->adapter = $adapter;
     }
 
     public function get()
     {
         try
         {
-            $products = $this->shopifyConnector->call('GET /admin/products.json', array('published_status'=>'published'));
+            $result = $this->shopifyConnector->call('GET /admin/products.json', array('published_status'=>'published'));
+
+            $products = [];
+
+            if ($result)
+            {
+                foreach ($result as $product)
+                {
+                    $products[] = $this->adapter->newProductFromApi($product, __FUNCTION__);
+                }
+            }
 
             return $products;
         }
