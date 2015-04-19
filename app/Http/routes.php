@@ -15,7 +15,12 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
+Route::get('shopify/shop', 'shopifyController@shop');
+
+Route::get('shopify/product', 'shopifyController@product');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
