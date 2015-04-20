@@ -48,7 +48,7 @@ class shopifyController extends Controller {
 	public function product()
 	{
 
-		dd($this->productRepository->get());
+		dd($this->productRepository->retrieve());
 
 	}
 

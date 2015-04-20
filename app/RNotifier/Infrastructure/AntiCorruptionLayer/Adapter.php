@@ -1,13 +1,14 @@
 <?php namespace App\RNotifier\Infrastructure\AntiCorruptionLayer;
 
 
-use App\RNotifier\Infrastructure\Transformers\Translator;
+
+use Illuminate\Support\Facades\App;
 
 class Adapter {
 
-    function __construct(Translator $translator)
+    function __construct()
     {
-        $this->translator = $translator;
+        $this->translator = App::make('App\RNotifier\Infrastructure\Transformers\Translator');
     }
 
     public function toEntityParameters(array $attributes, $method)

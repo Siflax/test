@@ -3,6 +3,6 @@
 
 interface ProductRepositoryInterface {
 
-    public function get();
+    public function retrieve ();
 
 }

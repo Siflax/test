@@ -20,7 +20,7 @@ class ShopifyProductRepository implements ProductRepositoryInterface{
         $this->adapter = $adapter;
     }
 
-    public function get()
+    public function retrieve()
     {
         try
         {
