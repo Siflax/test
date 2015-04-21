@@ -19,6 +19,10 @@ Route::get('shopify/shop', 'shopifyController@shop');
 
 Route::get('shopify/product', 'shopifyController@product');
 
+Route::get('settings/inventory', 'InventorySettingsController@show');
+
+Route::post('settings/inventory', 'InventorySettingsController@store');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
