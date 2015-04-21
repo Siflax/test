@@ -2,8 +2,11 @@
 
 
 use App\RNotifier\Domain\Products\Product;
+use App\RNotifier\Infrastructure\Factories\Factory;
+use App\RNotifier\Infrastructure\Products\Variants\VariantFactory;
 
-class ProductFactory {
+class ProductFactory extends Factory
+{
 
     protected $attributeNames = [
         'id',
@@ -23,13 +26,24 @@ class ProductFactory {
         'image'
     ];
 
+    private $variantFactory;
+
+    function __construct(VariantFactory $variantFactory)
+    {
+        $this->variantFactory = $variantFactory;
+    }
+
+    /**
+     * Takes an array of attributes and assigns them to the new object
+     *
+     * @param array $attributes
+     * @return Product
+     */
     public function create(Array $attributes)
     {
+        $attributes = $this->setMissingAttributesToNull($this->attributeNames, $attributes);
 
-        foreach ($this->attributeNames as $name)
-        {
-           $attributes = $this->setMissingAttributesToNull($attributes, $name);
-        }
+        $variants = $this->createVariants($attributes['variants']);
         
         $product = new Product(
             $attributes['id'],
@@ -37,13 +51,13 @@ class ProductFactory {
             $attributes['handle'],
             $attributes['type'],
             $attributes['publishedAt'],
-            $attributes['publishedScope '],
+            $attributes['publishedScope'],
             $attributes['templateSuffix'],
             $attributes['title'],
             $attributes['updatedAt'],
             $attributes['vendor'],
             $attributes['tags'],
-            $attributes['variants'],
+            $variants,
             $attributes['options'],
             $attributes['images'],
             $attributes['image']
@@ -52,10 +66,18 @@ class ProductFactory {
         return $product;
     }
 
-    private function setMissingAttributesToNull($attributes, $name)
+    private function createVariants($variantsAttributes)
     {
-        if (! isset($attributes[$name])) $attributes[$name] = null;
+        if ($variantsAttributes)
+        {
+            $variants = [];
 
-        return $attributes;
+            foreach($variantsAttributes as $variantAttributes)
+            {
+                $variants[] = $this->variantFactory->create($variantAttributes);
+            }
+
+            return $variants;
+        }
     }
 }
