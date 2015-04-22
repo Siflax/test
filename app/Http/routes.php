@@ -23,6 +23,8 @@ Route::get('settings/inventory', 'InventorySettingsController@show');
 
 Route::post('settings/inventory', 'InventorySettingsController@store');
 
+Route::get('settings/check', 'InventorySettingsController@check');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

@@ -54,25 +54,19 @@ class Product {
             $this->image = $image;
         }
 
+        public function hasLowInventory($globalLimit)
+        {
+            if ($this->variants[0]->inventory_quantity < $globalLimit && $this->isManagedByShopify()) return true;
+            else return false;
+        }
+
+        private function isManagedByShopify()
+        {
+            if ($this->variants[0]->inventory_management == "shopify") return true;
+            else return false;
+        }
 
 
 
 
 }
-/*
-"body_html" => "bodyHtml",
-        "created_at" => "createdAt",
-        "handle" => "handle",
-        "id" => "id",
-        "product_type" => "productType",
-        "published_at" => "publishedAt",
-        "published_scope" => "publishedScope",
-        "template_suffix" => "templateSuffix",
-        "title" => "title",
-        "updated_at" => "updatedAt",
-        "vendor" => "vendor",
-        "tags" => "tags",
-        "variants" => "variants",
-        "options" => "options",
-        "images" => "images",
-        "image" => "image",

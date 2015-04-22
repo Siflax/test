@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\RNotifier\Domain\InventoryChecker\InventoryCheckerService;
 use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 use Illuminate\Support\Facades\Input;
@@ -13,10 +14,15 @@ class InventorySettingsController extends Controller {
      * @var SettingsRepositoryInterface
      */
     private $settingsRepository;
+    /**
+     * @var InventoryCheckerService
+     */
+    private $inventoryChecker;
 
-    function __construct(SettingsRepositoryInterface $settingsRepository)
+    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker)
     {
         $this->settingsRepository = $settingsRepository;
+        $this->inventoryChecker = $inventoryChecker;
     }
 
     public function show()
@@ -50,6 +56,11 @@ class InventorySettingsController extends Controller {
         }
 
         return redirect()->back();
+    }
+
+    public function check()
+    {
+        $this->inventoryChecker->check();
     }
 
 }

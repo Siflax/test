@@ -3,30 +3,30 @@
 
 class Variant {
 
-    private $barcode;
-    private $compare_at_price;
-    private $created_at;
-    private $fulfillment_service;
-    private $grams;
-    private $id;
-    private $inventory_management;
-    private $inventory_policy;
-    private $option1;
-    private $option2;
-    private $option3;
-    private $position;
-    private $price;
-    private $product_id;
-    private $requires_shipping;
-    private $sku;
-    private $taxable;
-    private $title;
-    private $updated_at;
-    private $inventory_quantity;
-    private $old_inventory_quantity;
-    private $image_id;
-    private $weight;
-    private $weight_unit;
+    public $barcode;
+    public $compare_at_price;
+    public $created_at;
+    public $fulfillment_service;
+    public $grams;
+    public $id;
+    public $inventory_management;
+    public $inventory_policy;
+    public $option1;
+    public $option2;
+    public $option3;
+    public $position;
+    public $price;
+    public $product_id;
+    public $requires_shipping;
+    public $sku;
+    public $taxable;
+    public $title;
+    public $updated_at;
+    public $inventory_quantity;
+    public $old_inventory_quantity;
+    public $image_id;
+    public $weight;
+    public $weight_unit;
 
     function __construct(
        $barcode = null,
