@@ -20,11 +20,11 @@ class ShopifyProductRepository implements ProductRepositoryInterface{
         $this->adapter = $adapter;
     }
 
-    public function retrieve()
+    public function retrieve($options = null)
     {
         try
         {
-            $result = $this->shopifyConnector->call('GET /admin/products.json', array('published_status'=>'published'));
+            $result = $this->shopifyConnector->call('GET /admin/products.json', $options);
 
             $products = [];
 

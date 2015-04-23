@@ -60,6 +60,12 @@ class Product {
             else return false;
         }
 
+        public function titleContains($searchTerm)
+        {
+            if (strpos($this->title,$searchTerm) !== false) return true;
+            else return false;
+        }
+
         private function isManagedByShopify()
         {
             if ($this->variants[0]->inventory_management == "shopify") return true;

@@ -4,6 +4,7 @@
 use App\RNotifier\Domain\InventoryChecker\InventoryCheckerService;
 use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
+use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
@@ -18,11 +19,16 @@ class InventorySettingsController extends Controller {
      * @var InventoryCheckerService
      */
     private $inventoryChecker;
+    /**
+     * @var ProductRepositoryInterface
+     */
+    private $productRepository;
 
-    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker)
+    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ProductRepositoryInterface $productRepository)
     {
         $this->settingsRepository = $settingsRepository;
         $this->inventoryChecker = $inventoryChecker;
+        $this->productRepository = $productRepository;
     }
 
     public function show()
@@ -61,6 +67,24 @@ class InventorySettingsController extends Controller {
     public function check()
     {
         $this->inventoryChecker->check();
+    }
+
+    public function search()
+    {
+
+        $products = $this->productRepository->retrieve([
+            'fields' => 'title, id'
+        ]);
+
+        $matches = [];
+
+        foreach ($products as $product)
+        {
+            if($product->titleContains(Request::get('productTitle'))) $matches[] = $product;
+        }
+
+        dd($matches);
+
     }
 
 }

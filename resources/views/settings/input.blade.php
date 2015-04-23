@@ -23,4 +23,14 @@
         {!! Form::submit('save') !!}
 
     {!! Form::close() !!}
+
+    {!! Form::open(array('url' => 'settings/inventory/search')) !!}
+
+        {!! Form::label('productTitle', 'Search by product title') !!}
+        {!! Form::text('productTitle') !!}
+        {!! Form::submit('save') !!}
+
+    {!! Form::close() !!}
+
+
 @endsection
