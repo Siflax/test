@@ -25,6 +25,8 @@ Route::post('settings/inventory', 'InventorySettingsController@store');
 
 Route::post('settings/inventory/search', 'InventorySettingsController@search');
 
+Route::post('settings/inventory/limit', 'InventorySettingsController@individualLimit');
+
 Route::get('settings/check', 'InventorySettingsController@check');
 
 Route::controllers([

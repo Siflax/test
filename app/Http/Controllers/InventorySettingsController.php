@@ -5,30 +5,37 @@ use App\RNotifier\Domain\InventoryChecker\InventoryCheckerService;
 use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductRepositoryInterface;
+use App\RNotifier\Infrastructure\Products\EloquentProductRepository;
+use App\RNotifier\Infrastructure\Products\ProductFactory;
+use App\RNotifier\Infrastructure\Products\Variants\VariantFactory;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 
-class InventorySettingsController extends Controller {
+class InventorySettingsController extends Controller
+{
 
-    /**
-     * @var SettingsRepositoryInterface
-     */
     private $settingsRepository;
-    /**
-     * @var InventoryCheckerService
-     */
     private $inventoryChecker;
-    /**
-     * @var ProductRepositoryInterface
-     */
     private $productRepository;
+    private $productFactory;
+    /**
+     * @var EloquentProductRepository
+     */
+    private $eloquentProductRepository;
+    /**
+     * @var VariantFactory
+     */
+    private $variantFactory;
 
-    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ProductRepositoryInterface $productRepository)
+    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ProductRepositoryInterface $productRepository, ProductFactory $productFactory, EloquentProductRepository $eloquentProductRepository, VariantFactory $variantFactory)
     {
         $this->settingsRepository = $settingsRepository;
         $this->inventoryChecker = $inventoryChecker;
         $this->productRepository = $productRepository;
+        $this->productFactory = $productFactory;
+        $this->eloquentProductRepository = $eloquentProductRepository;
+        $this->variantFactory = $variantFactory;
     }
 
     public function show()
@@ -44,16 +51,13 @@ class InventorySettingsController extends Controller {
     {
         $globalLimit = Request::only('globalLimit');
 
-        if (Request::has('id'))
-        {
+        if (Request::has('id')) {
             $setting = $this->settingsRepository->retrieveById(Request::input('id'));
 
             $setting->fill($globalLimit);
 
             $this->settingsRepository->save($setting);
-        }
-        else
-        {
+        } else {
             $setting = new Setting();
 
             $setting->fill($globalLimit);
@@ -78,13 +82,40 @@ class InventorySettingsController extends Controller {
 
         $matches = [];
 
-        foreach ($products as $product)
-        {
-            if($product->titleContains(Request::get('productTitle'))) $matches[] = $product;
+        foreach ($products as $product) {
+            if ($product->titleContains(Request::get('productTitle'))) $matches[] = $product;
         }
 
-        dd($matches);
+        $idsList = '';
+        foreach ($matches as $match) {
+            if (!$idsList) $idsList = $match->id;
+            else $idsList .= ', ' . $match->id;
+        }
 
+        $products = $this->productRepository->retrieve(['ids' => $idsList]);
+
+        $id = 1;
+        $setting = $this->settingsRepository->retrieveById($id);
+
+        return view('settings.input', ['setting' => $setting, 'matches' => $products]);
+
+    }
+
+    public function individualLimit()
+    {
+
+
+        // insert product in DB
+        $product = $this->productFactory->create(['id' => Request::get('productId')]);
+        //dd($product);
+        $this->eloquentProductRepository->save($product);
+
+        $variant = $this->variantFactory->create(['id' => Request::get('variantId'), 'product_id' => Request::get('productId'), 'inventory_limit' => Request::get('individualLimit')]);
+
+
+        $variant->save();
+
+        //'product_id', 'inventory_quantity', 'title', 'inventory_management'];
     }
 
 }

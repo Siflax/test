@@ -3,6 +3,7 @@
 
 use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 use App\RNotifier\Infrastructure\Shopify\ShopifyConnector;
+use Illuminate\Support\Facades\Log;
 use phpish\shopify;
 
 
@@ -13,11 +14,16 @@ class ShopifyProductRepository implements ProductRepositoryInterface{
      * @var ProductAdapter
      */
     private $adapter;
+    /**
+     * @var ProductFactory
+     */
+    private $factory;
 
-    function __construct(ShopifyConnector $shopifyConnector, ProductAdapter $adapter)
+    function __construct(ShopifyConnector $shopifyConnector, ProductAdapter $adapter, ProductFactory $factory)
     {
         $this->shopifyConnector = $shopifyConnector;
         $this->adapter = $adapter;
+        $this->factory = $factory;
     }
 
     public function retrieve($options = null)
@@ -32,7 +38,7 @@ class ShopifyProductRepository implements ProductRepositoryInterface{
             {
                 foreach ($result as $product)
                 {
-                    $products[] = $this->adapter->newProductFromApi($product, __FUNCTION__);
+                    $products[] = $this->factory->create($product);
                 }
             }
 

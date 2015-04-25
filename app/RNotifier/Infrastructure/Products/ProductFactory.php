@@ -41,43 +41,27 @@ class ProductFactory extends Factory
      */
     public function create(Array $attributes)
     {
-        $attributes = $this->setMissingAttributesToNull($this->attributeNames, $attributes);
+        $variants = $this->createVariants($attributes);
 
-        $variants = $this->createVariants($attributes['variants']);
-        
-        $product = new Product(
-            $attributes['id'],
-            $attributes['createdAt'],
-            $attributes['handle'],
-            $attributes['type'],
-            $attributes['publishedAt'],
-            $attributes['publishedScope'],
-            $attributes['templateSuffix'],
-            $attributes['title'],
-            $attributes['updatedAt'],
-            $attributes['vendor'],
-            $attributes['tags'],
-            $variants,
-            $attributes['options'],
-            $attributes['images'],
-            $attributes['image']
-        );
+        $product = new Product($attributes);
+
+        if ($variants) $product->variants = $variants;
 
         return $product;
     }
 
-    private function createVariants($variantsAttributes)
+    private function createVariants($attributes)
     {
-        if ($variantsAttributes)
-        {
-            $variants = [];
+        $variants = [];
 
-            foreach($variantsAttributes as $variantAttributes)
-            {
-                $variants[] = $this->variantFactory->create($variantAttributes);
+        if (isset($attributes['variants']) && !is_null($attributes['variants'])) {
+            foreach ($attributes['variants'] as $variant) {
+                $variants[] = $this->variantFactory->create($variant);
             }
-
-            return $variants;
         }
+
+        if (! empty($variants)) return $variants;
+        else return false;
     }
+
 }
