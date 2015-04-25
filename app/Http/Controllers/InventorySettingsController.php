@@ -103,17 +103,23 @@ class InventorySettingsController extends Controller
 
     public function individualLimit()
     {
+        $product = $this->eloquentProductRepository->retrieveById(Request::get('productId'));
+
+        if (! $product)
+        {
+            $product = $this->productFactory->create(['id' => Request::get('productId')]);
+
+            $this->eloquentProductRepository->save($product);
+
+            $variant = $this->variantFactory->create(['id' => Request::get('variantId'), 'product_id' => Request::get('productId'), 'inventory_limit' => Request::get('individualLimit')]);
+
+            $variant->save();
+        }
 
 
-        // insert product in DB
-        $product = $this->productFactory->create(['id' => Request::get('productId')]);
-        //dd($product);
-        $this->eloquentProductRepository->save($product);
-
-        $variant = $this->variantFactory->create(['id' => Request::get('variantId'), 'product_id' => Request::get('productId'), 'inventory_limit' => Request::get('individualLimit')]);
+        //$this->eloquentProductRepository->save($product);
 
 
-        $variant->save();
 
         //'product_id', 'inventory_quantity', 'title', 'inventory_management'];
     }
