@@ -115,11 +115,17 @@ class InventorySettingsController extends Controller
 
             $variant->save();
         }
+        else
+        {
+            $variant = $product->variants->where('product_id', $product->id)->first();
+            $variant->inventory_limit = Request::get('individualLimit');
+            $variant->save();
 
+        }
 
         //$this->eloquentProductRepository->save($product);
 
-
+        return redirect()->to('settings/inventory');
 
         //'product_id', 'inventory_quantity', 'title', 'inventory_management'];
     }
