@@ -16,7 +16,10 @@ class Product extends Model  {
 
         public function titleContains($searchTerm)
         {
-            if (strpos($this->title,$searchTerm) !== false) return true;
+            $searchTerm = strtolower($searchTerm);
+            $title = strtolower($this->title);
+
+            if (strpos($title,$searchTerm) !== false) return true;
             else return false;
         }
 
