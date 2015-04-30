@@ -19,6 +19,11 @@
 	<![endif]-->
 </head>
 <body>
+	<div class="jumbotron" style="margin-bottom: 0px">
+		<div class="container">
+			<h1 class="jumbotron__header">Restock Notifier</h1>
+		</div>
+	</div>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">

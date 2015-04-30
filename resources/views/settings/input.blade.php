@@ -2,18 +2,6 @@
 
 @section('content')
 
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="jumbotron__header">You have arrived</h1>
-            <p class="jumbotron__body">
-                adsfasdf
-                asdfasdf
-            </p>
-        </div>
-    </div>
-
-
-
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -49,7 +37,7 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                     <tr>
-                                        <th></th>
+                                        <th>Variant</th>
                                         <th>Limit</th>
                                         <th></th>
                                     </tr>
