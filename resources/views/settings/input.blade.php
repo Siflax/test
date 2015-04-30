@@ -35,13 +35,16 @@
 
     @if (isset($matches))
         @foreach($matches as $product)
+
+
             <h2>{{$product->title}}</h2>
             @foreach($product->variants as $variant)
                 <p>{{$variant->title}}</p>
+              
                 {!! Form::open(array('url' => 'settings/inventory/limit')) !!}
 
                 {!! Form::label('individualLimit', 'Set Limit') !!}
-                {!! Form::text('individualLimit') !!}
+                {!! Form::text('individualLimit', $variant->inventory_limit) !!}
                 {!! Form::hidden('variantId', $variant->id) !!}
                 {!! Form::hidden('productId', $product->id) !!}
                 {!! Form::submit('save') !!}

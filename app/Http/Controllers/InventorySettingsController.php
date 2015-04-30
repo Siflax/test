@@ -78,13 +78,15 @@ class InventorySettingsController extends Controller
             if ($product->titleContains(Request::get('productTitle'))) $matches[] = $product;
         }
 
-        $idsList = '';
-        foreach ($matches as $match) {
-            if (!$idsList) $idsList = $match->id;
-            else $idsList .= ', ' . $match->id;
-        }
+        $products = [];
 
-        $products = $this->shopifyProductConnector->retrieve(['ids' => $idsList]);
+        foreach ($matches as $match) {
+            $product = $this->productRepository->retrieveById($match->id);
+
+            $product = $this->shopifyProductConnector->getDetails($product);
+
+            $products[] = $product;
+        }
 
         $id = 1;
         $setting = $this->settingsRepository->retrieveById($id);
