@@ -5,6 +5,7 @@ use App\RNotifier\Domain\InventoryChecker\InventoryCheckerService;
 use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductRepositoryInterface;
+use App\RNotifier\Domain\Products\Variants\VariantRepositoryInterface;
 use App\RNotifier\Infrastructure\Products\ProductFactory;
 use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
 use App\RNotifier\Infrastructure\Products\Variants\VariantFactory;
@@ -19,8 +20,9 @@ class InventorySettingsController extends Controller
     private $variantFactory;
     private $shopifyProductConnector;
     private $productRepository;
+    private $variantRepository;
 
-    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ShopifyProductConnector $shopifyProductConnector, ProductFactory $productFactory, ProductRepositoryInterface $productRepository, VariantFactory $variantFactory)
+    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ShopifyProductConnector $shopifyProductConnector, ProductFactory $productFactory, ProductRepositoryInterface $productRepository, VariantFactory $variantFactory, VariantRepositoryInterface $variantRepository)
     {
         $this->settingsRepository = $settingsRepository;
         $this->inventoryChecker = $inventoryChecker;
@@ -28,6 +30,7 @@ class InventorySettingsController extends Controller
         $this->variantFactory = $variantFactory;
         $this->shopifyProductConnector = $shopifyProductConnector;
         $this->productRepository = $productRepository;
+        $this->variantRepositoryInterface = $variantRepository;
     }
 
     public function show()
@@ -111,9 +114,28 @@ class InventorySettingsController extends Controller
         }
         else
         {
-            $variant = $product->variants->where('product_id', $product->id)->first();
-            $variant->inventory_limit = Request::get('individualLimit');
-            $variant->save();
+
+            $variant = $product->variants->where('product_id', $product->id)->where('id', (int) Request::get('variantId'))->first();
+
+            if ($variant)
+            {
+                $variant->inventory_limit = Request::get('individualLimit');
+                $variant->save();
+            }
+            else
+            {
+                $variant = $this->variantFactory->create([
+                    'id' => Request::get('variantId'),
+                    'product_id' => Request::get('productId'),
+                    'inventory_limit' => Request::get('individualLimit')
+                ]);
+
+                $variant->save();
+
+                //$this->variantRepository->create();
+            }
+
+
 
         }
 

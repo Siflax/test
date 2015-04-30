@@ -40,7 +40,7 @@
             <h2>{{$product->title}}</h2>
             @foreach($product->variants as $variant)
                 <p>{{$variant->title}}</p>
-              
+
                 {!! Form::open(array('url' => 'settings/inventory/limit')) !!}
 
                 {!! Form::label('individualLimit', 'Set Limit') !!}

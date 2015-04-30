@@ -32,24 +32,34 @@ class ShopifyProductConnector extends ShopifyConnector{
 
         $product->title = $result[0]['title'];
 
-        $variants = [];
-
         foreach ($result[0]['variants'] as $variantAttributes) {
+
+            $ids = [];
 
             foreach ($product->variants as $variant )
             {
+                $ids[] = $variant->id;
+
                 if ($variant->id == $variantAttributes['id'])
                 {
                     $variant->inventory_quantity = $variantAttributes['inventory_quantity'];
                     $variant->title = $variantAttributes['title'];
                     $variant->inventory_management = $variantAttributes['inventory_management'];
                 }
-                else $variant = $this->variantFactory->create($variantAttributes);
-
-                $variants[] = $variant;
             }
 
-            $product->variants = $variants;
+            if ( ! in_array($variantAttributes['id'], $ids))
+            {
+                $variant = $this->variantFactory->create([
+                    'id' => $variantAttributes['id'],
+                    'product_id' => $product->id
+                ]);
+
+                $variant->save();
+            }
+
+
+
         }
 
         return $product;

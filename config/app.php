@@ -146,7 +146,8 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'App\RNotifier\App\Providers\ProductRepositoryServiceProvider',
-		'App\RNotifier\App\Providers\SettingsRepositoryServiceProvider'
+		'App\RNotifier\App\Providers\SettingsRepositoryServiceProvider',
+		'App\RNotifier\App\Providers\VariantRepositoryServiceProvider',
 
 	],
 
