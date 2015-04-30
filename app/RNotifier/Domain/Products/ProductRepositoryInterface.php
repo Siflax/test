@@ -3,6 +3,4 @@
 
 interface ProductRepositoryInterface {
 
-    public function retrieve ();
-
 }

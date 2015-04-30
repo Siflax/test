@@ -2,9 +2,9 @@
 
 
 use App\RNotifier\Domain\Products\Product;
-use App\RNotifier\Domain\Products\Variants\Variant;
+use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 
-class EloquentProductRepository {
+class EloquentProductRepository implements ProductRepositoryInterface{
 
     public function save($product)
     {

@@ -4,7 +4,7 @@
 use App\RNotifier\Domain\InventoryChecker\InventoryCheckerService;
 use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
-use App\RNotifier\Infrastructure\Products\EloquentProductRepository;
+use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 use App\RNotifier\Infrastructure\Products\ProductFactory;
 use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
 use App\RNotifier\Infrastructure\Products\Variants\VariantFactory;
@@ -16,18 +16,18 @@ class InventorySettingsController extends Controller
     private $settingsRepository;
     private $inventoryChecker;
     private $productFactory;
-    private $eloquentProductRepository;
     private $variantFactory;
     private $shopifyProductConnector;
+    private $productRepository;
 
-    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ShopifyProductConnector $shopifyProductConnector, ProductFactory $productFactory, EloquentProductRepository $eloquentProductRepository, VariantFactory $variantFactory)
+    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ShopifyProductConnector $shopifyProductConnector, ProductFactory $productFactory, ProductRepositoryInterface $productRepository, VariantFactory $variantFactory)
     {
         $this->settingsRepository = $settingsRepository;
         $this->inventoryChecker = $inventoryChecker;
         $this->productFactory = $productFactory;
-        $this->eloquentProductRepository = $eloquentProductRepository;
         $this->variantFactory = $variantFactory;
         $this->shopifyProductConnector = $shopifyProductConnector;
+        $this->productRepository = $productRepository;
     }
 
     public function show()
@@ -95,13 +95,13 @@ class InventorySettingsController extends Controller
 
     public function individualLimit()
     {
-        $product = $this->eloquentProductRepository->retrieveById(Request::get('productId'));
+        $product = $this->productRepository->retrieveById(Request::get('productId'));
 
         if (! $product)
         {
             $product = $this->productFactory->create(['id' => Request::get('productId')]);
 
-            $this->eloquentProductRepository->save($product);
+            $this->productRepository->save($product);
 
             $variant = $this->variantFactory->create(['id' => Request::get('variantId'), 'product_id' => Request::get('productId'), 'inventory_limit' => Request::get('individualLimit')]);
 
@@ -115,7 +115,7 @@ class InventorySettingsController extends Controller
 
         }
 
-        //$this->eloquentProductRepository->save($product);
+        //$this->productRepository->save($product);
 
         return redirect()->to('settings/inventory');
 
