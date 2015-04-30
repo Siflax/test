@@ -1,18 +1,17 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
 use Illuminate\Support\Facades\Config;
 use phpish\shopify;
-use App\RNotifier\Domain\Products\ProductRepositoryInterface;
-
 
 class shopifyController extends Controller {
 
-	private $productRepository;
+	private $shopifyProductConnector;
 
-	function __construct(ProductRepositoryInterface $productRepository)
+	function __construct(ShopifyProductConnector $shopifyProductConnector)
 	{
-		$this->productRepository = $productRepository;
+		$this->shopifyProductConnector = $shopifyProductConnector;
 	}
 
 
@@ -48,7 +47,7 @@ class shopifyController extends Controller {
 	public function product()
 	{
 
-		dd($this->productRepository->retrieve());
+		dd($this->shopifyProductConnector->retrieve());
 
 	}
 

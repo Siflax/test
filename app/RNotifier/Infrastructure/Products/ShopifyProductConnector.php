@@ -1,27 +1,17 @@
 <?php namespace App\RNotifier\Infrastructure\Products;
 
 
-use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 use App\RNotifier\Infrastructure\Shopify\ShopifyConnector;
-use Illuminate\Support\Facades\Log;
 use phpish\shopify;
 
 
-class ShopifyProductRepository implements ProductRepositoryInterface{
+class ShopifyProductConnector extends ShopifyConnector{
 
-
-    /**
-     * @var ProductAdapter
-     */
     private $adapter;
-    /**
-     * @var ProductFactory
-     */
     private $factory;
 
-    function __construct(ShopifyConnector $shopifyConnector, ProductAdapter $adapter, ProductFactory $factory)
+    function __construct(ProductAdapter $adapter, ProductFactory $factory)
     {
-        $this->shopifyConnector = $shopifyConnector;
         $this->adapter = $adapter;
         $this->factory = $factory;
     }
@@ -30,7 +20,7 @@ class ShopifyProductRepository implements ProductRepositoryInterface{
     {
         try
         {
-            $result = $this->shopifyConnector->call('GET /admin/products.json', $options);
+            $result = $this->call('GET /admin/products.json', $options);
 
             $products = [];
 

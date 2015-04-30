@@ -2,23 +2,22 @@
 
 
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
-use App\RNotifier\Domain\Products\ProductRepositoryInterface;
+use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
 
 class InventoryCheckerService {
 
-    private $productRepository;
     private $settingsRepository;
+    private $shopifyProductConnector;
 
-    function __construct(ProductRepositoryInterface $productRepository, SettingsRepositoryInterface $settingsRepository)
+    function __construct(ShopifyProductConnector $shopifyProductConnector, SettingsRepositoryInterface $settingsRepository)
     {
-
-        $this->productRepository = $productRepository;
         $this->settingsRepository = $settingsRepository;
+        $this->shopifyProductConnector = $shopifyProductConnector;
     }
 
     public function check()
     {
-        $products = $this->productRepository->retrieve();
+        $products = $this->shopifyProductConnector->retrieve();
 
         $id = 1;
 

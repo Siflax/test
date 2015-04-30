@@ -12,9 +12,6 @@ class ProductRepositoryServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app->bind(
-            'App\RNotifier\Domain\Products\ProductRepositoryInterface',
-            'App\RNotifier\Infrastructure\Products\ShopifyProductRepository'
-        );
+  
     }
 }

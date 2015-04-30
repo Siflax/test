@@ -4,38 +4,30 @@
 use App\RNotifier\Domain\InventoryChecker\InventoryCheckerService;
 use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
-use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 use App\RNotifier\Infrastructure\Products\EloquentProductRepository;
 use App\RNotifier\Infrastructure\Products\ProductFactory;
+use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
 use App\RNotifier\Infrastructure\Products\Variants\VariantFactory;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\View;
 
 class InventorySettingsController extends Controller
 {
 
     private $settingsRepository;
     private $inventoryChecker;
-    private $productRepository;
     private $productFactory;
-    /**
-     * @var EloquentProductRepository
-     */
     private $eloquentProductRepository;
-    /**
-     * @var VariantFactory
-     */
     private $variantFactory;
+    private $shopifyProductConnector;
 
-    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ProductRepositoryInterface $productRepository, ProductFactory $productFactory, EloquentProductRepository $eloquentProductRepository, VariantFactory $variantFactory)
+    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ShopifyProductConnector $shopifyProductConnector, ProductFactory $productFactory, EloquentProductRepository $eloquentProductRepository, VariantFactory $variantFactory)
     {
         $this->settingsRepository = $settingsRepository;
         $this->inventoryChecker = $inventoryChecker;
-        $this->productRepository = $productRepository;
         $this->productFactory = $productFactory;
         $this->eloquentProductRepository = $eloquentProductRepository;
         $this->variantFactory = $variantFactory;
+        $this->shopifyProductConnector = $shopifyProductConnector;
     }
 
     public function show()
@@ -76,7 +68,7 @@ class InventorySettingsController extends Controller
     public function search()
     {
 
-        $products = $this->productRepository->retrieve([
+        $products = $this->shopifyProductConnector->retrieve([
             'fields' => 'title, id'
         ]);
 
@@ -92,7 +84,7 @@ class InventorySettingsController extends Controller
             else $idsList .= ', ' . $match->id;
         }
 
-        $products = $this->productRepository->retrieve(['ids' => $idsList]);
+        $products = $this->shopifyProductConnector->retrieve(['ids' => $idsList]);
 
         $id = 1;
         $setting = $this->settingsRepository->retrieveById($id);
