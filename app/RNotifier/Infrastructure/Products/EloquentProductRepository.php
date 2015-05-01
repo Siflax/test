@@ -18,4 +18,11 @@ class EloquentProductRepository implements ProductRepositoryInterface{
         return $product;
     }
 
+    public function retrieveAll()
+    {
+        $products = Product::all();
+
+        return $products;
+    }
+
 }

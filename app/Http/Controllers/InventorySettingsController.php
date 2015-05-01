@@ -38,7 +38,9 @@ class InventorySettingsController extends Controller
         $id = 1;
         $setting = $this->settingsRepository->retrieveById($id);
 
-        return view('settings.input', ['setting' => $setting]);
+        $products = $this->productRepository->retrieveAll();
+
+        return view('settings.input', ['setting' => $setting, 'products' => $products]);
 
     }
 
