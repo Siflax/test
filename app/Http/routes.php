@@ -31,6 +31,23 @@ Route::get('settings/check', 'InventorySettingsController@check');
 
 Route::get('notifications', 'NotificationsController@show');
 
+Route::post('notifications/email', 'NotificationsController@addEmail');
+
+Route::delete('notifications/email/delete/{id}', [
+	'as'=>'deleteEmail',
+	'uses'=> 'NotificationsController@removeEmail'
+]);
+
+Route::post('notifications/webhook', [
+	'as'=>'addWebhook',
+	'uses'=> 'NotificationsController@addWebhook'
+]);
+
+Route::delete('notifications/webhook/delete/{id}', [
+	'as'=>'deleteWebhook',
+	'uses'=> 'NotificationsController@removeWebhook'
+]);
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

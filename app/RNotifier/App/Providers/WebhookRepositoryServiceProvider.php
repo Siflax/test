@@ -1,11 +1,9 @@
 <?php namespace App\RNotifier\App\Providers;
 
 
-
 use Illuminate\Support\ServiceProvider;
 
-class EmailRepositoryServiceProvider extends ServiceProvider {
-
+class WebhookRepositoryServiceProvider extends ServiceProvider{
 
     /**
      * Register the service provider.
@@ -15,10 +13,8 @@ class EmailRepositoryServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->app->bind(
-            'App\RNotifier\Domain\Emails\EmailRepositoryInterface',
-            'App\RNotifier\Infrastructure\Emails\EloquentEmailRepository'
+            'App\RNotifier\Domain\Webhooks\WebhookRepositoryInterface',
+            'App\RNotifier\Infrastructure\Webhooks\EloquentWebhookRepository'
         );
     }
-
-
 }

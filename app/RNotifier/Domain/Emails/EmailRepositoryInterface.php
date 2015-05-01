@@ -1,6 +1,8 @@
 <?php namespace App\RNotifier\Domain\Emails;
 
 
-class EmailRepositoryInterface {
+interface EmailRepositoryInterface {
+
+    public function save($email);
 
 }

@@ -148,7 +148,8 @@ return [
 		'App\RNotifier\App\Providers\ProductRepositoryServiceProvider',
 		'App\RNotifier\App\Providers\SettingsRepositoryServiceProvider',
 		'App\RNotifier\App\Providers\VariantRepositoryServiceProvider',
-
+		'App\RNotifier\App\Providers\EmailRepositoryServiceProvider',
+		'App\RNotifier\App\Providers\WebhookRepositoryServiceProvider',
 	],
 
 	/*
