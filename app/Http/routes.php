@@ -29,6 +29,8 @@ Route::post('settings/inventory/limit', 'InventorySettingsController@individualL
 
 Route::get('settings/check', 'InventorySettingsController@check');
 
+Route::get('notifications', 'NotificationsController@show');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
