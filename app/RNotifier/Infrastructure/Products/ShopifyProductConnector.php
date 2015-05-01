@@ -55,7 +55,7 @@ class ShopifyProductConnector extends ShopifyConnector{
                     'product_id' => $product->id
                 ]);
 
-                $variant->save();
+                $product->variants[]= $variant;
             }
 
 

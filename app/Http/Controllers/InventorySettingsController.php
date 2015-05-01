@@ -86,6 +86,8 @@ class InventorySettingsController extends Controller
         foreach ($matches as $match) {
             $product = $this->productRepository->retrieveById($match->id);
 
+            if (! $product) $product = $match;
+
             $product = $this->shopifyProductConnector->getDetails($product);
 
             $products[] = $product;
