@@ -80,6 +80,15 @@ class InventorySettingsController extends Controller
     public function search()
     {
 
+        $products = $this->productRepository->retrieveAll();
+
+        $prods = [];
+
+        foreach ($products as $product)
+        {
+            $prods[] = $this->shopifyProductConnector->getDetails($product);
+        }
+
         $products = $this->shopifyProductConnector->retrieve([
             'fields' => 'title, id'
         ]);
@@ -105,7 +114,7 @@ class InventorySettingsController extends Controller
         $id = 1;
         $setting = $this->settingsRepository->retrieveById($id);
 
-        return view('settings.input', ['setting' => $setting, 'matches' => $products]);
+        return view('settings.input', ['setting' => $setting, 'matches' => $products, 'products' => $prods]);
 
     }
 
@@ -119,7 +128,12 @@ class InventorySettingsController extends Controller
 
             $this->productRepository->save($product);
 
-            $variant = $this->variantFactory->create(['id' => Request::get('variantId'), 'product_id' => Request::get('productId'), 'inventory_limit' => Request::get('individualLimit')]);
+            $variant = $this->variantFactory->create([
+                'id' => Request::get('variantId'),
+                'product_id' => Request::get('productId'),
+                'inventory_limit' => Request::get('individualLimit'),
+                'track' => Request::get('track')
+            ]);
 
             $variant->save();
         }
@@ -131,6 +145,7 @@ class InventorySettingsController extends Controller
             if ($variant)
             {
                 $variant->inventory_limit = Request::get('individualLimit');
+                $variant->track = Request::get('track');
                 $variant->save();
             }
             else
@@ -138,15 +153,12 @@ class InventorySettingsController extends Controller
                 $variant = $this->variantFactory->create([
                     'id' => Request::get('variantId'),
                     'product_id' => Request::get('productId'),
-                    'inventory_limit' => Request::get('individualLimit')
+                    'inventory_limit' => Request::get('individualLimit'),
+                    'track' => Request::get('track')
                 ]);
 
                 $variant->save();
-
-                //$this->variantRepository->create();
             }
-
-
 
         }
 
@@ -154,7 +166,6 @@ class InventorySettingsController extends Controller
 
         return redirect()->to('settings/inventory');
 
-        //'product_id', 'inventory_quantity', 'title', 'inventory_management'];
     }
 
 }

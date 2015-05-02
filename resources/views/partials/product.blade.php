@@ -1,10 +1,11 @@
-<h2>{{$product->title}}</h2>
+<h3>{{$product->title}}</h3>
 
 <table class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
         <th>Variant</th>
         <th>Limit</th>
+        <th>Track</th>
         <th></th>
     </tr>
     </thead>
@@ -22,6 +23,9 @@
                 {!! Form::hidden('variantId', $variant->id) !!}
                 {!! Form::hidden('productId', $product->id) !!}
             </td>
+
+            <td>{!! Form::checkbox('track', True, $variant->track) !!}</td>
+
             <td class="text-right">{!! Form::submit('save') !!}</td>
         </tr>
 

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Home</div>
+                    <div class="panel-heading">Global Rules</div>
 
                     <div class="panel-body">
                         {!! Form::open(array('url' => 'settings/inventory')) !!}
@@ -18,34 +18,40 @@
 
                         {!! Form::close() !!}
 
-                        <hr/>
-
-                        {!! Form::open(array('url' => 'settings/inventory/search')) !!}
-
-                        {!! Form::label('productTitle', 'Search by product title') !!}
-                        {!! Form::text('productTitle') !!}
-                        {!! Form::submit('save') !!}
-
-                        {!! Form::close() !!}
-
-                        @if (isset($matches))
-                            @foreach($matches as $product)
-                                @include('partials.product')
-                            @endforeach
-                        @endif
                     </div>
                 </div>
             </div>
 
             <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Individual Inventory Rules</div>
 
-                @if (isset($products))
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            @if (isset($products))
+                                @foreach($products as $product)
+                                    @include('partials.product')
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Add product rule</h4>
+                            {!! Form::open(array('url' => 'settings/inventory/search')) !!}
 
-                    @foreach($products as $product)
+                            {!! Form::label('productTitle', 'Search by product title') !!}
+                            {!! Form::text('productTitle') !!}
+                            {!! Form::submit('save') !!}
 
-                        @include('partials.product')
-                    @endforeach
-                @endif
+                            {!! Form::close() !!}
+
+                            @if (isset($matches))
+                                @foreach($matches as $product)
+                                    @include('partials.product')
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

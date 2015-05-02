@@ -17,6 +17,7 @@ class CreateVariantsTable extends Migration {
             $table->integer('id')->unique();
             $table->integer('product_id');
             $table->integer('inventory_limit');
+            $table->boolean('track')->default(True);
             $table->timestamps();
         });
     }
