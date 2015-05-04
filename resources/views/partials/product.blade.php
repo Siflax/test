@@ -19,7 +19,7 @@
         <tr>
             <td><p>{{$variant->title}}</p></td>
             <td>
-                {!! Form::text('individualLimit', $variant->inventory_limit) !!}
+                {!! Form::text('individualLimit', $variant->inventory_limit, ['style' => 'width:40px'] ) !!}
                 {!! Form::hidden('variantId', $variant->id) !!}
                 {!! Form::hidden('productId', $product->id) !!}
             </td>
