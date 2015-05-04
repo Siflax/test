@@ -12,6 +12,18 @@
                     <div class="panel-body">
 
 
+                        {!! Form::open(array('route' => 'saveFrequency')) !!}
+
+                        {!! Form::label('frequency', 'Daily') !!}
+                        {!! Form::radio('frequency', 'Daily', $settings->frequencyIsDaily()) !!}
+
+                        {!! Form::label('frequency', 'Weekly') !!}
+                        {!! Form::radio('frequency', 'Weekly', $settings->frequencyIsWeekly()) !!}
+
+                        {!! Form::submit('Save') !!}
+
+                        {!! Form::close() !!}
+
                     </div>
                 </div>
 <div class="col-md-6">

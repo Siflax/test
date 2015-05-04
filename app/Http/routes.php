@@ -43,6 +43,13 @@ Route::post('notifications/webhook', [
 	'uses'=> 'NotificationsController@addWebhook'
 ]);
 
+Route::post('notifications/frequency/save', [
+	'as'=>'saveFrequency',
+	'uses'=> 'NotificationsController@saveFrequency'
+]);
+
+
+
 Route::delete('notifications/webhook/delete/{id}', [
 	'as'=>'deleteWebhook',
 	'uses'=> 'NotificationsController@removeWebhook'

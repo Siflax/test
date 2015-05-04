@@ -16,6 +16,7 @@ class CreateInventorySettingsTable extends Migration {
         {
             $table->increments('id');
             $table->integer('globalLimit')->index();
+            $table->string('frequency');
         });
     }
 
