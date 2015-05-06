@@ -44,7 +44,7 @@ class InventorySettingsController extends Controller
 
         foreach ($products as $product)
         {
-            $prods[] = $this->shopifyProductConnector->getDetails($product);
+            $prods[] = $this->shopifyProductConnector->getDetails($product, false);
         }
 
         return view('settings.input', ['setting' => $setting, 'products' => $prods]);
@@ -150,11 +150,14 @@ class InventorySettingsController extends Controller
             }
             else
             {
+                $track = Request::get('track');
+                if (! $track) $track = 0;
+
                 $variant = $this->variantFactory->create([
                     'id' => Request::get('variantId'),
                     'product_id' => Request::get('productId'),
                     'inventory_limit' => Request::get('individualLimit'),
-                    'track' => Request::get('track')
+                    'track' => $track
                 ]);
 
                 $variant->save();

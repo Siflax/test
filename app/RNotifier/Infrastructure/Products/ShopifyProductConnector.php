@@ -20,7 +20,7 @@ class ShopifyProductConnector extends ShopifyConnector{
         $this->variantFactory = $variantFactory;
     }
 
-    public function getDetails(Product $product)
+    public function getDetails(Product $product, $addOriginalVariants = true)
     {
         $id = $product->id;
 
@@ -48,18 +48,22 @@ class ShopifyProductConnector extends ShopifyConnector{
                 }
             }
 
-            if ( ! in_array($variantAttributes['id'], $ids))
+            if ($addOriginalVariants)
             {
-                $variant = $this->variantFactory->create([
-                    'id' => $variantAttributes['id'],
-                    'product_id' => $product->id
-                ]);
+                if ( ! in_array($variantAttributes['id'], $ids))
+                {
+                    $variant = $this->variantFactory->create([
+                        'id' => $variantAttributes['id'],
+                        'product_id' => $product->id,
+                        'inventory_quantity' => $variantAttributes['inventory_quantity'],
+                        'title' => $variantAttributes['title'],
+                        'inventory_management' => $variantAttributes['inventory_management'],
+                        'track' => True
+                    ]);
 
-                $product->variants[]= $variant;
+                    $product->variants[]= $variant;
+                }
             }
-
-
-
         }
 
         return $product;

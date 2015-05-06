@@ -12,7 +12,7 @@
                         {!! Form::open(array('url' => 'settings/inventory')) !!}
 
                         {!! Form::label('globalLimit', 'Inventory Limit') !!}
-                        {!! Form::text('globalLimit', $setting->globalLimit) !!}
+                        {!! Form::text('globalLimit', $setting->globalLimit, ['style' => 'width:40px'] ) !!}
                         {!! Form::hidden('id', $setting->id) !!}
                         {!! Form::submit('save') !!}
 
