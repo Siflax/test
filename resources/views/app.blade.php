@@ -19,11 +19,7 @@
 	<![endif]-->
 </head>
 <body>
-	<div class="jumbotron" style="margin-bottom: 0px">
-		<div class="container">
-			<h1 class="jumbotron__header">Restock Notifier</h1>
-		</div>
-	</div>
+
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -38,10 +34,14 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{{route('showInventoryRules')}}">Inventory Rules</a></li>
-					<li><a href="{{url('/notifications')}}">Notifications</a></li>
+					<li class = {{ Request::is('inventory-rules*') ? 'active' : '' }} >
+						<a href="{{route('showInventoryRules')}}">Inventory Rules</a>
+					</li>
+					<li class = {{ Request::is('notifications*') ? 'active' : '' }} >
+						<a href="{{url('/notifications')}}">Notifications</a>
+					</li>
 				</ul>
-
+				<!--
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
 						<li><a href="{{ url('/auth/login') }}">Login</a></li>
@@ -54,7 +54,7 @@
 							</ul>
 						</li>
 					@endif
-				</ul>
+				</ul> --!>
 			</div>
 		</div>
 	</nav>
