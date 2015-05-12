@@ -11,6 +11,35 @@
 |
 */
 
+
+Route::group(array('prefix' => 'inventory-rules'), function()
+{
+	Route::get('', [
+			'as' =>'showInventoryRules',
+			'uses' => 'InventorySettingsController@show'
+	]);
+
+	Route::post('global-limit/save', [
+			'as'=>'saveGlobalLimit',
+			'uses'=> 'InventorySettingsController@store'
+	]);
+
+	Route::post('/search',[
+			'as'=>'searchInventoryRules',
+			'uses'=> 'InventorySettingsController@search'
+	]);
+
+	Route::post('product-limit/save', [
+		'as'=>'saveProductLimit',
+		'uses'=> 'InventorySettingsController@individualLimit'
+	]);
+
+});
+
+
+Route::get('settings/check', 'InventorySettingsController@check');
+
+
 Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
@@ -19,15 +48,7 @@ Route::get('shopify/shop', 'shopifyController@shop');
 
 Route::get('shopify/product', 'shopifyController@product');
 
-Route::get('settings/inventory', 'InventorySettingsController@show');
 
-Route::post('settings/inventory', 'InventorySettingsController@store');
-
-Route::post('settings/inventory/search', 'InventorySettingsController@search');
-
-Route::post('settings/inventory/limit', 'InventorySettingsController@individualLimit');
-
-Route::get('settings/check', 'InventorySettingsController@check');
 
 Route::get('notifications', 'NotificationsController@show');
 

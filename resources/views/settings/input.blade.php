@@ -9,15 +9,12 @@
                     <div class="panel-heading">Global Rules</div>
 
                     <div class="panel-body">
-                        {!! Form::open(array('url' => 'settings/inventory')) !!}
-
-                        {!! Form::label('globalLimit', 'Inventory Limit') !!}
-                        {!! Form::text('globalLimit', $setting->globalLimit, ['style' => 'width:40px'] ) !!}
-                        {!! Form::hidden('id', $setting->id) !!}
-                        {!! Form::submit('save') !!}
-
+                        {!! Form::open(array('route' => 'saveGlobalLimit')) !!}
+                            {!! Form::label('globalLimit', 'Inventory Limit') !!}
+                            {!! Form::text('globalLimit', $setting->globalLimit, ['style' => 'width:40px'] ) !!}
+                            {!! Form::hidden('id', $setting->id) !!}
+                            {!! Form::submit('save') !!}
                         {!! Form::close() !!}
-
                     </div>
                 </div>
             </div>
@@ -36,12 +33,10 @@
                         </div>
                         <div class="col-md-6">
                             <h4>Add product rule</h4>
-                            {!! Form::open(array('url' => 'settings/inventory/search')) !!}
-
-                            {!! Form::label('productTitle', 'Search by product title') !!}
-                            {!! Form::text('productTitle') !!}
-                            {!! Form::submit('save') !!}
-
+                            {!! Form::open(array('route' => 'searchInventoryRules')) !!}
+                                {!! Form::label('productTitle', 'Search by product title') !!}
+                                {!! Form::text('productTitle') !!}
+                                {!! Form::submit('save') !!}
                             {!! Form::close() !!}
 
                             @if (isset($matches))

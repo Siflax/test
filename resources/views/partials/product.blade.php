@@ -14,7 +14,7 @@
     @foreach($product->variants as $variant)
 
 
-        {!! Form::open(array('url' => 'settings/inventory/limit')) !!}
+        {!! Form::open(array('route' => 'saveProductLimit')) !!}
 
         <tr>
             <td><p>{{$variant->title}}</p></td>
