@@ -10,12 +10,19 @@
 
                     <div class="panel-body">
                         {!! Form::open(array('route' => 'saveGlobalLimit')) !!}
-                            {!! Form::label('globalLimit', 'Inventory Limit') !!}
-                            {!! Form::text('globalLimit', $setting->globalLimit, ['style' => 'width:40px'] ) !!}
-                            {!! Form::hidden('id', $setting->id) !!}
-                            {!! Form::submit('save') !!}
+                            <div class="form-group">
+                                {!! Form::label('globalLimit', 'Inventory Limit') !!}
+                                {!! Form::text('globalLimit', $setting->globalLimit, ['style' => 'width:40px', 'class' => 'form-control'] ) !!}
+                                {!! Form::hidden('id', $setting->id) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::submit('save', ['class'=> 'btn btn-primary']) !!}
+                            </div>
+
                         {!! Form::close() !!}
                     </div>
+
                 </div>
             </div>
 
