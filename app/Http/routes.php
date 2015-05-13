@@ -24,7 +24,7 @@ Route::group(array('prefix' => 'inventory-rules'), function()
 			'uses'=> 'InventorySettingsController@store'
 	]);
 
-	Route::post('/search',[
+	Route::post('',[
 			'as'=>'searchInventoryRules',
 			'uses'=> 'InventorySettingsController@search'
 	]);
