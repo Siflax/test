@@ -5,7 +5,7 @@ use App\RNotifier\Domain\InventoryChecker\InventoryCheckerService;
 use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductRepositoryInterface;
-use App\RNotifier\Domain\Products\Variants\VariantRepositoryInterface;
+use App\RNotifier\Domain\Products\ProductSearcher;
 use App\RNotifier\Infrastructure\Products\ProductFactory;
 use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
 use App\RNotifier\Infrastructure\Products\Variants\VariantFactory;
@@ -20,9 +20,9 @@ class InventorySettingsController extends Controller
     private $variantFactory;
     private $shopifyProductConnector;
     private $productRepository;
-    private $variantRepository;
+    private $productSearcher;
 
-    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ShopifyProductConnector $shopifyProductConnector, ProductFactory $productFactory, ProductRepositoryInterface $productRepository, VariantFactory $variantFactory, VariantRepositoryInterface $variantRepository)
+    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ShopifyProductConnector $shopifyProductConnector, ProductFactory $productFactory, ProductRepositoryInterface $productRepository, VariantFactory $variantFactory, ProductSearcher $productSearcher)
     {
         $this->settingsRepository = $settingsRepository;
         $this->inventoryChecker = $inventoryChecker;
@@ -30,7 +30,7 @@ class InventorySettingsController extends Controller
         $this->variantFactory = $variantFactory;
         $this->shopifyProductConnector = $shopifyProductConnector;
         $this->productRepository = $productRepository;
-        $this->variantRepositoryInterface = $variantRepository;
+        $this->productSearcher = $productSearcher;
     }
 
     public function show()
@@ -79,42 +79,14 @@ class InventorySettingsController extends Controller
 
     public function search()
     {
+        $matches = $this->productSearcher->execute(Request::get('productTitle'));
 
-        $products = $this->productRepository->retrieveAll();
-
-        $prods = [];
-
-        foreach ($products as $product)
-        {
-            $prods[] = $this->shopifyProductConnector->getDetails($product);
-        }
-
-        $products = $this->shopifyProductConnector->retrieve([
-            'fields' => 'title, id'
-        ]);
-
-        $matches = [];
-
-        foreach ($products as $product) {
-            if ($product->titleContains(Request::get('productTitle'))) $matches[] = $product;
-        }
-
-        $products = [];
-
-        foreach ($matches as $match) {
-            $product = $this->productRepository->retrieveById($match->id);
-
-            if (! $product) $product = $match;
-
-            $product = $this->shopifyProductConnector->getDetails($product);
-
-            $products[] = $product;
-        }
+        $products = $this->productRepository->retrieveAll(true);
 
         $id = 1;
         $setting = $this->settingsRepository->retrieveById($id);
 
-        return view('settings.input', ['setting' => $setting, 'matches' => $products, 'products' => $prods]);
+        return view('settings.input', ['setting' => $setting, 'matches' => $matches, 'products' => $products]);
 
     }
 
