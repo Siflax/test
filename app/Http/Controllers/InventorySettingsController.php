@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\Http\Requests\SearchProductsRequest;
 use App\RNotifier\Domain\InventoryChecker\InventoryCheckerService;
 use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
@@ -77,7 +78,7 @@ class InventorySettingsController extends Controller
         $this->inventoryChecker->check();
     }
 
-    public function search()
+    public function search(SearchProductsRequest $request)
     {
         $matches = $this->productSearcher->execute(Request::get('productTitle'));
 
@@ -87,7 +88,6 @@ class InventorySettingsController extends Controller
         $setting = $this->settingsRepository->retrieveById($id);
 
         return view('settings.input', ['setting' => $setting, 'matches' => $matches, 'products' => $products]);
-
     }
 
     public function saveProductLimit()
