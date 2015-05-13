@@ -31,7 +31,7 @@ Route::group(array('prefix' => 'inventory-rules'), function()
 
 	Route::post('product-limit/save', [
 		'as'=>'saveProductLimit',
-		'uses'=> 'InventorySettingsController@individualLimit'
+		'uses'=> 'InventorySettingsController@saveProductLimit'
 	]);
 
 });

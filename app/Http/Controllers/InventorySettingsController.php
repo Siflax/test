@@ -90,7 +90,7 @@ class InventorySettingsController extends Controller
 
     }
 
-    public function individualLimit()
+    public function saveProductLimit()
     {
         $product = $this->productRepository->retrieveById(Request::get('productId'));
 
@@ -139,7 +139,7 @@ class InventorySettingsController extends Controller
 
         //$this->productRepository->save($product);
 
-        return redirect()->to('settings/inventory');
+        return redirect()->back();
 
     }
 
