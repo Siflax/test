@@ -31,50 +31,9 @@
 
                     </div>
                 </div>
-<div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Webhooks</div>
+            </div>
 
-                    <div class="panel-body">
-
-                        {!! Form::open(array('route' => 'addWebhook')) !!}
-
-                        {!! Form::label('url', 'Add Webhook') !!}
-                        {!! Form::text('url') !!}
-                        {!! Form::submit('Add') !!}
-
-                        {!! Form::close() !!}
-
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>Webhooks</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                                @if(isset($webhooks))
-                                    @foreach($webhooks as $webhook)
-
-                                        {!! Form::open(array('route' => ['deleteWebhook', $webhook->id], 'method' => 'Delete')) !!}
-                                        <tr>
-                                            <td>{{$webhook->url}}</td>
-                                            <td class="text-right">{!! Form::submit('Remove') !!}</td>
-                                        </tr>
-                                        {!! Form::close() !!}
-
-                                    @endforeach
-
-                                @endif
-
-                            <tbody>
-                        </table>
-
-                    </div>
-                </div>
-</div>
-<div class="col-md-6">
+<div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Emails</div>
 
