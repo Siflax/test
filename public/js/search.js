@@ -15,6 +15,12 @@ function up()
                 type : method,
                 url : url,
                 data : form.serialize(),
+                beforeSend: function(){
+                    $('#loading-image').show();
+                },
+                complete: function(){
+                    $('#loading-image').hide();
+                },
                 success : function(response)
                 {
                     $('#search-results').html(response);

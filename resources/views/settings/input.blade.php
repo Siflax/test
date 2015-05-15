@@ -62,6 +62,7 @@
 
                             {!! Form::close() !!}
 
+                            <div id = 'loading-image' style="display: none; z-index: 100; position: absolute;" ></div>
                             <div id="search-results"></div>
 
                         </div>
@@ -71,12 +72,6 @@
 
         </div>
     </div>
-
-
-
-
-
-
 
 @endsection
 
