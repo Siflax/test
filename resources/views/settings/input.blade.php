@@ -51,7 +51,7 @@
 
                                 <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
                                     {!! Form::label('productTitle', 'Search by product title') !!}
-                                    {!! Form::text('productTitle', null, ['class' => 'form-control'])!!}
+                                    {!! Form::text('productTitle', null, ['class' => 'form-control', 'onkeydown' => "down()", 'onkeyup' => "up()", 'id' => "search-input" ])!!}
 
                                     {!! $errors->first('productTitle', '<span class="help-block">:message</span>') !!}
                                 </div>
@@ -62,11 +62,8 @@
 
                             {!! Form::close() !!}
 
-                            @if (isset($matches))
-                                @foreach($matches as $product)
-                                    @include('partials.product')
-                                @endforeach
-                            @endif
+                            <div id="search-results"></div>
+
                         </div>
                     </div>
                 </div>

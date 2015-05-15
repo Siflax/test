@@ -87,7 +87,7 @@ class InventorySettingsController extends Controller
         $id = 1;
         $setting = $this->settingsRepository->retrieveById($id);
 
-        return view('settings.input', ['setting' => $setting, 'matches' => $matches, 'products' => $products]);
+        return view('partials.searchResults', ['matches' => $matches]);
     }
 
     public function saveProductLimit()
