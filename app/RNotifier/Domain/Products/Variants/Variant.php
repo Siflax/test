@@ -14,4 +14,10 @@ class Variant extends Model
         $this->belongsTo('App\RNotifier\Domain\Products\Product');
     }
 
+    public function setTitleAttribute($value)
+    {
+        if ($value === "Default Title") $this->attributes['title'] = 'N/A';
+        else $this->attributes['title'] = $value;
+    }
+
 }
