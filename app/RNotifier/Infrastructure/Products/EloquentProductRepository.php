@@ -27,7 +27,7 @@ class EloquentProductRepository implements ProductRepositoryInterface{
 
     public function retrieveAll($withShopifyDetails = false)
     {
-        $products = Product::all();
+        $products = Product::paginate(10);
 
         if ($withShopifyDetails === false) return $products;
         elseif ($withShopifyDetails === true) {

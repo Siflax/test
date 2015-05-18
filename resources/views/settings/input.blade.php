@@ -43,6 +43,8 @@
                                 @foreach($products as $product)
                                     @include('partials.product')
                                 @endforeach
+
+                                    <?php echo $products->render(); ?>
                             @endif
                         </div>
                         <div class="col-md-6">
@@ -67,6 +69,7 @@
                                     @include('partials.product')
                                 @endforeach
                             @endif
+
                         </div>
                     </div>
                 </div>

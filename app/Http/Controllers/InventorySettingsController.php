@@ -41,14 +41,12 @@ class InventorySettingsController extends Controller
 
         $products = $this->productRepository->retrieveAll();
 
-        $prods = [];
-
-        foreach ($products as $product)
+        foreach($products as $key => $value)
         {
-            $prods[] = $this->shopifyProductConnector->getDetails($product, false);
+            $products[$key] = $this->shopifyProductConnector->getDetails($products[$key]);
         }
 
-        return view('settings.input', ['setting' => $setting, 'products' => $prods]);
+        return view('settings.input', ['setting' => $setting, 'products' => $products]);
 
     }
 
