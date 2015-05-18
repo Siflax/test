@@ -13,7 +13,7 @@ class EloquentEmailRepository implements EmailRepositoryInterface{
 
     public function retrieveAll()
     {
-        $emails = Email::all();
+        $emails = Email::paginate(10);
 
         return $emails;
     }

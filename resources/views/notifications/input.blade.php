@@ -67,11 +67,13 @@
                                     {!! Form::open(array('route' => ['deleteEmail', $email->id], 'method' => 'Delete')) !!}
                                     <tr>
                                         <td>{{$email->address}}</td>
-                                        <td class="text-right">{!! Form::submit('Remove') !!}</td>
+                                        <td class="text-right">{!! Form::submit('Remove', ['class'=> 'btn btn-primary']) !!}</td>
                                     </tr>
                                     {!! Form::close() !!}
 
                                 @endforeach
+
+                                <?php echo $emails->render(); ?>
                             @endif
 
 
