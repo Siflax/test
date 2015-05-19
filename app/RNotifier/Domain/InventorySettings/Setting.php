@@ -15,6 +15,11 @@ class Setting extends Model  {
     {
     }
 
+    public function shop()
+    {
+        $this->belongsTo('App\RNotifier\Domain\Shops\Shop');
+    }
+
     public function frequencyIsWeekly()
     {
         if($this->frequency == 'Weekly') return true;

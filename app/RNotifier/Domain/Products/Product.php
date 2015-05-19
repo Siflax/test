@@ -34,6 +34,10 @@ class Product extends Model  {
             return $this->hasMany('App\RNotifier\Domain\Products\Variants\Variant');
         }
 
+        public function shop()
+        {
+            $this->belongsTo('App\RNotifier\Domain\Shops\Shop');
+        }
 
 
 }
