@@ -21,7 +21,8 @@ class CreateInventorySettingsTable extends Migration {
             $table->string('frequency');
 
             $table->foreign('shop_id')
-                ->references('id')->on('shops');
+                ->references('id')->on('shops')
+                ->onDelete('cascade');
         });
     }
 

@@ -20,7 +20,8 @@ class CreateEmailsTable extends Migration {
             $table->timestamps();
 
             $table->foreign('shop_id')
-                ->references('id')->on('shops');
+                ->references('id')->on('shops')
+                ->onDelete('cascade');
         });
     }
 
