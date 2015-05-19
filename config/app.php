@@ -150,6 +150,7 @@ return [
 		'App\RNotifier\App\Providers\VariantRepositoryServiceProvider',
 		'App\RNotifier\App\Providers\EmailRepositoryServiceProvider',
 		'App\RNotifier\App\Providers\WebhookRepositoryServiceProvider',
+		'App\RNotifier\App\Providers\ShopRepositoryServiceProvider',
 	],
 
 	/*

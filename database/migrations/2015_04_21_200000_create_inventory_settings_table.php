@@ -15,9 +15,13 @@ class CreateInventorySettingsTable extends Migration {
         Schema::create('inventorySettings', function(Blueprint $table)
         {
             $table->increments('id');
+            $table->integer('shop_id')->unsigned();
             $table->integer('globalLimit')->index();
             $table->boolean('isTrackedGlobally');
             $table->string('frequency');
+
+            $table->foreign('shop_id')
+                ->references('id')->on('shops');
         });
     }
 

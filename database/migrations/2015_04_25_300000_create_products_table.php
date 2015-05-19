@@ -15,7 +15,11 @@ class CreateProductsTable extends Migration {
         Schema::create('products', function(Blueprint $table)
         {
             $table->integer('id');
+            $table->integer('shop_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('shop_id')
+                ->references('id')->on('shops');
         });
     }
 
