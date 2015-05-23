@@ -23,9 +23,6 @@ class InventorySettingsController extends Controller
     private $shopifyProductConnector;
     private $productRepository;
     private $productSearcher;
-    /**
-     * @var VariantRepositoryInterface
-     */
     private $variantRepository;
 
     function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ShopifyProductConnector $shopifyProductConnector, ProductFactory $productFactory, ProductRepositoryInterface $productRepository, VariantFactory $variantFactory, ProductSearcher $productSearcher, VariantRepositoryInterface $variantRepository)

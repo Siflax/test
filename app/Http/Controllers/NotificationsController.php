@@ -4,6 +4,7 @@
 use App\RNotifier\Domain\Emails\Email;
 use App\RNotifier\Domain\Emails\EmailRepositoryInterface;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
+use App\RNotifier\Domain\Shops\Shop;
 use App\RNotifier\Domain\Webhooks\Webhook;
 use App\RNotifier\Domain\Webhooks\WebhookRepositoryInterface;
 use Illuminate\Support\Facades\Request;
@@ -25,9 +26,10 @@ class NotificationsController extends Controller {
 
     public function show()
     {
-        //TODO: fix
-        $id = 1;
-        $settings = $this->settingsRepository->retrieveById($id);
+        $shop = Shop::find(1);
+
+        $settings = $this->settingsRepository->retrieveByShop($shop);
+
         $emails = $this->emailRepository->retrieveAll();
         $webhooks = $this->webhookRepository->retrieveAll();
         return view('notifications.input', ['emails' => $emails, 'webhooks' => $webhooks, 'settings' => $settings]);
@@ -70,9 +72,9 @@ class NotificationsController extends Controller {
 
     public function saveFrequency()
     {
-        //TODO: fix
-        $id = 1;
-        $setting = $this->settingsRepository->retrieveById($id);
+        $shop = Shop::find(1);
+
+        $setting = $this->settingsRepository->retrieveByShop($shop);
 
         $setting->frequency = Request::get('frequency');
 
