@@ -33,4 +33,22 @@ class EloquentSettingsRepository implements SettingsRepositoryInterface {
         $setting->save();
     }
 
+    public function updateOrCreateByShop($shop, $parameters = [], $update)
+    {
+        $setting = $this->firstOrCreateByShop($shop, $parameters);
+
+        $setting->fill($update);
+
+        $setting->save();
+
+        return $setting;
+    }
+
+    public function firstOrCreateByShop($shop, $parameters = [])
+    {
+        $setting = $shop->settings()->firstOrCreate($parameters);
+
+        return $setting;
+    }
+
 }

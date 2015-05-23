@@ -2,6 +2,7 @@
 
 
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
+use App\RNotifier\Domain\Shops\Shop;
 use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
 
 class InventoryCheckerService {
@@ -21,7 +22,9 @@ class InventoryCheckerService {
 
         $id = 1;
 
-        $setting = $this->settingsRepository->retrieveById($id);
+        $shop = Shop::find(1);
+
+        $setting = $this->settingsRepository->retrieveByShop($shop);
 
         $globalLimit = $setting->globalLimit;
 

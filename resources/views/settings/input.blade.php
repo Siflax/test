@@ -15,8 +15,8 @@
                         {!! Form::open(array('route' => 'saveGlobalLimit')) !!}
                             <div class="form-group">
                                 {!! Form::label('globalLimit', 'Inventory Limit') !!}
-                                {!! Form::text('globalLimit', $setting->globalLimit, ['style' => 'width:40px', 'class' => 'form-control'] ) !!}
-                                {!! Form::hidden('id', $setting->id) !!}
+                                {!! Form::text('globalLimit', isset($setting->globalLimit) ? $setting->globalLimit : null, ['style' => 'width:40px', 'class' => 'form-control'] ) !!}
+                                {!! Form::hidden('id', isset($setting->id) ? $setting->id : null) !!}
                             </div>
 
                             <div class="form-group">

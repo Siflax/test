@@ -48,21 +48,11 @@ class InventorySettingsController extends Controller
 
     public function store()
     {
+        $shop = Shop::find(1);
+
         $globalLimit = Request::only('globalLimit');
 
-        if (Request::has('id')) {
-            $setting = $this->settingsRepository->retrieveById(Request::input('id'));
-
-            $setting->fill($globalLimit);
-
-            $this->settingsRepository->save($setting);
-        } else {
-            $setting = new Setting();
-
-            $setting->fill($globalLimit);
-
-            $this->settingsRepository->create($setting);
-        }
+        $this->settingsRepository->updateOrCreateByShop($shop, [], $globalLimit);
 
         return redirect()->back();
     }
