@@ -1,11 +1,5 @@
 @if (isset($products))
 
-
-
-
-
-
-
 <table class="table table-condensed" style="border-collapse:collapse;">
 
     <thead>

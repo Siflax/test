@@ -3,19 +3,26 @@
     @foreach($product->variants as $variant)
 
 
-
-
-        <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+        <tr data-toggle="collapse" data-target="#{{$product->id}}" class="accordion-toggle">
             <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-            <td>OBS Name</td>
-            <td>OBS Description</td>
-            <td>hpcloud</td>
-            <td>nova</td>
+            {!! Form::open(array('route' => 'saveProductLimit')) !!}
+                <td><p>{{$variant->title}}</p></td>
+                <td>
+                    {!! Form::text('individualLimit', $variant->inventory_limit, ['style' => 'width:50px', 'class' => 'form-control'] ) !!}
+                    {!! Form::hidden('variantId', $variant->id) !!}
+                    {!! Form::hidden('productId', $product->id) !!}
+                </td>
+                <td>{!! Form::checkbox('track', True, $variant->track, ['class' => 'form-control']) !!}</td>
+                <td class="text-right">
+                    {!! Form::submit('save', ['class'=> 'btn btn-primary']) !!}
+                    {!! link_to_route('deleteProductLimit', 'Delete', $variant->id ,['class' => 'btn btn-danger']) !!}
+                </td>
+            {!! Form::close() !!}
         </tr>
 
 
         <tr>
-            <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo1">
+            <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="{{$product->id}}">
                     <table class="table table-striped">
                         <thead>
                         <tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>
@@ -33,6 +40,7 @@
 
 
     @endforeach
+
 
 
 

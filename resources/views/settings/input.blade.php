@@ -63,11 +63,7 @@
 
                             {!! Form::close() !!}
 
-                            @if (isset($matches))
-                                @foreach($matches as $product)
-                                    @include('partials.product')
-                                @endforeach
-                            @endif
+                            @include('partials.productSearchResults')
 
                         </div>
                     </div>
