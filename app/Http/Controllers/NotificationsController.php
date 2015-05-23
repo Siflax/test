@@ -5,21 +5,17 @@ use App\RNotifier\Domain\Emails\Email;
 use App\RNotifier\Domain\Emails\EmailRepositoryInterface;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\RNotifier\Domain\Shops\Shop;
-use App\RNotifier\Domain\Webhooks\Webhook;
-use App\RNotifier\Domain\Webhooks\WebhookRepositoryInterface;
 use Illuminate\Support\Facades\Request;
 
 
 class NotificationsController extends Controller {
 
     private $emailRepository;
-    private $webhookRepository;
     private $settingsRepository;
 
-    function __construct(EmailRepositoryInterface $emailRepository, WebhookRepositoryInterface $webhookRepository, SettingsRepositoryInterface $settingsRepository)
+    function __construct(EmailRepositoryInterface $emailRepository, SettingsRepositoryInterface $settingsRepository)
     {
         $this->emailRepository = $emailRepository;
-        $this->webhookRepository = $webhookRepository;
         $this->settingsRepository = $settingsRepository;
     }
 
@@ -30,45 +26,32 @@ class NotificationsController extends Controller {
 
         $settings = $this->settingsRepository->retrieveByShop($shop);
 
-        $emails = $this->emailRepository->retrieveAll();
-        $webhooks = $this->webhookRepository->retrieveAll();
-        return view('notifications.input', ['emails' => $emails, 'webhooks' => $webhooks, 'settings' => $settings]);
+        $emails = $this->emailRepository->retrievePaginatedForShop($shop);
+
+        return view('notifications.input', ['emails' => $emails, 'settings' => $settings]);
     }
 
     public function addEmail()
     {
+        $shopId = 1;
 
         $email = new Email([
             'address' => Request::get('emailAddress')
         ]);
 
-        $this->emailRepository->save($email);
+        $this->emailRepository->save($email, $shopId);
 
         return redirect()->back();
     }
 
     public function removeEmail($id)
-    {   //TODO: when multi tenant- should only be able to delete own
-        $this->emailRepository->delete($id);
-        return redirect()->back();
-    }
-
-    public function removeWebhook($id)
-    {//TODO: when multi tenant- should only be able to delete own
-        $this->webhookRepository->delete($id);
-        return redirect()->back();
-    }
-
-    public function addWebhook()
     {
-        $webhook = new Webhook([
-           'url' => Request::get('url')
-        ]);
+        $shopId = 1;
 
-        $this->webhookRepository->save($webhook);
-
+        $this->emailRepository->delete($id, $shopId);
         return redirect()->back();
     }
+
 
     public function saveFrequency()
     {

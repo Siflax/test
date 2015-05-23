@@ -3,6 +3,6 @@
 
 interface EmailRepositoryInterface {
 
-    public function save($email);
+    public function save( Email $email, $shopId);
 
 }
