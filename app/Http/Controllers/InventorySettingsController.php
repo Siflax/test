@@ -7,6 +7,7 @@ use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductSearcher;
+use App\RNotifier\Domain\Products\Variants\VariantRepositoryInterface;
 use App\RNotifier\Domain\Shops\Shop;
 use App\RNotifier\Infrastructure\Products\ProductFactory;
 use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
@@ -23,8 +24,12 @@ class InventorySettingsController extends Controller
     private $shopifyProductConnector;
     private $productRepository;
     private $productSearcher;
+    /**
+     * @var VariantRepositoryInterface
+     */
+    private $variantRepository;
 
-    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ShopifyProductConnector $shopifyProductConnector, ProductFactory $productFactory, ProductRepositoryInterface $productRepository, VariantFactory $variantFactory, ProductSearcher $productSearcher)
+    function __construct(SettingsRepositoryInterface $settingsRepository, InventoryCheckerService $inventoryChecker, ShopifyProductConnector $shopifyProductConnector, ProductFactory $productFactory, ProductRepositoryInterface $productRepository, VariantFactory $variantFactory, ProductSearcher $productSearcher, VariantRepositoryInterface $variantRepository)
     {
         $this->settingsRepository = $settingsRepository;
         $this->inventoryChecker = $inventoryChecker;
@@ -33,6 +38,7 @@ class InventorySettingsController extends Controller
         $this->shopifyProductConnector = $shopifyProductConnector;
         $this->productRepository = $productRepository;
         $this->productSearcher = $productSearcher;
+        $this->variantRepository = $variantRepository;
     }
 
     public function show()
@@ -77,55 +83,22 @@ class InventorySettingsController extends Controller
 
     public function saveProductLimit()
     {
-        $product = $this->productRepository->retrieveById(Request::get('productId'));
+        $shop = Shop::find(1);
 
-        if (! $product)
-        {
-            $product = $this->productFactory->create(['id' => Request::get('productId')]);
+        $product = $this->productRepository->firstOrCreateByShop($shop, ['id' => Request::get('productId')]);
 
-            $this->productRepository->save($product);
+        $variant = $this->variantRepository->firstOrNewByProduct(
+            $product,
+            ['id' => Request::get('variantId')]
+        );
 
-            $variant = $this->variantFactory->create([
-                'id' => Request::get('variantId'),
-                'product_id' => Request::get('productId'),
-                'inventory_limit' => Request::get('individualLimit'),
-                'track' => Request::get('track')
-            ]);
+        $variant->product_id = Request::get('productId');
+        $variant->inventory_limit = Request::get('individualLimit');
+        $variant->track = Request::get('track');
 
-            $variant->save();
-        }
-        else
-        {
-
-            $variant = $product->variants->where('product_id', $product->id)->where('id', (int) Request::get('variantId'))->first();
-
-            if ($variant)
-            {
-                $variant->inventory_limit = Request::get('individualLimit');
-                $variant->track = Request::get('track');
-                $variant->save();
-            }
-            else
-            {
-                $track = Request::get('track');
-                if (! $track) $track = 0;
-
-                $variant = $this->variantFactory->create([
-                    'id' => Request::get('variantId'),
-                    'product_id' => Request::get('productId'),
-                    'inventory_limit' => Request::get('individualLimit'),
-                    'track' => $track
-                ]);
-
-                $variant->save();
-            }
-
-        }
-
-        //$this->productRepository->save($product);
+        $variant->save();
 
         return redirect()->back();
-
     }
 
     public function deleteRule($id)
