@@ -101,15 +101,11 @@ class InventorySettingsController extends Controller
 
     public function deleteRule($id)
     {
-        //TODO: make sure that can only delete own products!!!
+        $shopId = 1;
 
-        // find variant
+        $this->variantRepository->delete($id, $shopId);
 
-        // get product id
-
-        // delete variant by id
-
-        // if product has no children delete
+        return redirect()->back();
     }
 
 }

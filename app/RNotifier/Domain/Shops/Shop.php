@@ -22,4 +22,9 @@ class Shop extends Model {
         return $this->hasMany('App\RNotifier\Domain\InventorySettings\Setting');
     }
 
+    public function variants()
+    {
+        return $this->hasManyThrough('App\RNotifier\Domain\Products\Variants\Variant', 'App\RNotifier\Domain\Products\Product');
+    }
+
 }

@@ -5,7 +5,7 @@ use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 
 class EloquentSettingsRepository implements SettingsRepositoryInterface {
-    
+
     public function retrieveByShop($shop)
     {
         return $shop->settings()->first();

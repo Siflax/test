@@ -34,6 +34,11 @@ Route::group(array('prefix' => 'inventory-rules'), function()
 		'uses'=> 'InventorySettingsController@saveProductLimit'
 	]);
 
+	Route::get('product-limit/delete/{id}', [
+		'as'=>'deleteProductLimit',
+		'uses'=> 'InventorySettingsController@deleteRule'
+	]);
+
 });
 
 
