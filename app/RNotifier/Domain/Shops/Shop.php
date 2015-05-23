@@ -19,7 +19,7 @@ class Shop extends Model {
 
     public function settings()
     {
-        return $this->hasMany('App\RNotifier\Domain\InventorySettings\Settings');
+        return $this->hasMany('App\RNotifier\Domain\InventorySettings\Setting');
     }
 
 }

@@ -18,6 +18,11 @@ class EloquentSettingsRepository implements SettingsRepositoryInterface {
         return $setting;
     }
 
+    public function retrieveByShop($shop)
+    {
+        return $shop->settings()->first();
+    }
+
     public function retrieve($options)
     {
         $settings = Setting::where($options);

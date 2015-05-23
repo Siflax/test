@@ -42,4 +42,27 @@ class EloquentProductRepository implements ProductRepositoryInterface{
         }
     }
 
+    public function retrievePaginatedByShop($shop, $withShopifyDetails = false)
+    {
+        $products = $shop->products()->paginate(10);
+
+        if ($withShopifyDetails === true) $products = $this->getShopifyDetails($products);
+
+        return $products;
+    }
+
+    /**
+     * Get a products details from shopify
+     *
+     * @param $products
+     * @return mixed
+     */
+    public function getShopifyDetails($products)
+    {
+        foreach ($products as $key => $value) {
+            $products[$key] = $this->shopifyProductConnector->getDetails($products[$key]);
+        }
+        return $products;
+    }
+
 }

@@ -7,6 +7,7 @@ use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductSearcher;
+use App\RNotifier\Domain\Shops\Shop;
 use App\RNotifier\Infrastructure\Products\ProductFactory;
 use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
 use App\RNotifier\Infrastructure\Products\Variants\VariantFactory;
@@ -36,18 +37,13 @@ class InventorySettingsController extends Controller
 
     public function show()
     {
-        $id = 1;
-        $setting = $this->settingsRepository->retrieveById($id);
+        $shop = Shop::find(1);
 
-        $products = $this->productRepository->retrieveAll();
+        $setting = $this->settingsRepository->retrieveByShop($shop);
 
-        foreach($products as $key => $value)
-        {
-            $products[$key] = $this->shopifyProductConnector->getDetails($products[$key]);
-        }
+        $products = $this->productRepository->retrievePaginatedByShop($shop, true);
 
         return view('settings.input', ['setting' => $setting, 'products' => $products]);
-
     }
 
     public function store()
@@ -78,12 +74,13 @@ class InventorySettingsController extends Controller
 
     public function search(SearchProductsRequest $request)
     {
+        $shop = Shop::find(1);
+
+        $products = $this->productRepository->retrievePaginatedByShop($shop, true);
+
         $matches = $this->productSearcher->execute(Request::get('productTitle'));
 
-        $products = $this->productRepository->retrieveAll(true);
-
-        $id = 1;
-        $setting = $this->settingsRepository->retrieveById($id);
+        $setting = $this->settingsRepository->retrieveByShop($shop);
 
         return view('settings.input', ['setting' => $setting, 'matches' => $matches, 'products' => $products]);
     }
