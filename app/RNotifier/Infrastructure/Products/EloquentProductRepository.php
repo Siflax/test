@@ -13,33 +13,11 @@ class EloquentProductRepository implements ProductRepositoryInterface{
         $this->shopifyProductConnector = $shopifyProductConnector;
     }
 
-    public function save($product)
-    {
-        $product->save();
-    }
-
     public function retrieveById($id)
     {
         $product = Product::find($id);
 
         return $product;
-    }
-
-    public function retrieveAll($withShopifyDetails = false)
-    {
-        $products = Product::paginate(10);
-
-        if ($withShopifyDetails === false) return $products;
-        elseif ($withShopifyDetails === true) {
-
-            $detailedProducts = [];
-
-            foreach ($products as $product)
-            {
-                $detailedProducts[] = $this->shopifyProductConnector->getDetails($product);
-            }
-            return $detailedProducts;
-        }
     }
 
     public function retrievePaginatedByShop($shop, $withShopifyDetails = false)

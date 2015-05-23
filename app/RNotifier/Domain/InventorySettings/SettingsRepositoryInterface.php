@@ -3,11 +3,10 @@
 
 Interface SettingsRepositoryInterface {
 
-    public function create($setting);
-
     public function retrieveByShop($shop);
 
-    public function retrieve($options);
+    public function updateOrCreateByShop($shop, $parameters = [], $update);
 
-    public function save($setting);
+    public function firstOrCreateByShop($shop, $parameters = []);
+
 }
