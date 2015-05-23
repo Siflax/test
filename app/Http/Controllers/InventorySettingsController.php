@@ -3,7 +3,6 @@
 
 use App\Http\Requests\SearchProductsRequest;
 use App\RNotifier\Domain\InventoryChecker\InventoryCheckerService;
-use App\RNotifier\Domain\InventorySettings\Setting;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductSearcher;
@@ -83,6 +82,8 @@ class InventorySettingsController extends Controller
 
     public function saveProductLimit()
     {
+        $track = (bool) Request::get('track');
+
         $shop = Shop::find(1);
 
         $product = $this->productRepository->firstOrCreateByShop($shop, ['id' => Request::get('productId')]);
@@ -94,7 +95,7 @@ class InventorySettingsController extends Controller
 
         $variant->product_id = Request::get('productId');
         $variant->inventory_limit = Request::get('individualLimit');
-        $variant->track = Request::get('track');
+        $variant->track = $track;
 
         $variant->save();
 
