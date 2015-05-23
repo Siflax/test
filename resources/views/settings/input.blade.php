@@ -44,13 +44,7 @@
                         </div>
                         <div class="col-md-6">
                             <h4>Product Rules</h4>
-                            @if (isset($products))
-                                @foreach($products as $product)
-                                    @include('partials.product')
-                                @endforeach
-
-                                    <?php echo $products->render(); ?>
-                            @endif
+                            @include('partials.productRules')
                         </div>
                         <div class="col-md-6">
                             <h4>Add product rule</h4>
