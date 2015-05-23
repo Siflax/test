@@ -52,7 +52,7 @@ class InventorySettingsController extends Controller
     {
         $shop = Shop::find(1);
 
-        $globalLimit = Request::only('globalLimit');
+        $globalLimit = Request::only('globalLimit', 'isTrackedGlobally');
 
         $this->settingsRepository->updateOrCreateByShop($shop, [], $globalLimit);
 

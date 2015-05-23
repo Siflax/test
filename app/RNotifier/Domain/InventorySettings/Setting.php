@@ -7,7 +7,11 @@ class Setting extends Model  {
 
     protected $table = 'inventorySettings';
 
-    protected $fillable = ['globalLimit', 'frequency'];
+    protected $fillable = ['globalLimit', 'frequency', 'isTrackedGlobally'];
+
+    protected $casts = [
+        'isTrackedGlobally' => 'boolean',
+    ];
 
     public $timestamps = false;
 

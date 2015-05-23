@@ -25,7 +25,7 @@ class EloquentVariantRepository implements VariantRepositoryInterface{
     }
 
     /**
-     * Deletes the product if it does not have any variants saved
+     * Deletes the product if it does not have any variant rules saved
      *
      * @param $variant
      */
