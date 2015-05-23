@@ -26,7 +26,7 @@
             <td>{!! Form::checkbox('track', True, $variant->track, ['class' => 'form-control']) !!}</td>
             <td class="text-right">
                 {!! Form::submit('save', ['class'=> 'btn btn-primary']) !!}
-                {!! link_to_route('deleteProductLimit', 'Delete', $variant->id ,['class' => 'btn btn-danger btn-sm']) !!}
+                {!! link_to_route('deleteProductLimit', 'Delete', $variant->id ,['class' => 'btn btn-danger']) !!}
             </td>
         </tr>
 
