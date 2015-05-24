@@ -22,7 +22,7 @@
 
             <table class="table table-striped">
 
-
+                variants
                 <tbody>
 
                     @foreach($product->variants as $variant)
@@ -33,10 +33,10 @@
 
                             <td><p>{{$variant->title}}</p></td>
                             <td>
-                                <input type="text" name="individualLimit[{{$variant->id}}]" value="{{$variant->inventory_limit}}" style = "width:50px;" class = 'form-control' >
+                                <input type="text" name="variants[{{$variant->id}}][individualLimit]" value="{{$variant->inventory_limit}}" style = "width:50px;" class = 'form-control' >
                             </td>
                             <td>
-                                <input type="checkbox" name="trackVariant[{{$variant->id}}]" value="{{$variant->track}}" style = "width:50px;" class = 'form-control' @if ($variant->track == true) checked = "checked" @else ' ' @endif >
+                                <input type="checkbox" name="variants[{{$variant->id}}][track]" value="{{$variant->track}}" style = "width:50px;" class = 'form-control' @if ($variant->track == true) checked = "checked" @else ' ' @endif >
                             </td>
                             <td class="text-right">
 

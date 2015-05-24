@@ -38,7 +38,7 @@ class EloquentProductRepository implements ProductRepositoryInterface{
     public function getShopifyDetails($products)
     {
         foreach ($products as $key => $value) {
-            $products[$key] = $this->shopifyProductConnector->getDetails($products[$key], false);
+            $products[$key] = $this->shopifyProductConnector->getDetails($products[$key]);
         }
         return $products;
     }

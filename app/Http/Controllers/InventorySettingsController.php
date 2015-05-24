@@ -116,12 +116,25 @@ class InventorySettingsController extends Controller
 
         $product = $this->productRepository->firstOrCreateByShop($shop, ['id' => Request::get('productId')]);
 
-
-
         $product->inventory_limit = Request::get('individualLimit');
         $product->track = $track;
-
         $product->save();
+
+        foreach(Request::get('variants') as $variantId => $values)
+        {
+            if ( ! isset($values['track'])) $values['track'] = false;
+
+            $variant = $this->variantRepository->firstOrNewByProduct(
+                $product,
+                ['id' => $variantId]
+            );
+
+            $variant->product_id = Request::get('productId');
+            $variant->inventory_limit = $values['individualLimit'];
+            $variant->track = (bool) $values['track'];
+
+            $variant->save();
+        }
 
         return redirect()->back();
     }
