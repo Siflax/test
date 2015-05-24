@@ -1,5 +1,5 @@
-<tr data-toggle="collapse" data-target="#{{$product->id}}" class="accordion-toggle">
-    <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+<tr >
+    <td><button data-toggle="collapse" data-target="#{{$product->id}}" class="accordion-toggle btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
     {!! Form::open(array('route' => 'saveProductRule')) !!}
     <td><p>test</p></td>
     <td>
