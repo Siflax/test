@@ -49,4 +49,9 @@ class EloquentProductRepository implements ProductRepositoryInterface{
         return $shop->products()->firstOrCreate($parameters);
     }
 
+    public function firstOrNewByShop($shop, $parameters = [])
+    {
+        return $shop->products()->firstOrNew($parameters);
+    }
+
 }

@@ -110,7 +110,20 @@ class InventorySettingsController extends Controller
 
     public function saveProductRule()
     {
+        $track = (bool) Request::get('track');
 
+        $shop = Shop::find(1);
+
+        $product = $this->productRepository->firstOrCreateByShop($shop, ['id' => Request::get('productId')]);
+
+
+
+        $product->inventory_limit = Request::get('individualLimit');
+        $product->track = $track;
+
+        $product->save();
+
+        return redirect()->back();
     }
 
     public function deleteProductRule()
