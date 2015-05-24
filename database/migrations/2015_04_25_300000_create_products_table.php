@@ -16,6 +16,8 @@ class CreateProductsTable extends Migration {
         {
             $table->integer('id');
             $table->integer('shop_id')->unsigned();
+            $table->integer('inventory_limit');
+            $table->boolean('track')->default(True);
             $table->timestamps();
 
             $table->foreign('shop_id')

@@ -21,7 +21,7 @@
 
                             <div class="form-group">
                                 {!! Form::label('track', 'Track') !!}
-                                {!! Form::checkbox('isTrackedGlobally', true, $setting->isTrackedGlobally,  ['class' => 'form-control'] ) !!}
+                                {!! Form::checkbox('isTrackedGlobally', true, isset($setting->isTrackedGlobally) ? $setting->isTrackedGlobally : true,  ['class' => 'form-control'] ) !!}
                             </div>
 
                             <div class="form-group">

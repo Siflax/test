@@ -77,7 +77,7 @@ class InventorySettingsController extends Controller
         return view('settings.input', ['setting' => $setting, 'matches' => $matches, 'products' => $products]);
     }
 
-    public function saveProductLimit()
+    public function saveVariantRule()
     {
         $track = (bool) Request::get('track');
 
@@ -99,13 +99,23 @@ class InventorySettingsController extends Controller
         return redirect()->back();
     }
 
-    public function deleteRule($id)
+    public function deleteVariantRule($id)
     {
         $shopId = 1;
 
         $this->variantRepository->delete($id, $shopId);
 
         return redirect()->back();
+    }
+
+    public function saveProductRule()
+    {
+
+    }
+
+    public function deleteProductRule()
+    {
+
     }
 
 }

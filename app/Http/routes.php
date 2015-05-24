@@ -29,14 +29,24 @@ Route::group(array('prefix' => 'inventory-rules'), function()
 			'uses'=> 'InventorySettingsController@search'
 	]);
 
-	Route::post('product-limit/save', [
-		'as'=>'saveProductLimit',
-		'uses'=> 'InventorySettingsController@saveProductLimit'
+	Route::post('variant/save', [
+		'as'=>'saveVariantRule',
+		'uses'=> 'InventorySettingsController@saveVariantRule'
 	]);
 
-	Route::get('product-limit/delete/{id}', [
-		'as'=>'deleteProductLimit',
-		'uses'=> 'InventorySettingsController@deleteRule'
+	Route::get('variant/delete/{id}', [
+		'as'=>'deleteVariantRule',
+		'uses'=> 'InventorySettingsController@deleteVariantRule'
+	]);
+
+	Route::post('product/save', [
+		'as'=>'saveProductRule',
+		'uses'=> 'InventorySettingsController@saveProductRule'
+	]);
+
+	Route::get('product/delete/{id}', [
+		'as'=>'deleteProductRule',
+		'uses'=> 'InventorySettingsController@deleteProductRule'
 	]);
 
 });

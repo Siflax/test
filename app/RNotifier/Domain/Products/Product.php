@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model  {
 
-        protected $fillable = ['id', 'title'];
+        protected $fillable = ['id', 'title', 'inventory_limit', 'track'];
 
 
         public function hasLowInventory($globalLimit)

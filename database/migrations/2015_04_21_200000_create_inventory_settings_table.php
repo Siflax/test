@@ -17,7 +17,7 @@ class CreateInventorySettingsTable extends Migration {
             $table->increments('id');
             $table->integer('shop_id')->unsigned();
             $table->integer('globalLimit')->index();
-            $table->boolean('isTrackedGlobally');
+            $table->boolean('isTrackedGlobally')->default(True);
             $table->string('frequency');
 
             $table->foreign('shop_id')
