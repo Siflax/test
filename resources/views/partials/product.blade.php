@@ -11,7 +11,7 @@
         {!! Form::submit('save', ['class'=> 'btn btn-primary']) !!}
         {!! link_to_route('deleteProductRule', 'Delete', $product->id ,['class' => 'btn btn-danger']) !!}
     </td>
-    {!! Form::close() !!}
+
 </tr>
 
 
@@ -30,22 +30,19 @@
                         <tr >
 
                             <td></td>
-                            {!! Form::open(array('route' => 'saveVariantRule')) !!}
+
                             <td><p>{{$variant->title}}</p></td>
                             <td>
-                                {!! Form::text('individualLimit', $variant->inventory_limit, ['style' => 'width:50px', 'class' => 'form-control'] ) !!}
-                                {!! Form::hidden('variantId', $variant->id) !!}
-                                {!! Form::hidden('productId', $product->id) !!}
+                                <input type="text" name="individualLimit[{{$variant->id}}]" value="{{$variant->inventory_limit}}" style = "width:50px;" class = 'form-control' >
                             </td>
-                            <td>{!! Form::checkbox('track', True, $variant->track, ['class' => 'form-control']) !!}</td>
+                            <td>
+                                <input type="checkbox" name="trackVariant[{{$variant->id}}]" value="{{$variant->track}}" style = "width:50px;" class = 'form-control' @if ($variant->track == true) checked = "checked" @else ' ' @endif >
+                            </td>
                             <td class="text-right">
-                                {!! Form::submit('save', ['class'=> 'btn btn-primary']) !!}
-                                {!! link_to_route('deleteVariantRule', 'Delete', $variant->id ,['class' => 'btn btn-danger']) !!}
+
                             </td>
-                            {!! Form::close() !!}
 
                         </tr>
-
 
                     @endforeach
 
@@ -56,8 +53,4 @@
 </tr>
 
 
-
-
-
-
-
+{!! Form::close() !!}
