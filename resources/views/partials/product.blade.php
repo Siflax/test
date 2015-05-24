@@ -1,28 +1,53 @@
-<tr >
-    <td><button data-toggle="collapse" data-target="#{{$product->id}}" class="accordion-toggle btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-    {!! Form::open(array('route' => 'saveProductRule')) !!}
-    <td><p>test</p></td>
-    <td>
-        {!! Form::text('individualLimit', $product->inventory_limit, ['style' => 'width:50px', 'class' => 'form-control'] ) !!}
-        {!! Form::hidden('productId', $product->id) !!}
-    </td>
-    <td>{!! Form::checkbox('track', True, $product->track, ['class' => 'form-control']) !!}</td>
-    <td class="text-right">
-        {!! Form::submit('save', ['class'=> 'btn btn-primary']) !!}
-        {!! link_to_route('deleteProductRule', 'Delete', $product->id ,['class' => 'btn btn-danger']) !!}
-    </td>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>{{$product->title}}</strong></div>
 
-</tr>
+    <div class="panel-body">
 
 
-<tr>
-    <td colspan="12" class="hiddenRow">
+        <table class="table">
+
+            <tbody>
+
+                <tr >
+
+                    <td>
+                        <button data-toggle="collapse" data-target="#{{$product->id}}" class="accordion-toggle btn btn-default"><span class="glyphicon glyphicon-eye-open"> variants</span></button>
+                    </td>
+
+                    {!! Form::open(array('route' => 'saveProductRule')) !!}
+
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">Limit</span>
+                            {!! Form::text('individualLimit', $product->inventory_limit, ['style' => 'width:50px', 'class' => 'form-control'] ) !!}
+                            {!! Form::hidden('productId', $product->id) !!}
+                        </div>
+                    </td>
+                    <td>
+                        {!! Form::checkbox('track', True, $product->track, ['class' => 'form-control']) !!}
+                    </td>
+                    <td class="text-right">
+                        {!! Form::submit('save', ['class'=> 'btn btn-primary']) !!}
+
+                    </td>
+                    <td>
+                        {!! link_to_route('deleteProductRule', 'Delete', $product->id ,['class' => 'btn btn-danger']) !!}
+                    </td>
+
+
+                </tr>
+
+            </tbody>
+        </table>
+
+
+
+
 
         <div class="accordian-body collapse" id="{{$product->id}}">
 
             <table class="table table-striped">
 
-                variants
                 <tbody>
 
                     @foreach($product->variants as $variant)
@@ -48,9 +73,12 @@
 
                 </tbody>
             </table>
-          </div>
-    </td>
-</tr>
+
+        </div>
 
 
-{!! Form::close() !!}
+        {!! Form::close() !!}
+
+    </div>
+
+</div>
