@@ -15,20 +15,20 @@
 </tr>
 
 
+<tr>
+    <td colspan="12" class="hiddenRow">
 
-@foreach($product->variants as $variant)
+        <div class="accordian-body collapse" id="{{$product->id}}">
+
+            <table class="table table-striped">
 
 
+                <tbody>
 
+                    @foreach($product->variants as $variant)
 
+                        <tr >
 
-        <tr>
-            <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="{{$product->id}}">
-                    <table class="table table-striped">
-                      
-
-                        <tbody>
-                        <tr data-toggle="collapse" data-target="#{{$product->id}}" class="accordion-toggle">
                             <td></td>
                             {!! Form::open(array('route' => 'saveVariantRule')) !!}
                             <td><p>{{$variant->title}}</p></td>
@@ -43,18 +43,17 @@
                                 {!! link_to_route('deleteVariantRule', 'Delete', $variant->id ,['class' => 'btn btn-danger']) !!}
                             </td>
                             {!! Form::close() !!}
+
                         </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </td>
-        </tr>
 
 
+                    @endforeach
 
-    @endforeach
-
-
+                </tbody>
+            </table>
+          </div>
+    </td>
+</tr>
 
 
 
