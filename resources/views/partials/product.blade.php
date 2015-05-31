@@ -9,7 +9,9 @@
         <strong>{{$product->title}}</strong>
         <div class="text-right" style="display:inline-block;float:right">
             {!! Form::submit('Save', ['class'=> 'btn btn-primary']) !!}
-            {!! link_to_route('deleteProductRule', 'X', $product->id ,['class' => 'btn btn-danger']) !!}
+            @if ($display != 'search')
+                {!! link_to_route('deleteProductRule', 'X', $product->id ,['class' => 'btn btn-danger']) !!}
+            @endif
         </div>
 
     </div>
