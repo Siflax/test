@@ -6,7 +6,7 @@
 
 
     <div class="panel-heading" >
-        <strong>{{$product->title}}</strong>
+        <strong style="font-size:1.4em">{{$product->title}}</strong>
         <div class="text-right" style="display:inline-block;float:right">
             {!! Form::submit('Save', ['class'=> 'btn btn-primary']) !!}
             @if ($display != 'search')
