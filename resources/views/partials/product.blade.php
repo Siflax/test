@@ -26,7 +26,7 @@
                 <tr >
 
                     <td>
-                        <div data-toggle="collapse" data-target="#{{$product->id}}" class="accordion-toggle btn btn-default">show variants</div>
+                        <div data-toggle="collapse" data-target="#{{$display . $product->id}}" class="accordion-toggle btn btn-default">show variants</div>
                     </td>
 
 
@@ -78,7 +78,7 @@
 
 
 
-        <div class="accordian-body collapse" id="{{$product->id}}">
+        <div class="accordian-body collapse" id="{{$display . $product->id}}">
 
             <table class="table table-striped">
 

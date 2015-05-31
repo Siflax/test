@@ -5,7 +5,7 @@
 
 
     @foreach($products as $product)
-        @include('partials.product')
+        @include('partials.product', array('display'=>'rules'))
     @endforeach
 
 
