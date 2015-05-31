@@ -13,20 +13,36 @@
                             Lorem ipsum dolor sit amet, natum inermis pericula sed ei, cu malis legere phaedrum nec. Qui ex decore honestatis, ex magna utinam regione qui. Adhuc eleifend appellantur id mel. No mundi ceteros his, nostrum philosophia qui in. Sententiae consequuntur quo eu, nam veri erant nominavi at, eam solum voluptua contentiones id. Nec et ancillae hendrerit, usu commodo iuvaret adolescens ut, paulo fabulas per ex.
                         </div>
                         {!! Form::open(array('route' => 'saveGlobalLimit')) !!}
-                            <div class="form-group">
-                                {!! Form::label('globalLimit', 'Inventory Limit') !!}
-                                {!! Form::text('globalLimit', isset($setting->globalLimit) ? $setting->globalLimit : null, ['style' => 'width:40px', 'class' => 'form-control'] ) !!}
-                                {!! Form::hidden('id', isset($setting->id) ? $setting->id : null) !!}
-                            </div>
 
-                            <div class="form-group">
-                                {!! Form::label('track', 'Track') !!}
-                                {!! Form::checkbox('isTrackedGlobally', true, isset($setting->isTrackedGlobally) ? $setting->isTrackedGlobally : true,  ['class' => 'form-control'] ) !!}
-                            </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
 
-                            <div class="form-group">
-                                {!! Form::submit('save', ['class'=> 'btn btn-primary']) !!}
+                                    {!! Form::label('globalLimit', 'Inventory Limit',['class'=>'col-sm-2 control-label']) !!}
+                                    <div class="col-sm-2">
+                                        {!! Form::text('globalLimit', isset($setting->globalLimit) ? $setting->globalLimit : null, ['style' => 'width:40px', 'class' => 'form-control'] ) !!}
+                                        {!! Form::hidden('id', isset($setting->id) ? $setting->id : null) !!}
+                                    </div>
+                                </div>
                             </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    {!! Form::label('track', 'Track',['class'=>'col-sm-2 control-label']) !!}
+                                    <div class="col-sm-2">
+                                        {!! Form::checkbox('isTrackedGlobally', true, isset($setting->isTrackedGlobally) ? $setting->isTrackedGlobally : true,  ['class' => 'form-control'] ) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    {!! Form::submit('save', ['class'=> 'btn btn-primary']) !!}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
 
                         {!! Form::close() !!}
                     </div>
