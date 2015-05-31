@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-md-6">
                             <h4>Product Rules</h4>
-                            @include('partials.productRules')
+                            @include('partials.products')
                         </div>
                         <div class="col-md-6">
                             <h4>Add product rule</h4>
@@ -63,7 +63,7 @@
 
                             {!! Form::close() !!}
 
-                            @include('partials.productSearchResults')
+                            @include('partials.matches')
 
                         </div>
                     </div>
