@@ -8,6 +8,11 @@ class Product extends Model  {
         protected $fillable = ['id', 'title', 'inventory_limit', 'track'];
 
 
+        protected $attributes = [
+            'track' => True
+        ];
+
+
         public function hasLowInventory($globalLimit)
         {
             if ($this->variants[0]->inventory_quantity < $globalLimit && $this->isManagedByShopify()) return true;

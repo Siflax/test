@@ -70,7 +70,7 @@ class InventorySettingsController extends Controller
 
         $products = $this->productRepository->retrievePaginatedByShop($shop, true);
 
-        $matches = $this->productSearcher->execute(Request::get('productTitle'));
+        $matches = $this->productSearcher->execute(Request::get('productTitle'), $shop);
 
         $setting = $this->settingsRepository->retrieveByShop($shop);
 
