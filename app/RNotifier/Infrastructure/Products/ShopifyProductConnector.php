@@ -32,6 +32,8 @@ class ShopifyProductConnector extends ShopifyConnector{
 
         $product->title = $result[0]['title'];
 
+        if (count($result[0]['variants'])  <= 1) return $product;
+
         foreach ($result[0]['variants'] as $variantAttributes) {
 
             $ids = [];

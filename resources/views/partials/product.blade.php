@@ -28,7 +28,9 @@
                 <tr >
 
                     <td>
-                        <div onclick = 'toggleText(this)' data-toggle="collapse" data-target="#{{$display . $product->id}}" class="accordion-toggle btn btn-default">Show Variants</div>
+                        @if (count($product->variants) > 0)
+                            <div onclick = 'toggleText(this)' data-toggle="collapse" data-target="#{{$display . $product->id}}" class="accordion-toggle btn btn-default">Show Variants</div>
+                        @endif
                     </td>
 
 
