@@ -26,7 +26,7 @@
                 <tr >
 
                     <td>
-                        <div data-toggle="collapse" data-target="#{{$display . $product->id}}" class="accordion-toggle btn btn-default">show variants</div>
+                        <div onclick = 'toggleText(this)' data-toggle="collapse" data-target="#{{$display . $product->id}}" class="accordion-toggle btn btn-default">Show Variants</div>
                     </td>
 
 
@@ -116,3 +116,18 @@
     </div>
 
 </div>
+
+
+<script>
+
+    function toggleText($button) {
+        console.log('test2');
+        if ($($button).text() == 'Show Variants') {
+            $($button).text('Hide Variants');
+        } else {
+            $($button).text('Show Variants');
+        }
+
+    }
+
+</script>
