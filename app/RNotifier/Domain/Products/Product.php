@@ -9,7 +9,8 @@ class Product extends Model  {
 
 
         protected $attributes = [
-            'track' => True
+            'track' => True,
+            'inventory_limit' => 'N/A'
         ];
 
 
