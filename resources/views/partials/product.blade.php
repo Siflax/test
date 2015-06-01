@@ -99,14 +99,14 @@
                                 <div class="input-group">
 
                                     <input type="text" name="variants[{{$variant->id}}][individualLimit]" value="{{$variant->inventory_limit}}" style = "width:50px;" class = 'form-control' >
-                                    {!! link_to_route('deleteProductRule', 'X', $variant->id ,['class' => 'btn btn-danger']) !!}
+
                                 </div>
                             </td>
                             <td>
                                 <input type="checkbox" name="variants[{{$variant->id}}][track]" value="{{$variant->track}}" style = "width:50px;" class = 'form-control' @if ($variant->track == true) checked = "checked" @else ' ' @endif >
                             </td>
                             <td class="text-right">
-
+                                {!! link_to_route('deleteVariantRule', 'X', $variant->id ,['class' => 'btn btn-danger']) !!}
                             </td>
 
                         </tr>
