@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\Commands\NotifyShops;
 use App\RNotifier\Domain\Emails\Email;
 use App\RNotifier\Domain\Emails\EmailRepositoryInterface;
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
@@ -64,6 +65,15 @@ class NotificationsController extends Controller {
         $setting->save();
 
         return redirect()->back();
+    }
+
+    public function notifyShops()
+    {
+        $command = new NotifyShops();
+
+        $this->dispatch($command);
+
+        return 'done';
     }
 
 }

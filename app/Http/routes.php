@@ -91,6 +91,11 @@ Route::delete('notifications/webhook/delete/{id}', [
 	'uses'=> 'NotificationsController@removeWebhook'
 ]);
 
+Route::get('notifications/notifyShop', [
+	'as'=>'notifyShops',
+	'uses'=> 'NotificationsController@notifyShops'
+]);
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
