@@ -1,4 +1,4 @@
-<?php namespace App\Infrastructure\AntiCorruptionLayer;
+<?php namespace App\Infrastructure\Adapters;
 
 
 

@@ -2,6 +2,7 @@
 
 
 use App\Domain\Products\Product;
+use App\Infrastructure\Adapters\ProductAdapter;
 use App\Infrastructure\Products\Variants\VariantFactory;
 use App\Infrastructure\Shopify\ShopifyConnector;
 use phpish\shopify;
