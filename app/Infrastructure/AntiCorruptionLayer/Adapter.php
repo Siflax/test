@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Infrastructure\AntiCorruptionLayer;
+<?php namespace App\Infrastructure\AntiCorruptionLayer;
 
 
 
@@ -8,7 +8,7 @@ class Adapter {
 
     function __construct()
     {
-        $this->translator = App::make('App\RNotifier\Infrastructure\Transformers\Translator');
+        $this->translator = App::make('App\Infrastructure\Transformers\Translator');
     }
 
     public function toEntityParameters(array $attributes, $method)

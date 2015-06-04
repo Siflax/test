@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Infrastructure\Transformers;
+<?php namespace App\Infrastructure\Transformers;
 
 
 class Translator {

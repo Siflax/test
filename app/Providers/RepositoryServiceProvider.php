@@ -6,11 +6,11 @@ use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 use App\RNotifier\Domain\Products\Variants\VariantRepositoryInterface;
 use App\RNotifier\Domain\Shops\ShopRepositoryInterface;
-use App\RNotifier\Infrastructure\Emails\EloquentEmailRepository;
-use App\RNotifier\Infrastructure\InventorySettings\EloquentSettingsRepository;
-use App\RNotifier\Infrastructure\Products\EloquentProductRepository;
-use App\RNotifier\Infrastructure\Products\Variants\EloquentVariantRepository;
-use App\RNotifier\Infrastructure\Shops\EloquentShopRepository;
+use App\Infrastructure\Emails\EloquentEmailRepository;
+use App\Infrastructure\InventorySettings\EloquentSettingsRepository;
+use App\Infrastructure\Products\EloquentProductRepository;
+use App\Infrastructure\Products\Variants\EloquentVariantRepository;
+use App\Infrastructure\Shops\EloquentShopRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider {

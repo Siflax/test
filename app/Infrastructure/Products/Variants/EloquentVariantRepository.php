@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Infrastructure\Products\Variants;
+<?php namespace App\Infrastructure\Products\Variants;
 
 
 use App\RNotifier\Domain\Products\Variants\VariantRepositoryInterface;

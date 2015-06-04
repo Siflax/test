@@ -1,7 +1,7 @@
 <?php namespace App\RNotifier\Domain\Products;
 
 
-use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
+use App\Infrastructure\Products\ShopifyProductConnector;
 
 class ProductSearcher {
 

@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Infrastructure\Factories;
+<?php namespace App\Infrastructure\Factories;
 
 
 class Factory {

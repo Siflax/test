@@ -1,9 +1,9 @@
-<?php namespace App\RNotifier\Infrastructure\Products;
+<?php namespace App\Infrastructure\Products;
 
 
 use App\RNotifier\Domain\Products\Product;
-use App\RNotifier\Infrastructure\Factories\Factory;
-use App\RNotifier\Infrastructure\Products\Variants\VariantFactory;
+use App\Infrastructure\Factories\Factory;
+use App\Infrastructure\Products\Variants\VariantFactory;
 
 class ProductFactory extends Factory
 {

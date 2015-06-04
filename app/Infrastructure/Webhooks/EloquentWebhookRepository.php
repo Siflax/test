@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Infrastructure\Webhooks;
+<?php namespace App\Infrastructure\Webhooks;
 
 
 use App\RNotifier\Domain\Webhooks\Webhook;

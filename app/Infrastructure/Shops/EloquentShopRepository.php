@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Infrastructure\Shops;
+<?php namespace App\Infrastructure\Shops;
 
 
 use App\RNotifier\Domain\Shops\ShopRepositoryInterface;

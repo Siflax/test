@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Infrastructure\Shopify;
+<?php namespace App\Infrastructure\Shopify;
 
 
 use Illuminate\Support\Facades\Config;

@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Infrastructure\Products;
+<?php namespace App\Infrastructure\Products;
 
 
 use App\RNotifier\Domain\Products\Product;

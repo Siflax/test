@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Infrastructure\InventorySettings;
+<?php namespace App\Infrastructure\InventorySettings;
 
 
 use App\RNotifier\Domain\InventorySettings\Setting;

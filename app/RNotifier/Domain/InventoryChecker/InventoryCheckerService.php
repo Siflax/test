@@ -3,7 +3,7 @@
 
 use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\RNotifier\Domain\Shops\Shop;
-use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
+use App\Infrastructure\Products\ShopifyProductConnector;
 
 class InventoryCheckerService {
 

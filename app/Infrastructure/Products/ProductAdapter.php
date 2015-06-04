@@ -1,7 +1,7 @@
-<?php namespace App\RNotifier\Infrastructure\Products;
+<?php namespace App\Infrastructure\Products;
 
 
-use App\RNotifier\Infrastructure\AntiCorruptionLayer\Adapter;
+use App\Infrastructure\AntiCorruptionLayer\Adapter;
 use Illuminate\Foundation\Application;
 
 class ProductAdapter extends Adapter {

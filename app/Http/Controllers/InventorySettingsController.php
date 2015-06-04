@@ -8,9 +8,9 @@ use App\RNotifier\Domain\Products\ProductRepositoryInterface;
 use App\RNotifier\Domain\Products\ProductSearcher;
 use App\RNotifier\Domain\Products\Variants\VariantRepositoryInterface;
 use App\RNotifier\Domain\Shops\Shop;
-use App\RNotifier\Infrastructure\Products\ProductFactory;
-use App\RNotifier\Infrastructure\Products\ShopifyProductConnector;
-use App\RNotifier\Infrastructure\Products\Variants\VariantFactory;
+use App\Infrastructure\Products\ProductFactory;
+use App\Infrastructure\Products\ShopifyProductConnector;
+use App\Infrastructure\Products\Variants\VariantFactory;
 use Illuminate\Support\Facades\Request;
 
 class InventorySettingsController extends Controller

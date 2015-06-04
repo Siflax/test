@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Infrastructure\Emails;
+<?php namespace App\Infrastructure\Emails;
 
 
 use App\RNotifier\Domain\Emails\Email;
