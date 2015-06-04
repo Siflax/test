@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Domain\InventorySettings;
+<?php namespace App\Domain\InventorySettings;
 
 
 Interface SettingsRepositoryInterface {

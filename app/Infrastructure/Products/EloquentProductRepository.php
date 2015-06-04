@@ -1,8 +1,8 @@
 <?php namespace App\Infrastructure\Products;
 
 
-use App\RNotifier\Domain\Products\Product;
-use App\RNotifier\Domain\Products\ProductRepositoryInterface;
+use App\Domain\Products\Product;
+use App\Domain\Products\ProductRepositoryInterface;
 
 class EloquentProductRepository implements ProductRepositoryInterface{
 

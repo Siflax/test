@@ -1,11 +1,11 @@
 <?php namespace App\Providers;
 
 use App\RNotifier\App\Providers\EmailRepositoryServiceProvider;
-use App\RNotifier\Domain\Emails\EmailRepositoryInterface;
-use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
-use App\RNotifier\Domain\Products\ProductRepositoryInterface;
-use App\RNotifier\Domain\Products\Variants\VariantRepositoryInterface;
-use App\RNotifier\Domain\Shops\ShopRepositoryInterface;
+use App\Domain\Emails\EmailRepositoryInterface;
+use App\Domain\InventorySettings\SettingsRepositoryInterface;
+use App\Domain\Products\ProductRepositoryInterface;
+use App\Domain\Products\Variants\VariantRepositoryInterface;
+use App\Domain\Shops\ShopRepositoryInterface;
 use App\Infrastructure\Emails\EloquentEmailRepository;
 use App\Infrastructure\InventorySettings\EloquentSettingsRepository;
 use App\Infrastructure\Products\EloquentProductRepository;

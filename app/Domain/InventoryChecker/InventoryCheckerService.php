@@ -1,8 +1,8 @@
-<?php namespace App\RNotifier\Domain\InventoryChecker;
+<?php namespace App\Domain\InventoryChecker;
 
 
-use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
-use App\RNotifier\Domain\Shops\Shop;
+use App\Domain\InventorySettings\SettingsRepositoryInterface;
+use App\Domain\Shops\Shop;
 use App\Infrastructure\Products\ShopifyProductConnector;
 
 class InventoryCheckerService {

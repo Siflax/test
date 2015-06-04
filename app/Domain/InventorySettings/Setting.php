@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Domain\InventorySettings;
+<?php namespace App\Domain\InventorySettings;
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -21,7 +21,7 @@ class Setting extends Model  {
 
     public function shop()
     {
-        $this->belongsTo('App\RNotifier\Domain\Shops\Shop');
+        $this->belongsTo('App\Domain\Shops\Shop');
     }
 
     public function frequencyIsWeekly()

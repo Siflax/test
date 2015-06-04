@@ -1,7 +1,7 @@
 <?php namespace App\Infrastructure\Products;
 
 
-use App\RNotifier\Domain\Products\Product;
+use App\Domain\Products\Product;
 use App\Infrastructure\Products\Variants\VariantFactory;
 use App\Infrastructure\Shopify\ShopifyConnector;
 use phpish\shopify;

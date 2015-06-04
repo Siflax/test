@@ -1,8 +1,8 @@
 <?php namespace App\Infrastructure\Products\Variants;
 
 
-use App\RNotifier\Domain\Products\Variants\VariantRepositoryInterface;
-use App\RNotifier\Domain\Shops\Shop;
+use App\Domain\Products\Variants\VariantRepositoryInterface;
+use App\Domain\Shops\Shop;
 
 class EloquentVariantRepository implements VariantRepositoryInterface{
 

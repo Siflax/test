@@ -1,7 +1,7 @@
 <?php namespace App\Infrastructure\Shops;
 
 
-use App\RNotifier\Domain\Shops\ShopRepositoryInterface;
+use App\Domain\Shops\ShopRepositoryInterface;
 
 class EloquentShopRepository implements ShopRepositoryInterface {
 

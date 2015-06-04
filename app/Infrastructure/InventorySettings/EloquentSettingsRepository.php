@@ -1,8 +1,8 @@
 <?php namespace App\Infrastructure\InventorySettings;
 
 
-use App\RNotifier\Domain\InventorySettings\Setting;
-use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
+use App\Domain\InventorySettings\Setting;
+use App\Domain\InventorySettings\SettingsRepositoryInterface;
 
 class EloquentSettingsRepository implements SettingsRepositoryInterface {
 

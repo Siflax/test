@@ -9,7 +9,7 @@
 namespace App\Infrastructure\Products\Variants;
 
 
-use App\RNotifier\Domain\Products\Variants\Variant;
+use App\Domain\Products\Variants\Variant;
 use App\Infrastructure\Factories\Factory;
 
 class VariantFactory extends Factory {

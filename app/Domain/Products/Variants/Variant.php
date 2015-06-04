@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Domain\Products\Variants;
+<?php namespace App\Domain\Products\Variants;
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ class Variant extends Model
 
     public function product()
     {
-        return $this->belongsTo('App\RNotifier\Domain\Products\Product');
+        return $this->belongsTo('App\Domain\Products\Product');
     }
 
     public function setTitleAttribute($value)

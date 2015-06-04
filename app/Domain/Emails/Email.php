@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Domain\Emails;
+<?php namespace App\Domain\Emails;
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +9,7 @@ class Email extends Model  {
 
     public function shop()
     {
-        $this->belongsTo('App\RNotifier\Domain\Shops\Shop');
+        $this->belongsTo('App\Domain\Shops\Shop');
     }
 
 }

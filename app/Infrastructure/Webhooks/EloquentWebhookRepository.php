@@ -1,8 +1,8 @@
 <?php namespace App\Infrastructure\Webhooks;
 
 
-use App\RNotifier\Domain\Webhooks\Webhook;
-use App\RNotifier\Domain\Webhooks\WebhookRepositoryInterface;
+use App\Domain\Webhooks\Webhook;
+use App\Domain\Webhooks\WebhookRepositoryInterface;
 
 class EloquentWebhookRepository implements WebhookRepositoryInterface {
 

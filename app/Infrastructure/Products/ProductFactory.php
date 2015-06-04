@@ -1,7 +1,7 @@
 <?php namespace App\Infrastructure\Products;
 
 
-use App\RNotifier\Domain\Products\Product;
+use App\Domain\Products\Product;
 use App\Infrastructure\Factories\Factory;
 use App\Infrastructure\Products\Variants\VariantFactory;
 

@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Domain\Products;
+<?php namespace App\Domain\Products;
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -37,12 +37,12 @@ class Product extends Model  {
 
         public function variants()
         {
-            return $this->hasMany('App\RNotifier\Domain\Products\Variants\Variant');
+            return $this->hasMany('App\Domain\Products\Variants\Variant');
         }
 
         public function shop()
         {
-            $this->belongsTo('App\RNotifier\Domain\Shops\Shop');
+            $this->belongsTo('App\Domain\Shops\Shop');
         }
 
 

@@ -2,12 +2,12 @@
 
 
 use App\Http\Requests\SearchProductsRequest;
-use App\RNotifier\Domain\InventoryChecker\InventoryCheckerService;
-use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
-use App\RNotifier\Domain\Products\ProductRepositoryInterface;
-use App\RNotifier\Domain\Products\ProductSearcher;
-use App\RNotifier\Domain\Products\Variants\VariantRepositoryInterface;
-use App\RNotifier\Domain\Shops\Shop;
+use App\Domain\InventoryChecker\InventoryCheckerService;
+use App\Domain\InventorySettings\SettingsRepositoryInterface;
+use App\Domain\Products\ProductRepositoryInterface;
+use App\Domain\Products\ProductSearcher;
+use App\Domain\Products\Variants\VariantRepositoryInterface;
+use App\Domain\Shops\Shop;
 use App\Infrastructure\Products\ProductFactory;
 use App\Infrastructure\Products\ShopifyProductConnector;
 use App\Infrastructure\Products\Variants\VariantFactory;

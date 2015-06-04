@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Domain\Products;
+<?php namespace App\Domain\Products;
 
 
 interface ProductRepositoryInterface {

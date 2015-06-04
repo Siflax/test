@@ -1,4 +1,4 @@
-<?php namespace App\RNotifier\Domain\Emails;
+<?php namespace App\Domain\Emails;
 
 
 interface EmailRepositoryInterface {

@@ -1,10 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 
-use App\RNotifier\Domain\Emails\Email;
-use App\RNotifier\Domain\Emails\EmailRepositoryInterface;
-use App\RNotifier\Domain\InventorySettings\SettingsRepositoryInterface;
-use App\RNotifier\Domain\Shops\Shop;
+use App\Domain\Emails\Email;
+use App\Domain\Emails\EmailRepositoryInterface;
+use App\Domain\InventorySettings\SettingsRepositoryInterface;
+use App\Domain\Shops\Shop;
 use Illuminate\Support\Facades\Request;
 
 

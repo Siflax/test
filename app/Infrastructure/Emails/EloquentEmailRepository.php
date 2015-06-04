@@ -1,9 +1,9 @@
 <?php namespace App\Infrastructure\Emails;
 
 
-use App\RNotifier\Domain\Emails\Email;
-use App\RNotifier\Domain\Emails\EmailRepositoryInterface;
-use App\RNotifier\Domain\Shops\Shop;
+use App\Domain\Emails\Email;
+use App\Domain\Emails\EmailRepositoryInterface;
+use App\Domain\Shops\Shop;
 
 class EloquentEmailRepository implements EmailRepositoryInterface{
 
