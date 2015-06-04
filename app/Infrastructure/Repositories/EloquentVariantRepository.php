@@ -1,4 +1,4 @@
-<?php namespace App\Infrastructure\Products\Variants;
+<?php namespace App\Infrastructure\Repositories;
 
 
 use App\Domain\Products\Variants\VariantRepositoryInterface;

@@ -1,4 +1,4 @@
-<?php namespace App\Infrastructure\InventorySettings;
+<?php namespace App\Infrastructure\Repositories;
 
 
 use App\Domain\InventorySettings\Setting;

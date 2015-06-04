@@ -1,8 +1,9 @@
-<?php namespace App\Infrastructure\Products;
+<?php namespace App\Infrastructure\Repositories;
 
 
 use App\Domain\Products\Product;
 use App\Domain\Products\ProductRepositoryInterface;
+use App\Infrastructure\Products\ShopifyProductConnector;
 
 class EloquentProductRepository implements ProductRepositoryInterface{
 

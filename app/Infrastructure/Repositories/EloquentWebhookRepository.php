@@ -1,4 +1,4 @@
-<?php namespace App\Infrastructure\Webhooks;
+<?php namespace App\Infrastructure\Repositories;
 
 
 use App\Domain\Webhooks\Webhook;

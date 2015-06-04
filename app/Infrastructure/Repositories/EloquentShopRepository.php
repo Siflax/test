@@ -1,4 +1,4 @@
-<?php namespace App\Infrastructure\Shops;
+<?php namespace App\Infrastructure\Repositories;
 
 
 use App\Domain\Shops\ShopRepositoryInterface;
