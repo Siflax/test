@@ -1,6 +1,5 @@
 <?php namespace App\Providers;
 
-use App\RNotifier\App\Providers\EmailRepositoryServiceProvider;
 use App\Domain\Emails\EmailRepositoryInterface;
 use App\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\Domain\Products\ProductRepositoryInterface;
