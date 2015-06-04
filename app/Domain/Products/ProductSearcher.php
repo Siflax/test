@@ -1,7 +1,7 @@
 <?php namespace App\Domain\Products;
 
 
-use App\Infrastructure\Products\ShopifyProductConnector;
+Use App\Infrastructure\Shopify\ShopifyProductConnector;
 
 class ProductSearcher {
 

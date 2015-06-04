@@ -3,7 +3,7 @@
 
 use App\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\Domain\Shops\Shop;
-use App\Infrastructure\Products\ShopifyProductConnector;
+Use App\Infrastructure\Shopify\ShopifyProductConnector;
 
 class InventoryCheckerService {
 

@@ -1,4 +1,4 @@
-<?php namespace App\Infrastructure\Products;
+<?php namespace App\Infrastructure\Shopify;
 
 
 use App\Domain\Products\Product;

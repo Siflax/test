@@ -9,7 +9,7 @@ use App\Domain\Products\ProductSearcher;
 use App\Domain\Products\Variants\VariantRepositoryInterface;
 use App\Domain\Shops\Shop;
 use App\Infrastructure\Products\ProductFactory;
-use App\Infrastructure\Products\ShopifyProductConnector;
+Use App\Infrastructure\Shopify\ShopifyProductConnector;
 use App\Infrastructure\Products\Variants\VariantFactory;
 use Illuminate\Support\Facades\Request;
 

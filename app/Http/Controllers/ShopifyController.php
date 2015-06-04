@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 
-use App\Infrastructure\Products\ShopifyProductConnector;
+Use App\Infrastructure\Shopify\ShopifyProductConnector;
 use Illuminate\Support\Facades\Config;
 use phpish\shopify;
 

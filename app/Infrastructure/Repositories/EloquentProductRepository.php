@@ -3,7 +3,7 @@
 
 use App\Domain\Products\Product;
 use App\Domain\Products\ProductRepositoryInterface;
-use App\Infrastructure\Products\ShopifyProductConnector;
+Use App\Infrastructure\Shopify\ShopifyProductConnector;
 
 class EloquentProductRepository implements ProductRepositoryInterface{
 
