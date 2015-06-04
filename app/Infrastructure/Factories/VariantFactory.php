@@ -6,7 +6,7 @@
  * Time: 14.24
  */
 
-namespace App\Infrastructure\Products\Variants;
+namespace App\Infrastructure\Factories;
 
 
 use App\Domain\Products\Variants\Variant;

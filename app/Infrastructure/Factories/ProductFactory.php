@@ -1,9 +1,9 @@
-<?php namespace App\Infrastructure\Products;
+<?php namespace App\Infrastructure\Factories;
 
 
 use App\Domain\Products\Product;
 use App\Infrastructure\Factories\Factory;
-use App\Infrastructure\Products\Variants\VariantFactory;
+use App\Infrastructure\Factories\VariantFactory;
 
 class ProductFactory extends Factory
 {
