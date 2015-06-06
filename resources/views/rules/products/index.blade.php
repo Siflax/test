@@ -1,5 +1,16 @@
 <div class="col-md-6">
-    @include('partials.products')
+
+    @if (isset($products))
+
+        @foreach($products as $product)
+            @include('rules.products.partials.product', array('display'=> 'rules'))
+        @endforeach
+
+        <?php echo $products->render(); ?>
+
+    @endif
+
+
 </div>
 <div class="col-md-6">
     <h4>Add product rule</h4>
