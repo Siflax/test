@@ -60,7 +60,7 @@
                         </div>
 
                         <ul class="nav nav-tabs">
-                            <li class="active tab"><a data-remote href="#"><h4>Products</h4></a></li>
+                            <li class="active tab"><a data-remote href="{{route('products.index')}}"><h4>Products</h4></a></li>
                             <li class="tab"><a data-remote href="{{route('variants.index')}}"><h4>Variants</h4></a></li>
                         </ul>
 
