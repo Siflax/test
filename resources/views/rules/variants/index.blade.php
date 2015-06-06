@@ -2,11 +2,19 @@
 
 <div class="col-md-6">
 
-    variant rules here
+    @if (isset($variants))
+
+        @foreach($variants as $variant)
+            @include('rules.variants.partials.variant', array('display'=> 'rules'))
+        @endforeach
+
+        <?php echo $variants->render(); ?>
+
+    @endif
 
 </div>
 <div class="col-md-6">
-    <h4>Add product rule</h4>
+    <h4>Add Variant rule</h4>
     {!! Form::open(array('route' => 'searchInventoryRules')) !!}
 
     <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
