@@ -28,7 +28,7 @@ class VariantRulesController extends Controller {
 
 		$variants = $this->variants->retrievePaginatedByShop($shop, true);
 
-		return view('settings.input', ['variants' => $variants]);
+		return view('rules.variants.index', ['variants' => $variants]);
 
 	}
 

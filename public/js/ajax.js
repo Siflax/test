@@ -44,9 +44,9 @@
         $.ajax({
             type: 'GET',
             url: url,
-            success: function() {
+            success: function(response) {
 
-console.log('adfadsf');
+                $('#rules').html(response);
 
             }
         });

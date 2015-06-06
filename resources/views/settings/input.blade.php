@@ -61,31 +61,34 @@
 
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-remote href="#"><h4>Products</h4></a></li>
-                            <li><a data-remote href="#"><h4>Variants</h4></a></li>
+                            <li><a data-remote href="{{route('variants.index')}}"><h4>Variants</h4></a></li>
                         </ul>
 
-                        <div class="col-md-6">
-                            @include('partials.products')
-                        </div>
-                        <div class="col-md-6">
-                            <h4>Add product rule</h4>
-                            {!! Form::open(array('route' => 'searchInventoryRules')) !!}
+                        <div id="rules">
 
-                                <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
-                                    {!! Form::label('productTitle', 'Search by product title') !!}
-                                    {!! Form::text('productTitle', null, ['class' => 'form-control'])!!}
+                            <div class="col-md-6">
+                                @include('partials.products')
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Add product rule</h4>
+                                {!! Form::open(array('route' => 'searchInventoryRules')) !!}
 
-                                    {!! $errors->first('productTitle', '<span class="help-block">:message</span>') !!}
-                                </div>
+                                    <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
+                                        {!! Form::label('productTitle', 'Search by product title') !!}
+                                        {!! Form::text('productTitle', null, ['class' => 'form-control'])!!}
 
-                                <div class="form-group">
-                                    {!! Form::submit('search', ['class'=> 'btn btn-primary']) !!}
-                                </div>
+                                        {!! $errors->first('productTitle', '<span class="help-block">:message</span>') !!}
+                                    </div>
 
-                            {!! Form::close() !!}
+                                    <div class="form-group">
+                                        {!! Form::submit('search', ['class'=> 'btn btn-primary']) !!}
+                                    </div>
 
-                            @include('partials.matches')
+                                {!! Form::close() !!}
 
+                                @include('partials.matches')
+
+                            </div>
                         </div>
                     </div>
                 </div>

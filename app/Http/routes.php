@@ -29,6 +29,11 @@ Route::group(array('prefix' => 'inventory-rules'), function()
 			'uses'=> 'InventorySettingsController@search'
 	]);
 
+	Route::get('variants', [
+		'as'=>'variants.index',
+		'uses'=> 'VariantRulesController@index'
+	]);
+
 	Route::post('variant/save', [
 		'as'=>'saveVariantRule',
 		'uses'=> 'InventorySettingsController@saveVariantRule'
