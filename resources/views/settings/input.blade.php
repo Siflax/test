@@ -60,8 +60,8 @@
                         </div>
 
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#"><h4>Products</h4></a></li>
-                            <li><a href="#"><h4>Variants</h4></a></li>
+                            <li class="active"><a data-remote href="#"><h4>Products</h4></a></li>
+                            <li><a data-remote href="#"><h4>Variants</h4></a></li>
                         </ul>
 
                         <div class="col-md-6">
