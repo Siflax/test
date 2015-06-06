@@ -38,7 +38,12 @@
     });
 
     $('a[data-remote]').on('click', function(e) {
-        console.log('works');
+
+        $(".tab").click(function () {
+            $(".tab").removeClass("active");
+            $(this).closest('.tab').addClass("active");
+        });
+
         var url = $(this).attr('href');
 
         $.ajax({
@@ -50,6 +55,7 @@
 
             }
         });
+
 
         e.preventDefault();
     });
