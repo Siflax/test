@@ -1,7 +1,7 @@
 <?php namespace App\Infrastructure\Adapters;
 
 
-use App\Infrastructure\AntiCorruptionLayer\Adapter;
+use App\Infrastructure\Factories\ProductFactory;
 use Illuminate\Foundation\Application;
 
 class ProductAdapter extends Adapter {
