@@ -21,7 +21,7 @@
                         </ul>
 
 
-                        <div id = 'loading-image' style="display: none; z-index: 100; position: absolute;" ></div>
+                        <div id = 'loading-image'></div>
 
                         <div id="rules">
 
