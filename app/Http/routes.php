@@ -29,6 +29,11 @@ Route::group(array('prefix' => 'inventory-rules'), function()
 			'uses'=> 'InventorySettingsController@search'
 	]);
 
+	Route::get('global', [
+		'as'=>'global.index',
+		'uses'=> 'GlobalRulesController@index'
+	]);
+
 	Route::get('products', [
 		'as'=>'products.index',
 		'uses'=> 'ProductRulesController@index'
