@@ -35,4 +35,11 @@ class EloquentVariantRepository implements VariantRepositoryInterface{
 
         if (!$product->variants()->first()) $product->delete();
     }
+
+    public function retrievePaginatedByShop($shop, $withShopifyDetails = false)
+    {
+        $variants = $shop->variants()->paginate(10);
+
+        return $variants;
+    }
 }
