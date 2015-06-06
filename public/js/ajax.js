@@ -49,6 +49,12 @@
         $.ajax({
             type: 'GET',
             url: url,
+            beforeSend: function(){
+                $('#loading-image').show();
+            },
+            complete: function(){
+                $('#loading-image').hide();
+            },
             success: function(response) {
 
                 $('#rules').html(response);

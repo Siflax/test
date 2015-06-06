@@ -64,6 +64,9 @@
                             <li class="tab"><a data-remote href="{{route('variants.index')}}"><h4>Variants</h4></a></li>
                         </ul>
 
+
+                        <div id = 'loading-image' style="display: none; z-index: 100; position: absolute;" ></div>
+
                         <div id="rules">
 
                             <div class="col-md-6">
