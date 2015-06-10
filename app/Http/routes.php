@@ -39,6 +39,11 @@ Route::group(array('prefix' => 'inventory-rules'), function()
 		'uses'=> 'ProductRulesController@index'
 	]);
 
+	Route::post('products/search', [
+		'as'=>'products.search',
+		'uses'=> 'ProductRulesController@search'
+	]);
+
 	Route::get('variants', [
 		'as'=>'variants.index',
 		'uses'=> 'VariantRulesController@index'

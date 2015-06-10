@@ -2,17 +2,6 @@
 
 <div class="panel panel-default">
 
-    <div class="panel-heading" >
-        <strong style="font-size:1.4em">variant title</strong>
-        <div class="text-right" style="display:inline-block;float:right">
-            {!! Form::submit('Save', ['class'=> 'btn btn-primary']) !!}
-            @if ($display != 'search')
-                {!! link_to_route('deleteProductRule', 'X', $variant->id ,['class' => 'btn btn-danger']) !!}
-            @endif
-        </div>
-
-    </div>
-
     <div class="panel-body">
 
         <table class="table">
@@ -22,13 +11,10 @@
             <tr >
 
                 <td>
-
+                    {{$variant->title}}
                 </td>
 
-
-
                 <td>
-
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
@@ -40,9 +26,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </td>
                 <td>
                     <div class="row">
@@ -55,10 +38,11 @@
                             </div>
                         </div>
                     </div>
-
                 </td>
                 <td class="text-right">
+                    {!! Form::submit('Save', ['class'=> 'btn btn-primary']) !!}
 
+                    {!! link_to_route('deleteProductRule', 'X', $variant->id ,['class' => 'btn btn-danger']) !!}
 
                 </td>
                 <td>

@@ -4,7 +4,7 @@
         @include('partials.product', array('display'=> 'search'))
     @endforeach
 
-    <?php echo $products->render(); ?>
+
 
 @endif
 

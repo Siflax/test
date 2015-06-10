@@ -1,17 +1,34 @@
+
 (function() {
 
-    $('form[data-remote]').on('submit', function(e) {
+
+
+
+    $(document).on('submit', 'form[data-remote]', function(e) {
 
         var form = $(this);
         var method = form.find('input[name="_method"]').val() || 'POST';
         var url = form.prop('action');
-
+        var target = form.attr('target');
 
         $.ajax({
             type: method,
             url: url,
             data: form.serialize(),
-            success: function() {
+            target: target,
+            beforeSend: function(){
+                $('#loading-image').show();
+            },
+            complete: function(){
+                $('#loading-image').hide();
+            },
+            success: function(response) {
+
+                if (this.target)
+                {
+                    $(this.target).html(response);
+                }
+
                 var message = form.data('remote-success-message');
 
                 if (message)
@@ -23,6 +40,10 @@
 
         e.preventDefault();
     });
+
+
+
+
 
     $('input[data-confirm], button[data-confirm]').on('click', function(e) {
 
@@ -37,18 +58,28 @@
         input.removeAttr('disabled');
     });
 
+
+
+
+
     $('a[data-remote]').on('click', function(e) {
 
-        $(".tab").click(function () {
-            $(".tab").removeClass("active");
-            $(this).closest('.tab').addClass("active");
-        });
+        var link = $(this);
 
-        var url = $(this).attr('href');
+        if (link.parents('.tab').length) {
+            $(".tab").click(function () {
+                $(".tab").removeClass("active");
+                link.closest('.tab').addClass("active");
+            });
+        }
+
+        var url = link.attr('href');
+        var target = link.attr('target');
 
         $.ajax({
             type: 'GET',
             url: url,
+            target: target,
             beforeSend: function(){
                 $('#loading-image').show();
             },
@@ -57,7 +88,10 @@
             },
             success: function(response) {
 
-                $('#rules').html(response);
+                if (this.target)
+                {
+                    $(this.target).html(response);
+                }
 
             }
         });

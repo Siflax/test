@@ -14,7 +14,7 @@
 </div>
 <div class="col-md-6">
     <h4>Add product rule</h4>
-    {!! Form::open(array('route' => 'searchInventoryRules')) !!}
+    {!! Form::open(['data-remote', 'target' => '#searchResults','route' => 'products.search']) !!}
 
     <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
         {!! Form::label('productTitle', 'Search by product title') !!}
@@ -29,4 +29,8 @@
 
     {!! Form::close() !!}
 
+    <div id="searchResults">
+
 @include('partials.matches')
+    </div>
+</div>
