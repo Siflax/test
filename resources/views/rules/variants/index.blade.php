@@ -2,15 +2,52 @@
 
 <div class="col-md-6">
 
-    @if (isset($variants))
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Limit</th>
+            <th>Track</th>
+            <th></th>
+        </tr>
+        </thead>
+
+
+        @if (isset($variants))
+        <tbody>
 
         @foreach($variants as $variant)
-            @include('rules.variants.partials.variant', array('display'=> 'rules'))
+            {!! Form::open(array('route' => 'saveProductRule')) !!}
+
+            <tr>
+                <td>{{$variant->title}}</td>
+                <td>
+                    {!! Form::text('individualLimit', $variant->inventory_limit, ['style' => 'width:50px', 'class' => 'form-control'] ) !!}
+                    {!! Form::hidden('variantId', $variant->id) !!}
+                </td>
+                <td>
+                    {!! Form::checkbox('track', True, $variant->track, ['class' => 'form-control']) !!}
+                </td>
+                <td>
+                    {!! Form::submit('Save', ['class'=> 'btn btn-primary']) !!}
+
+                    {!! link_to_route('deleteProductRule', 'X', $variant->id ,['class' => 'btn btn-danger']) !!}
+                </td>
+            </tr>
+
+            {!! Form::close() !!}
         @endforeach
+
+        </tbody>
+
+
 
         <?php echo $variants->render(); ?>
 
     @endif
+
+    </table>
 
 </div>
 <div class="col-md-6">
