@@ -11,7 +11,12 @@
 
                     <div class="panel-body">
                         <div class="well">
-                            Lorem ipsum dolor sit amet, natum inermis pericula sed ei, cu malis legere phaedrum nec. Qui ex decore honestatis, ex magna utinam regione qui. Adhuc eleifend appellantur id mel. No mundi ceteros his, nostrum philosophia qui in. Sententiae consequuntur quo eu, nam veri erant nominavi at, eam solum voluptua contentiones id. Nec et ancillae hendrerit, usu commodo iuvaret adolescens ut, paulo fabulas per ex.
+                            Set inventory tracking rules on a global, per product or per variant basis.</br>
+                            The more specific rules will overwrite the less specific rules – global rules will be overwritten by product rules, product rules will be overwritten by variant rules</br>
+                            </br>
+                            <strong>limit:</strong>  decides at what inventory level you will be notified.</br>
+                            <strong>track:</strong>  decides if you will be notified.</br>
+
                         </div>
 
                         <ul class="nav nav-tabs">
