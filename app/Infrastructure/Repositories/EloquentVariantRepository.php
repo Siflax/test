@@ -1,6 +1,7 @@
 <?php namespace App\Infrastructure\Repositories;
 
 
+use App\Domain\Products\Variants\Variant;
 use App\Domain\Products\Variants\VariantRepositoryInterface;
 use App\Domain\Shops\Shop;
 
@@ -42,4 +43,32 @@ class EloquentVariantRepository implements VariantRepositoryInterface{
 
         return $variants;
     }
+
+
+
+
+
+
+    public function updateOrCreateByShop($shop, $parameters = [], $update)
+    {
+        $variant = $this->firstOrCreateByShop($shop, $parameters);
+
+        $variant->update($update);
+
+        return $variant;
+    }
+
+    public function firstOrCreateByShop($shop, $parameters = [])
+    {
+        $variant = $shop->variants()->find($parameters)->first();
+
+        if ($variant) return $variant;
+
+        $variant = Variant::create($parameters);
+        $shop->variants()->save($variant);
+
+        return $variant;
+    }
+
+
 }

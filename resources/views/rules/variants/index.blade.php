@@ -18,25 +18,7 @@
         <tbody>
 
         @foreach($variants as $variant)
-            {!! Form::open(array('route' => 'saveProductRule')) !!}
-
-            <tr>
-                <td>{{$variant->title}}</td>
-                <td>
-                    {!! Form::text('individualLimit', $variant->inventory_limit, ['style' => 'width:50px', 'class' => 'form-control'] ) !!}
-                    {!! Form::hidden('variantId', $variant->id) !!}
-                </td>
-                <td>
-                    {!! Form::checkbox('track', True, $variant->track, ['class' => 'form-control']) !!}
-                </td>
-                <td>
-                    {!! Form::submit('Save', ['class'=> 'btn btn-primary']) !!}
-
-                    {!! link_to_route('deleteProductRule', 'X', $variant->id ,['class' => 'btn btn-danger']) !!}
-                </td>
-            </tr>
-
-            {!! Form::close() !!}
+            @include('rules.variants.partials.variant')
         @endforeach
 
         </tbody>

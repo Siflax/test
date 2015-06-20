@@ -27,6 +27,10 @@ $prefixedResourceNames = function($prefix) {
 Route::group(array('prefix' => 'inventory-rules'), function() use ($prefixedResourceNames)
 {
 
+	/**
+	 * Product Rules
+	 */
+
 	Route::post('products/search', [
 		'as'=>'products.search',
 		'uses'=> 'ProductRulesController@search'
@@ -34,7 +38,16 @@ Route::group(array('prefix' => 'inventory-rules'), function() use ($prefixedReso
 
 	Route::resource('products', 'ProductRulesController', ['names' => $prefixedResourceNames('products'), 'only' => ['index', 'store']]);
 
+	/**
+	 * Variant Rules
+	 */
 
+	Route::post('variants/search', [
+		'as'=>'variants.search',
+		'uses'=> 'VariantRulesController@search'
+	]);
+
+	Route::resource('variants', 'VariantRulesController', ['names' => $prefixedResourceNames('variants'), 'only' => ['index', 'store']]);
 
 	Route::get('', [
 			'as' =>'showInventoryRules',

@@ -55,7 +55,6 @@ class InventorySettingsController extends Controller
 
         if ($section === 'variants') $data += ['variants' =>  $this->variantRepository->retrievePaginatedByShop($shop, true)];
 
-
         return view('settings.input', $data);
     }
 
