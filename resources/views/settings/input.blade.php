@@ -15,9 +15,9 @@
                         </div>
 
                         <ul class="nav nav-tabs">
-                            <li class="active tab"><a data-remote target="#rules" href="{{route('global.index')}}"><h4>Global</h4></a></li>
-                            <li class="tab"><a data-remote target="#rules" href="{{route('products.index')}}"><h4>Products</h4></a></li>
-                            <li class="tab"><a data-remote target="#rules" href="{{route('variants.index')}}"><h4>Variants</h4></a></li>
+                            <li class="@if($section==='global') active @endif tab"><a href="{{route('showInventoryRules', ['section' => 'global'])}}"><h4>Global</h4></a></li>
+                            <li class="@if($section==='products') active @endif tab"><a href="{{route('showInventoryRules', ['section' => 'products'])}}"><h4>Products</h4></a></li>
+                            <li class="@if($section==='variants') active @endif tab"><a  href="{{route('showInventoryRules', ['section' => 'variants'])}}"><h4>Variants</h4></a></li>
                         </ul>
 
 
@@ -25,7 +25,9 @@
 
                         <div id="rules">
 
-                            @include('rules.global.index')
+                           @if(isset($setting)) @include('rules.global.index')@endif
+                           @if(isset($products)) @include('rules.products.index')@endif
+                           @if(isset($variants)) @include('rules.variants.index')@endif
                         </div>
                     </div>
                 </div>

@@ -41,11 +41,22 @@ class InventorySettingsController extends Controller
     {
         $shop = Shop::find(1);
 
-        $setting = $this->settingsRepository->retrieveByShop($shop);
+        $section = Request::get('section');
 
-        $products = $this->productRepository->retrievePaginatedByShop($shop, true);
+        if( ! $section ) $section = 'global';
 
-        return view('settings.input', ['setting' => $setting, 'products' => $products]);
+        $data = [
+          'section' => $section
+        ];
+
+        if ($section === 'global') $data += ['setting' => $this->settingsRepository->retrieveByShop($shop) ];
+
+        if ($section === 'products') $data += ['products' => $this->productRepository->retrievePaginatedByShop($shop, true) ];
+
+        if ($section === 'variants') $data += ['variants' =>  $this->variantRepository->retrievePaginatedByShop($shop, true)];
+
+
+        return view('settings.input', $data);
     }
 
     public function store()
