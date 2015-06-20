@@ -41,7 +41,7 @@ class ProductRulesController extends Controller {
 
 		$matches = $this->productSearcher->execute(Request::get('productTitle'), $shop);
 		
-		return view('partials.matches', ['matches' => $matches]);
+		return view('rules.products.partials.matches', ['matches' => $matches]);
 	}
 
 }
