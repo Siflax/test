@@ -50,20 +50,22 @@
     </table>
 
 </div>
+
 <div class="col-md-6">
     <h4>Add Variant rule</h4>
     {!! Form::open(array('route' => 'searchInventoryRules')) !!}
 
-    <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
-        {!! Form::label('productTitle', 'Search by product title') !!}
-        {!! Form::text('productTitle', null, ['class' => 'form-control'])!!}
+        <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
 
-        {!! $errors->first('productTitle', '<span class="help-block">:message</span>') !!}
-    </div>
+            <div class="input-group">
+                {!! Form::text('productTitle', null, ['class' => 'form-control', 'placeholder' => 'Search by product title'])!!}
+                <span class="input-group-btn">
+                    {!! Form::submit('search', ['class'=> 'btn btn-primary']) !!}
+                </span>
+            </div>
 
-    <div class="form-group">
-        {!! Form::submit('search', ['class'=> 'btn btn-primary']) !!}
-    </div>
+            {!! $errors->first('productTitle', '<span class="help-block">:message</span>') !!}
+        </div>
 
     {!! Form::close() !!}
 

@@ -55,21 +55,24 @@
     <h4>Add product rule</h4>
     {!! Form::open(['data-remote', 'target' => '#searchResults','route' => 'products.search']) !!}
 
-    <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
-        {!! Form::text('productTitle', null, ['class' => 'form-control', 'placeholder' => 'Search by product title'])!!}
+        <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
 
-        {!! $errors->first('productTitle', '<span class="help-block">:message</span>') !!}
-    </div>
+            <div class="input-group">
+                {!! Form::text('productTitle', null, ['class' => 'form-control', 'placeholder' => 'Search by product title'])!!}
+                    <span class="input-group-btn">
+                        {!! Form::submit('search', ['class'=> 'btn btn-primary']) !!}
+                    </span>
+            </div>
 
-    <div class="form-group">
-        {!! Form::submit('search', ['class'=> 'btn btn-primary']) !!}
-    </div>
+            {!! $errors->first('productTitle', '<span class="help-block">:message</span>') !!}
+        </div>
 
     {!! Form::close() !!}
 
     <div id="searchResults">
 
-@include('partials.matches')
+        @include('partials.matches')
+
     </div>
 </div>
 
