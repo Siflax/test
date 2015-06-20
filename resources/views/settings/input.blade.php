@@ -14,8 +14,8 @@
                             Set inventory tracking rules on a global, per product or per variant basis.</br>
                             The more specific rules will overwrite the less specific rules – global rules will be overwritten by product rules, product rules will be overwritten by variant rules</br>
                             </br>
-                            <strong>limit:</strong>  decides at what inventory level you will be notified.</br>
-                            <strong>track:</strong>  decides if you will be notified.</br>
+                            <strong>Limit:</strong>  decides at what inventory level you will be notified.</br>
+                            <strong>Track:</strong>  decides if you will be notified.</br>
 
                         </div>
 

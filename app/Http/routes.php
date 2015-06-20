@@ -1,5 +1,17 @@
 <?php
 
+$prefixedResourceNames = function($prefix) {
+	return [
+		'index'   => $prefix . '.index',
+		'create'  => $prefix . '.create',
+		'store'   => $prefix . '.store',
+		'show'    => $prefix . '.show',
+		'edit'    => $prefix . '.edit',
+		'update'  => $prefix . '.update',
+		'destroy' => $prefix . '.destroy'
+	];
+};
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,8 +24,18 @@
 */
 
 
-Route::group(array('prefix' => 'inventory-rules'), function()
+Route::group(array('prefix' => 'inventory-rules'), function() use ($prefixedResourceNames)
 {
+
+	Route::post('products/search', [
+		'as'=>'products.search',
+		'uses'=> 'ProductRulesController@search'
+	]);
+
+	Route::resource('products', 'ProductRulesController', ['names' => $prefixedResourceNames('products'), 'only' => ['index', 'store']]);
+
+
+
 	Route::get('', [
 			'as' =>'showInventoryRules',
 			'uses' => 'InventorySettingsController@show'
@@ -32,16 +54,6 @@ Route::group(array('prefix' => 'inventory-rules'), function()
 	Route::get('global', [
 		'as'=>'global.index',
 		'uses'=> 'GlobalRulesController@index'
-	]);
-
-	Route::get('products', [
-		'as'=>'products.index',
-		'uses'=> 'ProductRulesController@index'
-	]);
-
-	Route::post('products/search', [
-		'as'=>'products.search',
-		'uses'=> 'ProductRulesController@search'
 	]);
 
 	Route::get('variants', [

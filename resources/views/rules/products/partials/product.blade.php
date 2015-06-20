@@ -1,4 +1,4 @@
-{!! Form::open(array('route' => 'saveProductRule')) !!}
+{!! Form::open(array('route' => 'products.store')) !!}
 
 <tr>
     <td>{{$product->title}}</td>
