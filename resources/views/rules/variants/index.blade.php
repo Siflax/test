@@ -16,11 +16,20 @@
 
         @if (isset($variants))
         <tbody>
+        @foreach($productTitles as $productTitle)
+            <tr>
+                <td><strong>{{$productTitle}}</strong></td>
+                <td>                </td>
+                <td>                </td>
+                <td>                </td>
+            </tr>
+            @foreach($variants as $variant)
 
-        @foreach($variants as $variant)
-            @include('rules.variants.partials.variant')
+                @if ($variant->product_title === $productTitle)
+                    @include('rules.variants.partials.variant')
+                @endif
+            @endforeach
         @endforeach
-
         </tbody>
 
 

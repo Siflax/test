@@ -53,7 +53,19 @@ class InventorySettingsController extends Controller
 
         if ($section === 'products') $data += ['products' => $this->productRepository->retrievePaginatedByShop($shop, true) ];
 
-        if ($section === 'variants') $data += ['variants' =>  $this->variantRepository->retrievePaginatedByShop($shop, true)];
+        if ($section === 'variants') {
+
+            $data += ['variants' =>  $this->variantRepository->retrievePaginatedByShop($shop, true)];
+
+            $productTitles = [];
+
+            foreach($data['variants'] as $variant) {
+                $productTitle = $variant->product_title;
+                if (! in_array($productTitle, $productTitles)) array_push($productTitles, $productTitle);
+            }
+
+            $data += ['productTitles' => $productTitles];
+        }
 
         return view('settings.input', $data);
     }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Variant extends Model
 {
 
-    protected $fillable = ['id', 'product_id', 'inventory_quantity', 'title', 'inventory_management', 'inventory_limit', 'track'];
+    protected $fillable = ['id', 'product_id', 'inventory_quantity', 'title', 'inventory_management', 'inventory_limit', 'track', 'product_title'];
 
     public function product()
     {

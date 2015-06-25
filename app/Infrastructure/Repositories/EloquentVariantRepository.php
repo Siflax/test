@@ -48,7 +48,7 @@ class EloquentVariantRepository implements VariantRepositoryInterface {
 
     public function retrievePaginatedByShop($shop, $withShopifyDetails = false)
     {
-        $variants = $shop->variants()->paginate(10);
+        $variants = $shop->variants()->orderBy('product_id','DESC')->paginate(10);
 
         if ($withShopifyDetails) $variants = $this->getShopifyDetails($variants);
 

@@ -79,13 +79,18 @@ class ShopifyProductConnector extends ShopifyConnector{
 
         $result = $this->call('GET /admin/products.json', ['ids' => $variant->product_id]);
 
-        foreach ($result[0]['variants'] as $variantDetails)
+        foreach ($result as $productDetails)
         {
-            if ($variantDetails['id'] == $variant->id)
+
+            foreach ($productDetails['variants'] as $variantDetails)
             {
-                $variant->title = $variantDetails['title'];
-                $variant->inventory_quantity = $variantDetails['inventory_quantity'];
-                $variant->inventory_management = $variantDetails['inventory_management'];
+                if ($variantDetails['id'] == $variant->id)
+                {
+                    $variant->title = $variantDetails['title'];
+                    $variant->inventory_quantity = $variantDetails['inventory_quantity'];
+                    $variant->inventory_management = $variantDetails['inventory_management'];
+                    $variant->product_title = $productDetails['title'];
+                }
             }
         }
 
