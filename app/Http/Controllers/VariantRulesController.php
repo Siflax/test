@@ -1,12 +1,14 @@
 <?php namespace App\Http\Controllers;
 
 use App\Domain\Products\ProductRepositoryInterface;
+use App\Domain\Products\ProductSearcher;
 use App\Domain\Products\Variants\VariantRepositoryInterface;
 use App\Domain\Shops\Shop;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 
+use App\Http\Requests\SearchProductsRequest;
 use Illuminate\Support\Facades\Request;
 
 class VariantRulesController extends Controller {
@@ -14,11 +16,13 @@ class VariantRulesController extends Controller {
 
 	private $variants;
 	private $products;
+	private $productSearcher;
 
-	function __construct(VariantRepositoryInterface $variants, ProductRepositoryInterface $products)
+	function __construct(VariantRepositoryInterface $variants, ProductRepositoryInterface $products, ProductSearcher $productSearcher)
 	{
 		$this->variants = $variants;
 		$this->products = $products;
+		$this->productSearcher = $productSearcher;
 	}
 	
 	/**
@@ -47,5 +51,13 @@ class VariantRulesController extends Controller {
 		return redirect()->back();
 	}
 
+	public function search(SearchProductsRequest $request)
+	{
+		$shop = Shop::find(1);
+
+		$matches = $this->productSearcher->execute(Request::get('productTitle'), $shop);
+
+		return view('rules.variants.partials.matches', ['matches' => $matches]);
+	}
 
 }
