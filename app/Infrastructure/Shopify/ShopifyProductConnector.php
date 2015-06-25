@@ -2,6 +2,7 @@
 
 
 use App\Domain\Products\Product;
+use App\Domain\Products\Variants\Variant;
 use App\Infrastructure\Adapters\ProductAdapter;
 use App\Infrastructure\Factories\VariantFactory;
 use App\Infrastructure\Factories\ProductFactory;
@@ -71,6 +72,25 @@ class ShopifyProductConnector extends ShopifyConnector{
         }
 
         return $product;
+    }
+
+    public function getVariantDetails(Variant $variant)
+    {
+
+        $result = $this->call('GET /admin/products.json', ['ids' => $variant->product_id]);
+
+        foreach ($result[0]['variants'] as $variantDetails)
+        {
+            if ($variantDetails['id'] == $variant->id)
+            {
+                $variant->title = $variantDetails['title'];
+                $variant->inventory_quantity = $variantDetails['inventory_quantity'];
+                $variant->inventory_management = $variantDetails['inventory_management'];
+            }
+        }
+
+        return $variant;
+
     }
 
     public function retrieve($options = null)

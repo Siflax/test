@@ -4,8 +4,17 @@
 use App\Domain\Products\Variants\Variant;
 use App\Domain\Products\Variants\VariantRepositoryInterface;
 use App\Domain\Shops\Shop;
+use App\Infrastructure\Shopify\ShopifyProductConnector;
 
-class EloquentVariantRepository implements VariantRepositoryInterface{
+class EloquentVariantRepository implements VariantRepositoryInterface {
+
+
+    private $shopifyProductConnector;
+
+    function __construct(ShopifyProductConnector $shopifyProductConnector)
+    {
+        $this->shopifyProductConnector = $shopifyProductConnector;
+    }
 
     public function firstOrNewByProduct($product, $parameters = [])
     {
@@ -41,10 +50,18 @@ class EloquentVariantRepository implements VariantRepositoryInterface{
     {
         $variants = $shop->variants()->paginate(10);
 
+        if ($withShopifyDetails) $variants = $this->getShopifyDetails($variants);
+
         return $variants;
     }
 
-
+    public function getShopifyDetails($variants)
+    {
+        foreach ($variants as $key => $value) {
+            $variants[$key] = $this->shopifyProductConnector->getVariantDetails($variants[$key]);
+        }
+        return $variants;
+    }
 
 
 
