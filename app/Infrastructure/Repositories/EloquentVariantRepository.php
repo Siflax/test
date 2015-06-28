@@ -50,16 +50,8 @@ class EloquentVariantRepository implements VariantRepositoryInterface {
     {
         $variants = $shop->variants()->orderBy('product_id','DESC')->paginate(10);
 
-        if ($withShopifyDetails) $variants = $this->getShopifyDetails($variants);
+        if ($withShopifyDetails) return $this->shopifyProductConnector->getVariantsDetails($variants);
 
-        return $variants;
-    }
-
-    public function getShopifyDetails($variants)
-    {
-        foreach ($variants as $key => $value) {
-            $variants[$key] = $this->shopifyProductConnector->getVariantDetails($variants[$key]);
-        }
         return $variants;
     }
 

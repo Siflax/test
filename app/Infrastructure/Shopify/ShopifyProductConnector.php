@@ -110,83 +110,38 @@ class ShopifyProductConnector extends ShopifyConnector{
         return $products;
     }
 
-    public function getDetails(Product $product, $addOriginalVariants = true)
+    public function getVariantsDetails($variants)
     {
-        $id = $product->id;
+        $productIds = [];
 
-        $options = [
-          'ids' => $id,
-        ];
+        foreach ($variants as $variant)
+        {
+            if (! in_array($variant->product_id, $productIds)) $productIds[] = $variant->product_id;
+        }
 
-        $result = $this->call('GET /admin/products.json', $options);
+        $ids = implode(', ', $productIds);
 
-        $product->title = $result[0]['title'];
+        $results = $this->call('GET /admin/products.json', ['ids' => $ids]);
 
-        if (count($result[0]['variants'])  <= 1) return $product;
-
-        foreach ($result[0]['variants'] as $variantAttributes) {
-
-            $ids = [];
-
-
-            if ($product->variants)
+        foreach($results as $result)
+        {
+            foreach ($result['variants'] as $variantResult)
             {
-                foreach ($product->variants as $variant )
+                foreach ($variants as &$variant)
                 {
-                    $ids[] = $variant->id;
-
-                    if ($variant->id == $variantAttributes['id'])
+                    if ($variantResult['id'] == $variant->id)
                     {
-                        $variant->inventory_quantity = $variantAttributes['inventory_quantity'];
-                        $variant->title = $variantAttributes['title'];
-                        $variant->inventory_management = $variantAttributes['inventory_management'];
+                        $variant->title = $variantResult['title'];
+                        $variant->inventory_quantity = $variantResult['inventory_quantity'];
+                        $variant->inventory_management = $variantResult['inventory_management'];
+                        $variant->product_title = $result['title'];
                     }
                 }
             }
-
-
-            if ($addOriginalVariants)
-            {
-                if ( ! in_array($variantAttributes['id'], $ids))
-                {
-                    $variant = $this->variantFactory->create([
-                        'id' => $variantAttributes['id'],
-                        'product_id' => $product->id,
-                        'inventory_quantity' => $variantAttributes['inventory_quantity'],
-                        'title' => $variantAttributes['title'],
-                        'inventory_management' => $variantAttributes['inventory_management'],
-                        'track' => True
-                    ]);
-
-                    $product->variants[]= $variant;
-                }
-            }
         }
 
-        return $product;
-    }
+        return $variants;
 
-    public function getVariantDetails(Variant $variant)
-    {
-
-        $result = $this->call('GET /admin/products.json', ['ids' => $variant->product_id]);
-
-        foreach ($result as $productDetails)
-        {
-
-            foreach ($productDetails['variants'] as $variantDetails)
-            {
-                if ($variantDetails['id'] == $variant->id)
-                {
-                    $variant->title = $variantDetails['title'];
-                    $variant->inventory_quantity = $variantDetails['inventory_quantity'];
-                    $variant->inventory_management = $variantDetails['inventory_management'];
-                    $variant->product_title = $productDetails['title'];
-                }
-            }
-        }
-
-        return $variant;
     }
 
     public function retrieve($options = null)
@@ -222,6 +177,8 @@ class ShopifyProductConnector extends ShopifyConnector{
             print_R($e->getResponse());
         }
     }
+
+
 
 
 }
