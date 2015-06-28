@@ -21,6 +21,10 @@ class EloquentVariantRepository implements VariantRepositoryInterface {
         return $product->variants()->firstOrNew($parameters);
     }
 
+    public function findByIdByShop(Shop $shop, $id)
+    {
+        return $shop->variants()->find($id);
+    }
 
     public function delete($id, $shopId)
     {

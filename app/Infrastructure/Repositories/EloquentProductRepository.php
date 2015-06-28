@@ -3,6 +3,7 @@
 
 use App\Domain\Products\Product;
 use App\Domain\Products\ProductRepositoryInterface;
+use App\Domain\Shops\Shop;
 Use App\Infrastructure\Shopify\ShopifyProductConnector;
 
 class EloquentProductRepository implements ProductRepositoryInterface{
@@ -19,6 +20,11 @@ class EloquentProductRepository implements ProductRepositoryInterface{
         $product = Product::find($id);
 
         return $product;
+    }
+
+    public function retrieveByIdAndShop(Shop $shop, $id)
+    {
+        return $shop->products()->find($id);
     }
 
     public function retrievePaginatedByShop($shop, $withShopifyDetails = false)

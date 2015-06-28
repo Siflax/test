@@ -141,3 +141,8 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+
+Route::get('test', [
+	'as'=>'test',
+	'uses'=> 'TestingController@test'
+]);
