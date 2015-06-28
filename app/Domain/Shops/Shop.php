@@ -24,7 +24,7 @@ class Shop extends Model {
 
     public function variants()
     {
-        return $this->hasManyThrough('App\Domain\Products\Variants\Variant', 'App\Domain\Products\Product');
+        return $this->hasMany('App\Domain\Products\Variants\Variant');
     }
 
 }

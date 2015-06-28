@@ -63,28 +63,25 @@ class EloquentVariantRepository implements VariantRepositoryInterface {
         return $variants;
     }
 
-
-
-
     public function updateOrCreateByShop($shop, $parameters = [], $update)
     {
-        $variant = $this->firstOrCreateByShop($shop, $parameters);
+        $variant = $this->firstOrNewByShop($shop, $parameters);
 
-        $variant->update($update);
+        $variant->fill($update);
+
+        $variant->save();
 
         return $variant;
     }
 
-    public function firstOrCreateByShop($shop, $parameters = [])
+    public function firstOrCreateByShop(Shop $shop, $parameters = [])
     {
-        $variant = $shop->variants()->find($parameters)->first();
+        return $shop->variants()->firstOrCreate($parameters);
+    }
 
-        if ($variant) return $variant;
-
-        $variant = Variant::create($parameters);
-        $shop->variants()->save($variant);
-
-        return $variant;
+    public function firstOrNewByShop(Shop $shop, $parameters = [])
+    {
+        return $shop->variants()->firstOrNew($parameters);
     }
 
 

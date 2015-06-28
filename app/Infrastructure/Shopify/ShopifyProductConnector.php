@@ -41,17 +41,22 @@ class ShopifyProductConnector extends ShopifyConnector{
 
             $ids = [];
 
-            foreach ($product->variants as $variant )
-            {
-                $ids[] = $variant->id;
 
-                if ($variant->id == $variantAttributes['id'])
+            if ($product->variants)
+            {
+                foreach ($product->variants as $variant )
                 {
-                    $variant->inventory_quantity = $variantAttributes['inventory_quantity'];
-                    $variant->title = $variantAttributes['title'];
-                    $variant->inventory_management = $variantAttributes['inventory_management'];
+                    $ids[] = $variant->id;
+
+                    if ($variant->id == $variantAttributes['id'])
+                    {
+                        $variant->inventory_quantity = $variantAttributes['inventory_quantity'];
+                        $variant->title = $variantAttributes['title'];
+                        $variant->inventory_management = $variantAttributes['inventory_management'];
+                    }
                 }
             }
+
 
             if ($addOriginalVariants)
             {
@@ -95,7 +100,6 @@ class ShopifyProductConnector extends ShopifyConnector{
         }
 
         return $variant;
-
     }
 
     public function retrieve($options = null)
@@ -131,5 +135,6 @@ class ShopifyProductConnector extends ShopifyConnector{
             print_R($e->getResponse());
         }
     }
+
 
 }

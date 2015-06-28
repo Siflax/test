@@ -14,7 +14,7 @@ class ProductSearcher {
         $this->shopifyProductConnector = $shopifyProductConnector;
     }
 
-    public function execute($titleSearchTerm, $shop)
+    public function execute($titleSearchTerm, $shop, $getDetails = true)
     {
 
         $products = $this->shopifyProductConnector->retrieve([
@@ -33,7 +33,7 @@ class ProductSearcher {
 
             $product = $this->productRepository->firstOrNewByShop($shop, ['id' => $match->id]);
 
-            $product = $this->shopifyProductConnector->getDetails($product);
+            if ($getDetails) $product = $this->shopifyProductConnector->getDetails($product);
 
             $products[] = $product;
         }
