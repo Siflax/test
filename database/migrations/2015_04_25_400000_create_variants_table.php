@@ -14,9 +14,9 @@ class CreateVariantsTable extends Migration {
     {
         Schema::create('variants', function(Blueprint $table)
         {
-            $table->integer('id')->unique();
+            $table->bigInteger('id')->unique();
             $table->integer('shop_id')->unsigned();
-            $table->integer('product_id');
+            $table->bigInteger('product_id');
             $table->integer('inventory_limit');
             $table->boolean('track')->default(True);
             $table->timestamps();
