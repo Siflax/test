@@ -25,7 +25,7 @@ class EloquentProductRepository implements ProductRepositoryInterface{
     {
         $products = $shop->products()->paginate(10);
 
-        if ($withShopifyDetails === true) $products = $this->getShopifyDetails($products);
+        if ($withShopifyDetails === true)  return $this->shopifyProductConnector->addDetails($products);//$products = $this->getShopifyDetails($products);
 
         return $products;
     }

@@ -7,6 +7,7 @@ use App\Infrastructure\Adapters\ProductAdapter;
 use App\Infrastructure\Factories\VariantFactory;
 use App\Infrastructure\Factories\ProductFactory;
 use App\Infrastructure\Shopify\ShopifyConnector;
+use Illuminate\Database\Eloquent\Collection;
 use phpish\shopify;
 
 
@@ -21,6 +22,30 @@ class ShopifyProductConnector extends ShopifyConnector{
         $this->adapter = $adapter;
         $this->factory = $factory;
         $this->variantFactory = $variantFactory;
+    }
+
+    public function addDetails($products)
+    {
+        $ids = [];
+
+        foreach( $products as $product)
+        {
+            $ids[] = $product->id;
+        }
+
+        $idsString = implode(', ', $ids);
+
+        $results = $this->call('GET /admin/products.json', ['ids' => $idsString]);
+
+        foreach ($results as $result)
+        {
+            foreach ($products as &$product)
+            {
+                if ($product->id == $result['id']) $product->title = $result['title'];
+            }
+        }
+
+        return $products;
     }
 
     public function getDetails(Product $product, $addOriginalVariants = true)
