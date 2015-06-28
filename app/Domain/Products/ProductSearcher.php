@@ -14,7 +14,7 @@ class ProductSearcher {
         $this->shopifyProductConnector = $shopifyProductConnector;
     }
 
-    public function execute($titleSearchTerm, $shop, $getDetails = true)
+    public function execute($titleSearchTerm, $shop, $addVariants = false)
     {
 
         $products = $this->shopifyProductConnector->retrieve([
@@ -24,20 +24,16 @@ class ProductSearcher {
         $matches = [];
 
         foreach ($products as $product) {
-            if ($product->titleContains($titleSearchTerm)) $matches[] = $product;
+            if ($product->titleContains($titleSearchTerm))
+            {
+                $match = $this->productRepository->firstOrNewByShop($shop, ['id' => $product->id]);
+                $match->title = $product->title;
+                $matches[] = $match;
+            }
         }
 
-        $products = [];
+        if ($addVariants) return $this->shopifyProductConnector->addVariants($matches);
 
-        foreach ($matches as $match) {
-
-            $product = $this->productRepository->firstOrNewByShop($shop, ['id' => $match->id]);
-
-            if ($getDetails) $product = $this->shopifyProductConnector->getDetails($product);
-
-            $products[] = $product;
-        }
-
-        return $products;
+        return $matches;
     }
 }

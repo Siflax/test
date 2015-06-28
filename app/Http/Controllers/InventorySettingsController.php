@@ -71,7 +71,8 @@ class InventorySettingsController extends Controller
 
         if (Request::get('productTitle') )
         {
-            $matches = $this->productSearcher->execute(Request::get('productTitle'), $shop);
+            if ($section == 'variants') $matches = $this->productSearcher->execute(Request::get('productTitle'), $shop, true);
+            else $matches = $this->productSearcher->execute(Request::get('productTitle'), $shop);
 
             $data += ['matches' => $matches];
         }

@@ -48,6 +48,68 @@ class ShopifyProductConnector extends ShopifyConnector{
         return $products;
     }
 
+    public function addVariants($products)
+    {
+        $ids = [];
+
+        foreach( $products as $product)
+        {
+            $ids[] = $product->id;
+        }
+
+        $idsString = implode(', ', $ids);
+
+        $results = $this->call('GET /admin/products.json', ['ids' => $idsString]);
+
+        foreach ($results as $result)
+        {
+            foreach ($products as &$product)
+            {
+                $ids = [];
+
+                if ($product->variants)
+                {
+                    foreach ($product->variants as $variant )
+                    {
+                        $ids[] = $variant->id;
+
+                        foreach ($result['variants'] as $variantResult)
+                        {
+                            if ($variant->id == $variantResult['id'])
+                            {
+                                $variant->inventory_quantity = $variantResult['inventory_quantity'];
+                                $variant->title = $variantResult['title'];
+                                $variant->inventory_management = $variantResult['inventory_management'];
+                            }
+                        }
+                    }
+                }
+
+
+                foreach ($result['variants'] as $variantResult)
+                {
+                    if ( ! in_array($variantResult['id'], $ids))
+                    {
+                        $variant = $this->variantFactory->create([
+                            'id' => $variantResult['id'],
+                            'product_id' => $product->id,
+                            'inventory_quantity' => $variantResult['inventory_quantity'],
+                            'title' => $variantResult['title'],
+                            'inventory_management' => $variantResult['inventory_management'],
+                            'track' => True
+                        ]);
+
+                        $product->variants[]= $variant;
+                    }
+                }
+
+
+            }
+        }
+
+        return $products;
+    }
+
     public function getDetails(Product $product, $addOriginalVariants = true)
     {
         $id = $product->id;
