@@ -14,7 +14,7 @@ class CreateProductsTable extends Migration {
     {
         Schema::create('products', function(Blueprint $table)
         {
-            $table->integer('id');
+            $table->bigInteger('id');
             $table->integer('shop_id')->unsigned();
             $table->integer('inventory_limit');
             $table->boolean('track')->default(True);
