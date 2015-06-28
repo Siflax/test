@@ -63,7 +63,7 @@
     {!! Form::close() !!}
 
 
-    <div id="searchResults">
+    <div id="searchResults" class="scrollable">
         @include('rules/variants/partials/matches')
 
     </div>

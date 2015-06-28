@@ -7,3 +7,9 @@
     display: none;
     z-index: 100;
 }
+
+.scrollable {
+    /* Optional - You can set a  min-height : whatever px; for reserving some space*/
+    height: 200px; /* Fix a height here */
+    overflow: auto; /* Optionally you can also use overflow: scroll; */
+}
