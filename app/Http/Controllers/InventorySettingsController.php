@@ -67,6 +67,17 @@ class InventorySettingsController extends Controller
             $data += ['productTitles' => $productTitles];
         }
 
+
+
+        if (Request::get('productTitle') )
+        {
+            $matches = $this->productSearcher->execute(Request::get('productTitle'), $shop);
+
+            $data += ['matches' => $matches];
+        }
+
+  
+
         return view('settings.input', $data);
     }
 

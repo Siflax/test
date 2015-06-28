@@ -7,7 +7,9 @@
 </div>
 <div class="col-md-6">
     <h4>Add product rule</h4>
-    {!! Form::open(['data-remote', 'target' => '#searchResults','route' => 'products.search']) !!}
+    {!! Form::open(['route' => ['showInventoryRules'], 'method' => 'get']) !!}
+
+    {!! Form::hidden('section', 'products') !!}
 
         <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
 
