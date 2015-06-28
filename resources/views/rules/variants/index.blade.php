@@ -44,7 +44,9 @@
 
 <div class="col-md-6">
     <h4>Add Variant rule</h4>
-    {!! Form::open(['data-remote', 'target' => '#searchResults','route' => 'variants.search']) !!}
+    {!! Form::open(['route' => ['showInventoryRules'], 'method' => 'get']) !!}
+
+        {!! Form::hidden('section', 'variants') !!}
 
         <div class="form-group {{ $errors->has('productTitle') ? 'has-error' : '' }}">
 
@@ -62,7 +64,7 @@
 
 
     <div id="searchResults">
-
+        @include('rules/variants/partials/matches')
 
     </div>
 
