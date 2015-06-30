@@ -2,6 +2,7 @@
 
 
 use App\Domain\InventorySettings\SettingsRepositoryInterface;
+use App\Domain\Notifications\EmailNotifier;
 use App\Domain\Products\ProductRepositoryInterface;
 use App\Domain\Products\Variants\VariantRepositoryInterface;
 use App\Domain\Shops\Shop;
@@ -13,13 +14,15 @@ class InventoryCheckerService {
     private $shopifyProductConnector;
     private $variants;
     private $products;
+    private $mailer;
 
-    function __construct(ShopifyProductConnector $shopifyProductConnector, SettingsRepositoryInterface $settingsRepository, VariantRepositoryInterface $variants, ProductRepositoryInterface $products)
+    function __construct(ShopifyProductConnector $shopifyProductConnector, SettingsRepositoryInterface $settingsRepository, VariantRepositoryInterface $variants, ProductRepositoryInterface $products, EmailNotifier $mailer)
     {
         $this->settingsRepository = $settingsRepository;
         $this->shopifyProductConnector = $shopifyProductConnector;
         $this->variants = $variants;
         $this->products = $products;
+        $this->mailer = $mailer;
     }
 
     public function check(Shop $shop)
@@ -56,27 +59,10 @@ class InventoryCheckerService {
 
 
 
-
-        dd($notifications);
-        // foreach product
-
-        // if variants, foreach variants
-
-            // if variant rule, execute
-
-            // if product rule, execute
-
-            // if global rule, execute
-
-exit;
-
-        $lowProducts = [];
-        foreach ($products as $product)
+        foreach($shop->emails as $email)
         {
-            if($product->hasLowInventory($globalLimit)) $lowProducts[] =  $product;
+            return $this->mailer->notifyOfLowInventory($email, $notifications);
         }
-
-        dd($lowProducts);
     }
 
     private function checkVariant($variant, $shop, $globalRule)
