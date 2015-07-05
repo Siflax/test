@@ -50,10 +50,11 @@ class ProductRulesController extends Controller {
 
 		$shop = Shop::find(1);
 
-		$product = $this->products->firstOrCreateByShop($shop, ['id' => Request::get('productId')]);
+		$product = $this->products->firstOrNewByShop($shop, ['id' => Request::get('productId')]);
 
 		$product->inventory_limit = Request::get('individualLimit');
 		$product->track = $track;
+
 		$product->save();
 
 		return redirect()->back();

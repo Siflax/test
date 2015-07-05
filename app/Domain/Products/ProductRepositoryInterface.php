@@ -12,5 +12,7 @@ interface ProductRepositoryInterface {
     public function retrieveById($id);
 
     public function retrieveByIdAndShop(Shop $shop, $id);
+
+    public function firstOrNewByShop($shop, $parameters = []);
 }
 
