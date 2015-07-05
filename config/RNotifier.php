@@ -1,8 +1,8 @@
 <?php
 
 return [
-	'apiKey' => 'da21f5abb0278898abe2d2d639c26340',
-	'password' => '062ecea9deee5e43712a6abab72a0c57',
-	'sharedSecret' => 'b40d778506dd96c6700e514e51ac0901',
-	'shopName' => 'test-11182.myshopify.com'
+	'apiKey' => 'c87b93574fee854472224b5c224e596f',
+	//'password' => '062ecea9deee5e43712a6abab72a0c57',
+	'sharedSecret' => '82a73e97a138ee7eae66957430bd7e30',
+	//'shopName' => 'test-11182.myshopify.com'
 ];

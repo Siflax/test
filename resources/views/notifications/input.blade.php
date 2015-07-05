@@ -13,7 +13,7 @@
 
                         <div class="col-md-12">
                             <div class="well">
-                                Lorem ipsum dolor sit amet, natum inermis pericula sed ei, cu malis legere phaedrum nec. Qui ex decore honestatis, ex magna utinam regione qui. Adhuc eleifend appellantur id mel. No mundi ceteros his, nostrum philosophia qui in. Sententiae consequuntur quo eu, nam veri erant nominavi at, eam solum voluptua contentiones id. Nec et ancillae hendrerit, usu commodo iuvaret adolescens ut, paulo fabulas per ex.
+                                Set the frequency of notifications and the emails addresses the notifications will be sent to
                             </div>
                         </div>
 

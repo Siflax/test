@@ -16,6 +16,7 @@ class CreateShopsTable extends Migration {
         {
             $table->increments('id');
             $table->string('url');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

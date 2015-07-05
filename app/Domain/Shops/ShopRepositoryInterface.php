@@ -3,4 +3,5 @@
 
 interface ShopRepositoryInterface {
 
+    public function firstOrCreate($attributes);
 }

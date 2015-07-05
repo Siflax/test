@@ -95,7 +95,9 @@ class InventorySettingsController extends Controller
 
     public function check()
     {
-        $this->inventoryChecker->check();
+        $shop = Shop::find(1);
+
+        $this->inventoryChecker->check($shop);
     }
 
     public function search(SearchProductsRequest $request)

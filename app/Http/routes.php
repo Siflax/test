@@ -24,6 +24,17 @@ $prefixedResourceNames = function($prefix) {
 */
 
 
+/**
+ * Protected
+ */
+
+Route::group(array('middleware' => 'auth'), function() use ($prefixedResourceNames)
+{
+
+/**
+ * Inventory Rules Section
+ */
+
 Route::group(array('prefix' => 'inventory-rules'), function() use ($prefixedResourceNames)
 {
 
@@ -96,19 +107,9 @@ Route::group(array('prefix' => 'inventory-rules'), function() use ($prefixedReso
 
 });
 
-
-Route::get('settings/check', 'InventorySettingsController@check');
-
-
-Route::get('/', 'WelcomeController@index');
-
-Route::get('home', 'HomeController@index');
-
-Route::get('shopify/shop', 'shopifyController@shop');
-
-Route::get('shopify/product', 'shopifyController@product');
-
-
+/**
+ * Notifications Section
+ */
 
 Route::get('notifications', 'NotificationsController@show');
 
@@ -130,11 +131,35 @@ Route::post('notifications/frequency/save', [
 ]);
 
 
-
 Route::delete('notifications/webhook/delete/{id}', [
 	'as'=>'deleteWebhook',
 	'uses'=> 'NotificationsController@removeWebhook'
 ]);
+
+
+
+
+
+});
+
+
+/**
+ * Shopify
+ */
+
+Route::get('settings/check', 'InventorySettingsController@check');
+
+Route::get('shopify/shop', 'shopifyController@shop');
+
+Route::get('shopify/product', 'shopifyController@product');
+
+Route::get('shopify/oauth', 'shopifyController@oauth');
+
+Route::get('shopify/toInstall', 'shopifyController@toInstall');
+
+/**
+ * Other
+ */
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -146,3 +171,8 @@ Route::get('test', [
 	'as'=>'test',
 	'uses'=> 'TestingController@test'
 ]);
+
+
+Route::get('/', 'WelcomeController@index');
+
+Route::get('home', 'HomeController@index');
