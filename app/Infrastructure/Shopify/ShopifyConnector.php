@@ -11,20 +11,15 @@ class ShopifyConnector {
     private function connect()
     {
         $shop = Auth::user();
-        $apiKey = Config::get('RNotifier.apiKey');
 
-        $shopify = shopify\client($shop->url, $apiKey, $shop->remember_token);
-
-        return $shopify;
+        return  shopify\client($shop->url, Config::get('RNotifier.apiKey'), $shop->remember_token);
     }
 
     public function call($method, $options = [])
     {
         $shopify = $this->connect();
 
-        $result = $shopify($method, $options);
-
-        return $result;
+        return $shopify($method, $options);
     }
 
 }

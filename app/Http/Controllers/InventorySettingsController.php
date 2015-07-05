@@ -50,7 +50,7 @@ class InventorySettingsController extends Controller
           'section' => $section
         ];
 
-        if ($section === 'global') $data += ['setting' => $this->settingsRepository->retrieveByShop($shop) ];
+        if ($section === 'global') $data += ['setting' => $this->settingsRepository->firstOrNewByShop($shop) ];
 
         if ($section === 'products') $data += ['products' => $this->productRepository->retrievePaginatedByShop($shop, true) ];
 

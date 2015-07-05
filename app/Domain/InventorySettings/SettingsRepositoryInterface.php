@@ -9,4 +9,6 @@ Interface SettingsRepositoryInterface {
 
     public function firstOrCreateByShop($shop, $parameters = []);
 
+    public function firstOrNewByShop($shop);
+
 }

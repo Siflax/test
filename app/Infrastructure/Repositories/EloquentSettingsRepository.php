@@ -11,6 +11,11 @@ class EloquentSettingsRepository implements SettingsRepositoryInterface {
         return $shop->settings()->first();
     }
 
+    public function firstOrNewByShop($shop, $parameters = [])
+    {
+        return $shop->settings()->firstOrNew($parameters);
+    }
+
     public function updateOrCreateByShop($shop, $parameters = [], $update)
     {
         $setting = $this->firstOrCreateByShop($shop, $parameters);
