@@ -1,6 +1,7 @@
 <?php namespace App\Infrastructure\Shopify;
 
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use phpish\shopify;
 
@@ -9,11 +10,10 @@ class ShopifyConnector {
 
     private function connect()
     {
+        $shop = Auth::user();
         $apiKey = Config::get('RNotifier.apiKey');
-        $password = Config::get('RNotifier.password');
-        $shopName = Config::get('RNotifier.shopName');
 
-        $shopify = shopify\client($shopName, $apiKey, $password, true);
+        $shopify = shopify\client($shop->url, $apiKey, $shop->remember_token);
 
         return $shopify;
     }

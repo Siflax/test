@@ -33,6 +33,8 @@ class ShopifyProductConnector extends ShopifyConnector{
             $ids[] = $product->id;
         }
 
+        if (empty($ids)) return $products;
+
         $idsString = implode(', ', $ids);
 
         $results = $this->call('GET /admin/products.json', ['ids' => $idsString]);
@@ -118,6 +120,8 @@ class ShopifyProductConnector extends ShopifyConnector{
         {
             if (! in_array($variant->product_id, $productIds)) $productIds[] = $variant->product_id;
         }
+
+        if (empty($productIds)) return $variants;
 
         $ids = implode(', ', $productIds);
 
