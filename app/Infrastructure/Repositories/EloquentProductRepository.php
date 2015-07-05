@@ -5,6 +5,7 @@ use App\Domain\Products\Product;
 use App\Domain\Products\ProductRepositoryInterface;
 use App\Domain\Shops\Shop;
 Use App\Infrastructure\Shopify\ShopifyProductConnector;
+use Illuminate\Support\Facades\Input;
 
 class EloquentProductRepository implements ProductRepositoryInterface{
 
@@ -29,7 +30,9 @@ class EloquentProductRepository implements ProductRepositoryInterface{
 
     public function retrievePaginatedByShop($shop, $withShopifyDetails = false)
     {
-        $products = $shop->products()->paginate(10);
+        $products = $shop->products()->paginate(5);
+
+        $products->appends(Input::except('page'));
 
         if ($withShopifyDetails === true)  return $this->shopifyProductConnector->addDetails($products);
 

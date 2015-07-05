@@ -5,6 +5,7 @@ use App\Domain\Products\Variants\Variant;
 use App\Domain\Products\Variants\VariantRepositoryInterface;
 use App\Domain\Shops\Shop;
 use App\Infrastructure\Shopify\ShopifyProductConnector;
+use Illuminate\Support\Facades\Input;
 
 class EloquentVariantRepository implements VariantRepositoryInterface {
 
@@ -52,7 +53,9 @@ class EloquentVariantRepository implements VariantRepositoryInterface {
 
     public function retrievePaginatedByShop($shop, $withShopifyDetails = false)
     {
-        $variants = $shop->variants()->orderBy('product_id','DESC')->paginate(10);
+        $variants = $shop->variants()->orderBy('product_id','DESC')->paginate(5);
+
+        $variants->appends(Input::except('page'));
 
         if ($withShopifyDetails) return $this->shopifyProductConnector->getVariantsDetails($variants);
 

@@ -31,14 +31,12 @@
             @endforeach
         @endforeach
         </tbody>
-
-
-
-        <?php echo $variants->render(); ?>
-
     @endif
 
     </table>
+    @if (isset($variants))
+        <?php echo $variants->render(); ?>
+    @endif
 
 </div>
 

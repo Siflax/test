@@ -21,8 +21,12 @@
 
 
 
-        <?php echo $products->render(); ?>
+
 
     @endif
 
 </table>
+
+@if (isset($products))
+    <?php echo $products->render(); ?>
+@endif
