@@ -23,11 +23,11 @@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    {!! Form::label('frequency', 'Daily') !!}
+                                    {!! Form::label('frequency', 'Daily (at 10 AM UTC)') !!}
                                     {!! Form::radio('frequency', 'Daily', $settings->frequencyIsDaily(), ['class' => 'form-control']) !!}
                                 </div>
                                 <div class="input-group">
-                                    {!! Form::label('frequency', 'Weekly') !!}
+                                    {!! Form::label('frequency', 'Weekly (Mondays at 10 AM UTC)') !!}
                                     {!! Form::radio('frequency', 'Weekly', $settings->frequencyIsWeekly(), ['class' => 'form-control']) !!}
                                 </div>
                             </div>
