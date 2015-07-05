@@ -11,6 +11,7 @@ use App\Domain\Shops\Shop;
 use App\Infrastructure\Factories\ProductFactory;
 Use App\Infrastructure\Shopify\ShopifyProductConnector;
 use App\Infrastructure\Factories\VariantFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
 class InventorySettingsController extends Controller
@@ -39,7 +40,7 @@ class InventorySettingsController extends Controller
 
     public function show()
     {
-        $shop = Shop::find(1);
+        $shop = Auth::user();
 
         $section = Request::get('section');
 
@@ -84,7 +85,7 @@ class InventorySettingsController extends Controller
 
     public function store()
     {
-        $shop = Shop::find(1);
+        $shop = Auth::user();
 
         $globalLimit = Request::only('globalLimit', 'isTrackedGlobally');
 
@@ -95,14 +96,14 @@ class InventorySettingsController extends Controller
 
     public function check()
     {
-        $shop = Shop::find(1);
+        $shop = Auth::user();
 
         $this->inventoryChecker->check($shop);
     }
 
     public function search(SearchProductsRequest $request)
     {
-        $shop = Shop::find(1);
+        $shop = Auth::user();
 
         $products = $this->productRepository->retrievePaginatedByShop($shop, true);
 
@@ -115,9 +116,9 @@ class InventorySettingsController extends Controller
 
     public function saveVariantRule()
     {
-        $track = (bool) Request::get('track');
+        $shop = Auth::user();
 
-        $shop = Shop::find(1);
+        $track = (bool) Request::get('track');
 
         $product = $this->productRepository->firstOrCreateByShop($shop, ['id' => Request::get('productId')]);
 
@@ -146,9 +147,9 @@ class InventorySettingsController extends Controller
 
     public function saveProductRule()
     {
-        $track = (bool) Request::get('track');
+        $shop = Auth::user();
 
-        $shop = Shop::find(1);
+        $track = (bool) Request::get('track');
 
         $product = $this->productRepository->firstOrCreateByShop($shop, ['id' => Request::get('productId')]);
 

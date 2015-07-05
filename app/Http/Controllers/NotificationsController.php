@@ -5,6 +5,7 @@ use App\Domain\Emails\Email;
 use App\Domain\Emails\EmailRepositoryInterface;
 use App\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\Domain\Shops\Shop;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
 
@@ -22,7 +23,7 @@ class NotificationsController extends Controller {
 
     public function show()
     {
-        $shop = Shop::find(1);
+        $shop = Auth::user();
 
         $settings = $this->settingsRepository->retrieveByShop($shop);
 
@@ -55,7 +56,7 @@ class NotificationsController extends Controller {
 
     public function saveFrequency()
     {
-        $shop = Shop::find(1);
+        $shop = Auth::user();
 
         $setting = $this->settingsRepository->retrieveByShop($shop);
 

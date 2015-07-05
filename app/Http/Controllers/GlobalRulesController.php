@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GlobalRulesController extends Controller {
 
@@ -27,7 +28,7 @@ class GlobalRulesController extends Controller {
 	 */
 	public function index()
 	{
-		$shop = Shop::find(1);
+		$shop = Auth::user();
 
 		$setting = $this->settings->retrieveByShop($shop);
 

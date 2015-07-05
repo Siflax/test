@@ -5,6 +5,7 @@ use App\Domain\Products\ProductSearcher;
 use App\Domain\Shops\Shop;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
 use App\Http\Requests\SearchProductsRequest;
@@ -28,7 +29,7 @@ class ProductRulesController extends Controller {
 	 */
 	public function index()
 	{
-		$shop = Shop::find(1);
+		$shop = Auth::user();
 
 		$products = $this->products->retrievePaginatedByShop($shop, true);
 
@@ -37,7 +38,7 @@ class ProductRulesController extends Controller {
 
 	public function search(SearchProductsRequest $request)
 	{
-		$shop = Shop::find(1);
+		$shop = Auth::user();
 
 		$matches = $this->productSearcher->execute(Request::get('productTitle'), $shop);
 		
@@ -48,7 +49,7 @@ class ProductRulesController extends Controller {
 	{
 		$track = (bool) Request::get('track');
 
-		$shop = Shop::find(1);
+		$shop = Auth::user();
 
 		$product = $this->products->firstOrNewByShop($shop, ['id' => Request::get('productId')]);
 

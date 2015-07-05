@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 
 use App\Http\Requests\SearchProductsRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
 class VariantRulesController extends Controller {
@@ -32,7 +33,7 @@ class VariantRulesController extends Controller {
 	 */
 	public function index()
 	{
-		$shop = Shop::find(1);
+		$shop = Auth::user();
 
 		$variants = $this->variants->retrievePaginatedByShop($shop, true);
 
@@ -41,7 +42,7 @@ class VariantRulesController extends Controller {
 
 	public function store()
 	{
-		$shop = Shop::find(1);
+		$shop = Auth::user();
 
 		$input  = Request::only('inventory_limit','track');
 		$input['track'] = (bool) $input['track'];
@@ -53,7 +54,7 @@ class VariantRulesController extends Controller {
 
 	public function search(SearchProductsRequest $request)
 	{
-		$shop = Shop::find(1);
+		$shop = Auth::user();
 
 		$matches = $this->productSearcher->execute(Request::get('productTitle'), $shop);
 

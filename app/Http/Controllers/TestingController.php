@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TestingController extends Controller {
 
@@ -24,7 +25,7 @@ class TestingController extends Controller {
 	 */
 	public function test()
 	{
-		$shop = Shop::find(1);
+		$shop = Auth::user();
 
 		$this->checker->check($shop);
 	}
