@@ -8,6 +8,7 @@
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/nav.css') }}" rel="stylesheet">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -34,20 +35,24 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class = {{ Request::is('inventory-rules*') ? 'active' : '' }} >
-						<a href="{{route('showInventoryRules')}}">Inventory Rules</a>
-					</li>
-					<li class = {{ Request::is('notifications*') ? 'active' : '' }} >
-						<a href="{{url('/notifications')}}">Notifications</a>
-					</li>
-				</ul>
+				<a class="navbar-brand" href="#">Restockify</a>
+				@if (! Auth::guest())
+					<ul class="nav navbar-nav">
+						<li class = nav-tabs {{ Request::is('inventory-rules*') ? 'active' : '' }} >
+							<a href="{{route('showInventoryRules')}}">Inventory Rules</a>
+						</li>
+						<li class = nav-tabs {{ Request::is('notifications*') ? 'active' : '' }} >
+							<a href="{{url('/notifications')}}">Notifications</a>
+						</li>
+					</ul>
+				@endif
+
 
 				<ul class="nav navbar-nav navbar-right">
-				<!--	if (Auth::guest())
+					@if (Auth::guest())
 						<li><a href="{{ url('/auth/login') }}">Login</a></li>
-						<li><a href="{{ url('/auth/register') }}">Register</a></li>
-					else:  --!>
+						<li><a href="https://apps.shopify.com/groovepacker" target="_blank">Install</a></li>
+					@else
 
 
 					<li class="dropdown">
@@ -56,8 +61,10 @@
 							<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
 						</ul>
 					</li>
+					@endif
 
 				</ul>
+
 			</div>
 		</div>
 	</nav>

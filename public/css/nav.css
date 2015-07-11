@@ -1,0 +1,36 @@
+.navbar-default {
+    background-color: #548;
+    border-color: #436;
+}
+
+.navbar-default .navbar-brand {
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #98C;
+}
+
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color: #614e9c;
+    color: #FFF;
+}
+
+.navbar-default .navbar-nav > .open > a:focus {
+    background-color: #614e9c;
+    color: #FFF;
+}
+
+.navbar {
+    border-radius: 0px;
+}
+
+.navbar-nav .nav-tabs > li.active > a,
+.navbar-nav .nav-tabs > li.active > a:hover,
+.navbar-nav .nav-tabs > li.active > a:focus {
+    color: #555555;
+    background-color: #98C;
+    border: 1px solid #dddddd;
+    border-bottom-color: transparent;
+    cursor: default;
+}
