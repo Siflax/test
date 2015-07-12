@@ -24,7 +24,7 @@ class SubscriptionPlansController extends Controller {
 	public function index()
 	{
 		$data = [
-			'shopIsSubscribed' => $this->subscriptionPlans->shopIsSubscribed()
+			'subscriptionPlan' => $this->subscriptionPlans->getActiveSubscriptionPlan()
 		];
 
 		return view('account.subscriptionPlans.index')->with($data);

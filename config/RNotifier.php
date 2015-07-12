@@ -12,6 +12,7 @@ return [
 		'name' => 'test subscription plan',
 		'price' => 5,
 		'return_url' => url('/account/subscription-plans/activate'),
-		'test' => true
+		'test' => true,
+		"trial_days" => 7
 	]
 ];

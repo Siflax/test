@@ -36,4 +36,15 @@ class SubscriptionPlan extends Model{
         else return false;
     }
 
+    public function isOnTrial()
+    {
+        if ($this->trial_days > 0) return true;
+        else return false;
+    }
+
+    public function getNextBillingDate()
+    {
+        return $this->billing_on;
+    }
+
 }

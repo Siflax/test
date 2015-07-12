@@ -30,16 +30,22 @@ class ShopifySubscriptionPlanRepository implements SubscriptionPlanRepository {
         return $subscriptionPlans;
     }
 
-    public function shopIsSubscribed()
+    public function getActiveSubscriptionPlan()
     {
         $subscriptionPlans = $this->getForShop();
 
         foreach ($subscriptionPlans as $subscriptionPlan)
         {
-            if ( $subscriptionPlan->isActive() ) return true;
+            if ( $subscriptionPlan->isActive() ) return $subscriptionPlan;
         }
 
         return false;
+    }
+
+    public function shopIsSubscribed()
+    {
+        if ( $this->getActiveSubscription() ) return true;
+        else return false;
     }
 
     public function createForShop()

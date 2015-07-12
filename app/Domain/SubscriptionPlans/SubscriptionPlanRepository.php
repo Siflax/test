@@ -10,4 +10,6 @@ interface SubscriptionPlanRepository {
     public function activateForShop($id);
 
     public function shopIsSubscribed();
+
+    public function getActiveSubscriptionPlan();
 }
