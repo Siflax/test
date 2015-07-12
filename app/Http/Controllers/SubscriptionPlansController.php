@@ -1,11 +1,20 @@
 <?php namespace App\Http\Controllers;
 
+use App\Domain\SubscriptionPlans\SubscriptionPlanRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Request;
 
-use Illuminate\Http\Request;
 
 class SubscriptionPlansController extends Controller {
+
+	private $subscriptionPlans;
+
+	function __construct(SubscriptionPlanRepository $subscriptionPlans)
+	{
+		$this->subscriptionPlans = $subscriptionPlans;
+	}
+
 
 	/**
 	 * Display a listing of the resource.
@@ -14,7 +23,11 @@ class SubscriptionPlansController extends Controller {
 	 */
 	public function index()
 	{
-		return view('account.subscriptionPlans.index');
+		$data = [
+			'shopIsSubscribed' => $this->subscriptionPlans->shopIsSubscribed()
+		];
+
+		return view('account.subscriptionPlans.index')->with($data);
 	}
 
 	/**
@@ -34,7 +47,9 @@ class SubscriptionPlansController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$subscriptionPlan = $this->subscriptionPlans->createForShop();
+
+		return redirect($subscriptionPlan->confirmation_url);
 	}
 
 	/**
@@ -79,6 +94,13 @@ class SubscriptionPlansController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function activate()
+	{
+		$this->subscriptionPlans->activateForShop(Request::get('charge_id'));
+
+		return redirect(route('subscription-plans.index'));
 	}
 
 }

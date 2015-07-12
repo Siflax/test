@@ -5,11 +5,13 @@ use App\Domain\InventorySettings\SettingsRepositoryInterface;
 use App\Domain\Products\ProductRepositoryInterface;
 use App\Domain\Products\Variants\VariantRepositoryInterface;
 use App\Domain\Shops\ShopRepositoryInterface;
+use App\Domain\SubscriptionPlans\SubscriptionPlanRepository;
 use App\Infrastructure\Repositories\EloquentEmailRepository;
 use App\Infrastructure\Repositories\EloquentSettingsRepository;
 use App\Infrastructure\Repositories\EloquentProductRepository;
 use App\Infrastructure\Repositories\EloquentVariantRepository;
 use App\Infrastructure\Repositories\EloquentShopRepository;
+use App\Infrastructure\Repositories\ShopifySubscriptionPlanRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider {
@@ -41,6 +43,8 @@ class RepositoryServiceProvider extends ServiceProvider {
 		$this->app->bind(ShopRepositoryInterface::class, EloquentShopRepository::class);
 
 		$this->app->bind(VariantRepositoryInterface::class, EloquentVariantRepository::class);
+
+		$this->app->bind(SubscriptionPlanRepository::class, ShopifySubscriptionPlanRepository::class);
 	}
 
 }

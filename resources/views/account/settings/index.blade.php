@@ -2,7 +2,7 @@
 
 @section('account.content')
 
-    <div class="form-group">
+
 
         {!! Form::open(['route' => 'account-settings.store']) !!}
 
@@ -21,9 +21,9 @@
             </div>
 
             <div class="form-group">
-                {{Form::submit('save')}}
+                {!! Form::submit('save') !!}
             </div>
 
         {!! Form::close() !!}
-    </div>
+
 @stop

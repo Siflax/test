@@ -37,6 +37,11 @@ Route::group(array('middleware' => 'auth'), function() use ($prefixedResourceNam
 		 * Subscription Plans
 		 */
 
+		Route::get('subscription-plans/activate', [
+			'as' =>'subscription-plans.activate',
+			'uses' => 'SubscriptionPlansController@activate'
+		]);
+
 		Route::resource('subscription-plans', 'SubscriptionPlansController', ['names' => $prefixedResourceNames('subscription-plans'), 'only' => ['index', 'store']]);
 
 		/**
