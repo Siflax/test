@@ -27,7 +27,7 @@ class InventoryCheckerService {
 
     public function check(Shop $shop)
     {
-        $products = $this->shopifyProductConnector->retrieve();
+        $products = $this->shopifyProductConnector->retrieveAll();
 
         $notifications = [];
 

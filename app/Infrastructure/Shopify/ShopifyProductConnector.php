@@ -148,21 +148,43 @@ class ShopifyProductConnector extends ShopifyConnector{
 
     }
 
-    public function retrieve($options = null)
+    public function retrieveAll($options = [])
+    {
+
+        $count = $this->call('GET /admin/products/count.json');
+
+        $limit = 50;
+
+        $pages = (int) ceil($count / $limit);
+
+        $results = [];
+
+        for($i = 1; $i <= $pages; $i ++)
+        {
+            $result =  $this->retrieve( $options + [
+                    'limit' => $limit,
+                    'page' => $i
+                ], false
+            );
+
+            $results = array_merge($results, $result);
+        }
+
+        $products = $this->instanciateProducts($results);
+
+        return $products;
+
+    }
+
+    public function retrieve($options = null, $instantiateProducts = true)
     {
         try
         {
             $result = $this->call('GET /admin/products.json', $options);
 
-            $products = [];
+            if (! $instantiateProducts) return $result;
 
-            if ($result)
-            {
-                foreach ($result as $product)
-                {
-                    $products[] = $this->factory->create($product);
-                }
-            }
+            $products = $this->instanciateProducts($result);
 
             return $products;
         }
@@ -182,7 +204,22 @@ class ShopifyProductConnector extends ShopifyConnector{
         }
     }
 
+    /**
+     * @param $result
+     * @return array
+     */
+    private function instanciateProducts($result)
+    {
+        $products = [];
 
+        if ($result) {
+            foreach ($result as $product) {
+                $products[] = $this->factory->create($product);
+            }
+            return $products;
+        }
+        return $products;
+    }
 
 
 }
