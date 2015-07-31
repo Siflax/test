@@ -27,7 +27,7 @@ class InventoryCheckerService {
 
     public function check(Shop $shop)
     {
-        $products = $this->shopifyProductConnector->retrieveAll();
+        $products = $this->shopifyProductConnector->retrieve();
 
         $notifications = [];
 
@@ -57,11 +57,9 @@ class InventoryCheckerService {
 
         }
 
-
-
         foreach($shop->emails as $email)
         {
-            return $this->mailer->notifyOfLowInventory($email, $notifications);
+            $this->mailer->notifyOfLowInventory($email, $notifications);
         }
     }
 

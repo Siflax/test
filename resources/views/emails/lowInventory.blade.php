@@ -1,5 +1,6 @@
-The following products are low on inventory:
+@if($notifications)
 
+The following products are low on inventory:
 
 <table class="table">
     <thead>
@@ -12,6 +13,7 @@ The following products are low on inventory:
     </tr>
     </thead>
     <tbody>
+
         @foreach($notifications as $notification)
             <tr>
                 <td>{{ $notification['type'] }}</td>
@@ -24,3 +26,6 @@ The following products are low on inventory:
     </tbody>
 </table>
 
+@else
+    <p>There is no products with low inventory</p>
+@endif
