@@ -11,7 +11,7 @@ return [
 	'subscriptionPlans' => [
 		'name' => 'test subscription plan',
 		'price' => 5,
-		'return_url' => url('/account/subscription-plans/activate'),
+		'return_url' => config('app.url') . '/account/subscription-plans/activate',
 		'test' => true,
 		"trial_days" => 7
 	]
